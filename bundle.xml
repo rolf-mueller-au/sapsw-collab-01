@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Personal Scratchpad">
+    <Require feature="osapi" />
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+    <div id="loading" style="text-align: center; font-size: 12px;">
+      <img src="https://streamwork.com/images/spinner.gif" alt="spinner" style="vertical-align: middle;"/> Loading your scratchpad...
+    </div>
+    <div id="info" style="display: none;">
+      An error occured, please try again later.<br/>
+      <span id="errormsg">unknown</span>
+    </div>
+    <textarea id="scratchpad" style="width: 100%; height: 90%; display: none;"></textarea>
+    <div id="statusbar" style="display: none;">
+      <span style="font-size: 12px; float: left;" id="status">ready</span>
+      <span style="font-size: 12px; float: right;" id="limit">10000</span>
+    </div>
+    <script type="text/javascript">
+    const scratchpad = document.getElementById("scratchpad");
+    const loading = document.getElementById("loading");
+    const info = document.getElementById("info");
+    const errormsg = document.getElementById("errormsg");
+    const statusmsg = document.getElementById("status");
+    const limit = document.getElementById("limit");
+    const statusb = document.getElementById("statusbar");
+
+    var saveTimer = null;
+    const MAX_LENGTH = 1000;
+
+    function error(response) {
+      info.style.display = "block";
+      loading.style.display = "none";
+      scratchpad.style.display = "none";
+      statusb.style.display = "none";
+      
+      error.removeChild(error.lastChild);
+      error.appendChild(document.createTextNode("Error "+response.error.message+" ("+response.error.code+")"));
+    }
+
+    function deleteReplace(node, newChild) {
+      console.log();
+      while (node.childNodes.length > 0)
+         node.removeChild(node.lastChild);
+      node.appendChild(newChild);
+    }
+
+    function update(datamap) {
+      deleteReplace(statusmsg, document.createTextNode("saving"));
+      
+      osapi.appdata.update({
+        userId: "@viewer",
+        data: datamap
+      }).execute(function(response) {
+        if (response.error) {
+          error(response);
+          deleteReplace(statusmsg, document.createTextNode("error"));
+        } else deleteReplace(statusmsg, document.createTextNode("saved"));
+      });
+    }
+
+    scratchpad.onkeyup = function(event) {
+      var text = scratchpad.value;
+      
+      // user could have pasted something, make sure it doesn't exceed limit
+      if (text.length > MAX_LENGTH)
+        scratchpad.value = text = text.substring(0, MAX_LENGTH);
+      
+      deleteReplace(limit, document.createTextNode(MAX_LENGTH-text.length));
+      deleteReplace(statusmsg, document.createTextNode("modified"));
+      
+      if (saveTimer) {
+        clearTimeout(saveTimer);
+        saveTimer = null;
+      }
+
+      saveTimer = setTimeout(function() { update({ contents: text }); }, 1000);
+    };
+
+    osapi.appdata.get({userId: '@viewer'}).execute(function(response) {
+      if (response.error) error(response);
+      else {
+        loading.style.display = "none";
+        scratchpad.style.display = "block";
+        statusb.style.display = "block";
+        
+        for (p in response) {
+            if (!response[p]) continue;
+            scratchpad.value = response[p].contents;
+            var left = MAX_LENGTH-scratchpad.value.length;
+            deleteReplace(limit, document.createTextNode(left));
+        }
+      }
+    });
+    </script>
+   ]]>
+  </Content>
+</Module>
