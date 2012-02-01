@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
   <ModulePrefs title="Debugging Requests" 
-  description="To debug requests made through the open social api"
-  author="Rolf Mueller"
-  author_email="rolf.mueller.au@gmail.com" 
-  title_url="http://www.accenture.com"
-  <Require feature="dynamic-height" />
+               description="To debug requests made through the open social api"
+               author="Rolf Mueller"
+               author_email="rolf.mueller.au@gmail.com" 
+               title_url="http://www.accenture.com"
+    <Require feature="dynamic-height" />
   </ModulePrefs>
   <UserPref name="mycolor" display_name="Color" default_value="Lime" datatype="string" />
   <Content type="html">
