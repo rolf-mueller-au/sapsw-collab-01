@@ -4,7 +4,7 @@
                description="To debug requests made through the open social api"
                author="Rolf Mueller"
                author_email="rolf.mueller.au@gmail.com" 
-               title_url="http://www.accenture.com"
+               title_url="http://www.accenture.com" >
     <Require feature="dynamic-height" />
   </ModulePrefs>
   <UserPref name="mycolor" display_name="Color" default_value="Lime" datatype="string" />
