@@ -17,6 +17,7 @@
       <span style="font-size: 12px; float: left;" id="status">ready</span>
       <span style="font-size: 12px; float: right;" id="limit">10000</span>
     </div>
+	<div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
     <script type="text/javascript">
     const scratchpad = document.getElementById("scratchpad");
     const loading = document.getElementById("loading");
@@ -29,8 +30,17 @@
     var saveTimer = null;
     const MAX_LENGTH = 1000;
 
+    // debug flag. When its value is non-zero, debugging messages are displayed      
+    var debug = 1;
+    // The string containing debugging messages
+    var debug_html = "";
+	
     function error(response) {
-      info.style.display = "block";
+
+      // DEBUG: is the function getting called?
+      print("function error(response) called<br>");
+
+	  info.style.display = "block";
       loading.style.display = "none";
       scratchpad.style.display = "none";
       statusb.style.display = "none";
@@ -47,7 +57,11 @@
     }
 
     function update(datamap) {
-      deleteReplace(statusmsg, document.createTextNode("saving"));
+
+      // DEBUG: is the function getting called?
+      print("function update(datamap) called<br>");
+	  
+	deleteReplace(statusmsg, document.createTextNode("saving"));
       
       osapi.appdata.update({
         userId: "@viewer",
@@ -62,6 +76,9 @@
 
     scratchpad.onkeyup = function(event) {
       var text = scratchpad.value;
+
+      // DEBUG: is the function getting called?
+      print("scratchpad.onkeyup event triggered<br>");
       
       // user could have pasted something, make sure it doesn't exceed limit
       if (text.length > MAX_LENGTH)
@@ -78,6 +95,15 @@
       saveTimer = setTimeout(function() { update({ contents: text }); }, 1000);
     };
 
+    // Outputs debug messages if debug flag has a non-zero value
+    function print(msg) {      
+      if (debug) {
+        debug_html += msg;
+        // Write debug HTML to div
+        document.getElementById("debug_div").innerHTML = debug_html;
+      }
+    }	
+	
     osapi.appdata.get({userId: '@viewer'}).execute(function(response) {
       if (response.error) error(response);
       else {
