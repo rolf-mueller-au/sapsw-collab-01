@@ -21,7 +21,7 @@
   gadgets.util.registerOnLoadHandler(hello_world); 
   </script>
 
-<table border="1" style="width: 900px">
+<table border="1" style="width: 100%">
   <caption>Position Change Permanent/Temporary</caption>
   <tbody>
     <tr>
@@ -118,39 +118,39 @@
                 <table border="0" style="width: 100%">
                   <tbody>
                     <tr>
-						<td>Company Code</td>
-						<td>
-							<input type="text" size="4" id="pa_bukrs_new"> 
-							<input type="text" size="30" disabled="disabled" id="pa_bukrstxt_new">
-						</td>
+					  <td>Company Code</td>
+					  <td>
+					    <input type="text" size="4" id="pa_bukrs_new"> 
+					    <input type="text" size="30" disabled="disabled" id="pa_bukrstxt_new">
+					  </td>
                     </tr>
                     <tr>
-						<td>Personnel Area</td>
-						<td>
-							<input type="text" size="4" id="pa_werks_new"> 
-							<input type="text" size="30" disabled="disabled" id="pa_werkstxt_new">
-						</td>
+					  <td>Personnel Area</td>
+					  <td>
+					    <input type="text" size="4" id="pa_werks_new"> 
+					    <input type="text" size="30" disabled="disabled" id="pa_werkstxt_new">
+					  </td>
                     </tr>
                     <tr>
-						<td>Personnel SubArea</td>
-						<td>
-							<input type="text" size="4" id="pa_btrtl_new"> 
-							<input type="text" size="30" disabled="disabled" id="pa_btrtltxt_new">
-						</td>
+					  <td>Personnel SubArea</td>
+					  <td>
+					    <input type="text" size="4" id="pa_btrtl_new"> 
+					    <input type="text" size="30" disabled="disabled" id="pa_btrtltxt_new">
+					  </td>
                     </tr>
                     <tr>
-						<td>OrgUnit ID</td>
-						<td>
-							<input type="text" size="4" id="pa_orgid_new"> 
-							<input type="text" size="30" disabled="disabled" id="pa_orgtxt_new">
-						</td>
+					  <td>OrgUnit ID</td>
+					  <td>
+					    <input type="text" size="4" id="pa_orgid_new"> 
+					    <input type="text" size="30" disabled="disabled" id="pa_orgtxt_new">
+					  </td>
                     </tr>
                     <tr>
-						<td>Postion</td>
-						<td>
-							<input type="text" size="4" id="pa_position_new"> 
-							<input type="text" size="30" disabled="disabled" id="pa_positiontxt_new">
-						</td>
+					  <td>Postion</td>
+					  <td>
+					    <input type="text" size="4" id="pa_position_new"> 
+					    <input type="text" size="30" disabled="disabled" id="pa_positiontxt_new">
+					  </td>
                     </tr>
                   </tbody>
                 </table>
