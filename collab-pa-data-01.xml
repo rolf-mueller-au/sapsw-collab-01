@@ -24,6 +24,9 @@
   gadgets.util.registerOnLoadHandler(hello_world); 
   </script>
   <div id="content_div"></div>
+
+  <div id="div_pa_pernr"><label for=pa_pernr>Personel number: <input type=text name=pa_pernr size=20></label></div>
+
   ]]>
   </Content>
 </Module>
