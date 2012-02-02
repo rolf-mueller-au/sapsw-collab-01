@@ -12,7 +12,8 @@
   <![CDATA[
   
   <style media="screen" type="text/css">
-    .tdHeader{ background-color: LightBlue; }
+    .tdHeader{ background-color: LightBlue;
+               padding: 5px; }
   </style>
   
   <script type="text/javascript">
@@ -30,7 +31,7 @@
   <caption>Position Change Permanent/Temporary</caption>
   <tbody>
     <tr>
-      <td style="background-color: LightBlue;">Employee Information</td>
+      <td class="tdHeader">Employee Information</td>
     </tr>
     <tr>
       <td style="padding: 5px">
@@ -72,15 +73,15 @@
       </td>
     </tr>
     <tr>
-      <td>Organizational Information</td>
+      <td class="tdHeader">Organizational Information</td>
     </tr>
     <tr>
       <td style="padding: 5px">
-        <table border="1" style="width: 100%">
+        <table border="0" style="width: 100%">
           <tbody>
             <tr>
-              <td>Actual Situation</td>
-              <td>Future Situation</td>
+              <td class="tdHeader">Actual Situation</td>
+              <td class="tdHeader">Future Situation</td>
             </tr>
             <tr>
               <td style="padding: 5px">
