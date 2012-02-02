@@ -23,10 +23,146 @@
 
   gadgets.util.registerOnLoadHandler(hello_world); 
   </script>
-  <div id="content_div"></div>
-
-  <div id="div_pa_pernr"><label for=pa_pernr>Personel number: <input type=text name=pa_pernr disabled value="4711" size=20></label></div>
-  <div id="div_pa_bukrs"><label for=pa_pernr>New Company Code: <input type=text name=pa_bukrs size=20></label></div>
+  <div id="content_div"><
+  
+<table border="1" style="width: 100%">
+  <caption>Position Change Permanent/Temporary</caption>
+  <tbody>
+    <tr>
+      <td>Employee Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Employee No.</td>
+              <td><input type="text" size="20" id="pa_pernr"></td>
+              <td>Employee Name</td>
+              <td><input type="text" size="40" disabled="disabled" id="pa_name"></td>
+            </tr>
+            <tr>
+              <td>Effective Date</td>
+              <td><input type="text" size="12"  id="pa_date"></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Action Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Action Type</td>
+              <td><input type="text" size="4" id="pa_action"> <input
+                type="text" size="20" disabled="disabled"
+              id="pa_action_name"></td>
+              <td>Action Reason</td>
+              <td><input type="text" id="pa_action_reason"></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Organizational Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="1" style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Actual Situation</td>
+              <td>Future Situation</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px">
+                <table border="0" style="width: 100%">
+                  <tbody>
+                    <tr>
+                      <td>Company Code</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_bukrs_old"> <input type="text" size="40"
+                        disabled="disabled" id="pa_bukrstxt_old"></td>
+                    </tr>
+                    <tr>
+                      <td>Personnel Area</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_werks_old"> <input type="text" size="40"
+                        disabled="disabled" id="pa_werkstxt_old"></td>
+                    </tr>
+                    <tr>
+                      <td>Personnel SubArea</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_btrtl_old"> <input type="text" size="40"
+                        disabled="disabled" id="pa_btrtltxt_old"></td>
+                    </tr>
+                    <tr>
+                      <td>OrgUnit ID</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_orgid_old"> <input type="text" size="40"
+                        disabled="disabled" id="pa_orgtxt_old"></td>
+                    </tr>
+                    <tr>
+                      <td>Postion</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_position_old"> <input type="text" size="40"
+                        disabled="disabled" id="pa_positiontxt_old"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="padding: 5px">
+                <table border="0" style="width: 100%">
+                  <tbody>
+                    <tr>
+                      <td>Company Code</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_bukrs_new"> <input type="text" size="40"
+                        disabled="disabled" id="pa_bukrstxt_new"></td>
+                    </tr>
+                    <tr>
+                      <td>Personnel Area</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_werks_new"> <input type="text" size="40"
+                        disabled="disabled" id="pa_werkstxt_new"></td>
+                    </tr>
+                    <tr>
+                      <td>Personnel SubArea</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_btrtl_new"> <input type="text" size="40"
+                        disabled="disabled" id="pa_btrtltxt_new"></td>
+                    </tr>
+                    <tr>
+                      <td>OrgUnit ID</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_orgid_new"> <input type="text" size="40"
+                        disabled="disabled" id="pa_orgtxt_new"></td>
+                    </tr>
+                    <tr>
+                      <td>Postion</td>
+                      <td><input type="text" size="4" disabled="disabled"
+                        id="pa_position_new"> <input type="text" size="40"
+                        disabled="disabled" id="pa_positiontxt_new"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  
+  /div>
 
   ]]>
   </Content>
