@@ -10,6 +10,11 @@
   <UserPref name="mycolor" display_name="Color" default_value="Lime" datatype="string" />
   <Content type="html">
   <![CDATA[
+  
+  <style media="screen" type="text/css">
+    .tdHeader{ background-color: LightBlue; }
+  </style>
+  
   <script type="text/javascript">
    // Get the preferences for the current user
    var prefs = new gadgets.Prefs();
@@ -25,7 +30,7 @@
   <caption>Position Change Permanent/Temporary</caption>
   <tbody>
     <tr>
-      <td>Employee Information</td>
+      <td style="background-color: LightBlue;">Employee Information</td>
     </tr>
     <tr>
       <td style="padding: 5px">
@@ -48,7 +53,7 @@
       </td>
     </tr>
     <tr>
-      <td>Action Information</td>
+      <td class="tdHeader">Action Information</td>
     </tr>
     <tr>
       <td style="padding: 5px">
@@ -125,35 +130,35 @@
                     <tr>
 					  <td>Company Code</td>
 					  <td>
-					    <input type="text" size="4" maxlength="4" id="pa_bukrs_new"> 
+					    <input type="text" size="3" maxlength="4" id="pa_bukrs_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_bukrstxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>Personnel Area</td>
 					  <td>
-					    <input type="text" size="4" maxlength="4" id="pa_werks_new"> 
+					    <input type="text" size="3" maxlength="4" id="pa_werks_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_werkstxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>Personnel SubArea</td>
 					  <td>
-					    <input type="text" size="4" maxlength="4" id="pa_btrtl_new"> 
+					    <input type="text" size="3" maxlength="4" id="pa_btrtl_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_btrtltxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>OrgUnit ID</td>
 					  <td>
-					    <input type="text" size="4" maxlength="4" id="pa_orgid_new"> 
+					    <input type="text" size="3" maxlength="4" id="pa_orgid_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_orgtxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>Postion</td>
 					  <td>
-					    <input type="text" size="4" maxlength="4" id="pa_position_new"> 
+					    <input type="text" size="3" maxlength="4" id="pa_position_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_positiontxt_new">
 					  </td>
                     </tr>
