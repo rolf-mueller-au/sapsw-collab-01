@@ -15,16 +15,13 @@
    var prefs = new gadgets.Prefs();
  
    function hello_world() {
-     var html="Hello World!";
-     document.getElementById("content_div").style.backgroundColor=prefs.getString("mycolor");
-     document.getElementById("content_div").innerHTML = html;
      gadgets.window.adjustHeight();
    }	
 
   gadgets.util.registerOnLoadHandler(hello_world); 
   </script>
-  <div id="content_div"></div>
-  
+
+<div width="600px">  
 <table border="1" style="width: 100%">
   <caption>Position Change Permanent/Temporary</caption>
   <tbody>
@@ -161,6 +158,7 @@
     </tr>
   </tbody>
 </table>
+</div>
   
   ]]>
   </Content>
