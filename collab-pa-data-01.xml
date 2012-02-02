@@ -12,10 +12,10 @@
   <![CDATA[
   
   <style media="screen" type="text/css">
-    .tdHeader{ background-color: LightBlue;
-               padding: 5px; }
+    .tdHeader{ background-color: LightGrey;
+               padding: 3px; }
     .tdHeader2{ background-color: LightGrey;
-                padding: 5px; }
+                padding: 3px; }
   </style>
   
   <script type="text/javascript">
