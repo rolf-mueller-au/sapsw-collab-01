@@ -33,9 +33,9 @@
           <tbody>
             <tr>
               <td>Employee No.</td>
-              <td><input type="text" size="20" id="pa_pernr"></td>
+              <td><input type="text" size="20" disabled="disabled" id="pa_pernr" value="00002000"></td>
               <td>Employee Name</td>
-              <td><input type="text" size="40" disabled="disabled" id="pa_name"></td>
+              <td><input type="text" size="40" disabled="disabled" id="pa_name" value="Donald Duck"></td>
             </tr>
             <tr>
               <td>Effective Date</td>
@@ -83,33 +83,38 @@
                   <tbody>
                     <tr>
                       <td>Company Code</td>
-                      <td><input type="text" size="4" disabled="disabled"
-                        id="pa_bukrs_old"> <input type="text" size="20"
-                        disabled="disabled" id="pa_bukrstxt_old"></td>
+                      <td>
+                        <input type="text" size="4" disabled="disabled" id="pa_bukrs_old"> 
+                        <input type="text" size="20" disabled="disabled" id="pa_bukrstxt_old">
+                      </td>
                     </tr>
                     <tr>
                       <td>Personnel Area</td>
-                      <td><input type="text" size="4" disabled="disabled"
-                        id="pa_werks_old"> <input type="text" size="20"
-                        disabled="disabled" id="pa_werkstxt_old"></td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_werks_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_werkstxt_old">
+					  </td>
                     </tr>
                     <tr>
                       <td>Personnel SubArea</td>
-                      <td><input type="text" size="4" disabled="disabled"
-                        id="pa_btrtl_old"> <input type="text" size="20"
-                        disabled="disabled" id="pa_btrtltxt_old"></td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_btrtl_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_btrtltxt_old">
+                      </td>
                     </tr>
                     <tr>
                       <td>OrgUnit ID</td>
-                      <td><input type="text" size="4" disabled="disabled"
-                        id="pa_orgid_old"> <input type="text" size="20"
-                        disabled="disabled" id="pa_orgtxt_old"></td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_orgid_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_orgtxt_old">
+                      </td>
                     </tr>
                     <tr>
                       <td>Postion</td>
-                      <td><input type="text" size="4" disabled="disabled"
-                        id="pa_position_old"> <input type="text" size="20"
-                        disabled="disabled" id="pa_positiontxt_old"></td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_position_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_positiontxt_old">
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -120,35 +125,35 @@
                     <tr>
 					  <td>Company Code</td>
 					  <td>
-					    <input type="text" size="4" width="4" id="pa_bukrs_new"> 
+					    <input type="text" size="4" maxlength="4" id="pa_bukrs_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_bukrstxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>Personnel Area</td>
 					  <td>
-					    <input type="text" size="4" width="4" id="pa_werks_new"> 
+					    <input type="text" size="4" maxlength="4" id="pa_werks_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_werkstxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>Personnel SubArea</td>
 					  <td>
-					    <input type="text" size="4" width="4" id="pa_btrtl_new"> 
+					    <input type="text" size="4" maxlength="4" id="pa_btrtl_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_btrtltxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>OrgUnit ID</td>
 					  <td>
-					    <input type="text" size="4" width="4" id="pa_orgid_new"> 
+					    <input type="text" size="4" maxlength="4" id="pa_orgid_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_orgtxt_new">
 					  </td>
                     </tr>
                     <tr>
 					  <td>Postion</td>
 					  <td>
-					    <input type="text" size="4" width="4" id="pa_position_new"> 
+					    <input type="text" size="4" maxlength="4" id="pa_position_new"> 
 					    <input type="text" size="20" disabled="disabled" id="pa_positiontxt_new">
 					  </td>
                     </tr>
