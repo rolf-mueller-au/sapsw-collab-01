@@ -23,7 +23,7 @@
 
   gadgets.util.registerOnLoadHandler(hello_world); 
   </script>
-  <div id="content_div"><
+  <div id="content_div"></div>
   
 <table border="1" style="width: 100%">
   <caption>Position Change Permanent/Temporary</caption>
@@ -162,8 +162,6 @@
   </tbody>
 </table>
   
-  /div>
-
   ]]>
   </Content>
 </Module>
