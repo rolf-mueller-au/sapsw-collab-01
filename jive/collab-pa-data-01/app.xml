@@ -4,7 +4,9 @@
                description="This is a first POC on how to collaborate on PA Data"
                author="Rolf Mueller"
                author_affiliation="Accenture"
-               author_email="rolf.mueller@accenture.com">
+               author_email="rolf.mueller@accenture.com"
+			   height="500" 
+			   width="800">
 
     <!-- Commonly used features -->
     <Require feature="dynamic-height" /> 
