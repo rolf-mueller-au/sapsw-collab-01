@@ -6,7 +6,7 @@
                author_affiliation="Accenture"
                author_email="rolf.mueller@accenture.com"
 			   height="500" 
-			   width="800">
+			   width="1000">
 
     <!-- Commonly used features -->
     <Require feature="dynamic-height" /> 
