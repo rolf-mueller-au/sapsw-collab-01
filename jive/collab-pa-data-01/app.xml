@@ -5,8 +5,7 @@
                author="Rolf Mueller"
                author_affiliation="Accenture"
                author_email="rolf.mueller@accenture.com"
-			   height="500" 
-			   width="1000">
+			   height="500">
 
     <!-- Commonly used features -->
     <Require feature="dynamic-height" /> 
