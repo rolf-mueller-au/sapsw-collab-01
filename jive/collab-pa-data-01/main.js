@@ -39,9 +39,22 @@ function loadUser() {
 }
 
 function onClickSave() {
-	alert("save button clicked");
 	mini.createDismissibleMessage("save button clicked");
 
+	var lf_bukrs_new_value = pa_bukrs_new.value;
+    var lf_message = "Value of pa_bukrs_new:" + lf_bukrs_new_value.
+	mini.createDismissibleMessage(lf_message)
+	
+	osapi.appdata.update({
+        userId: "@owner",
+        data: { "field_id" : "pa_bukrs_new"
+                "field_value" : lf_bukrs_new_value }		
+      }).execute(function(response) {
+		if (response.error)
+			mini.createDismissibleMessage("pa_bukrs_new saving failed!");
+		else
+			mini.createDismissibleMessage("pa_bukrs_new saved...");
+		};
 }
 
 //--- Register our on-view-load handler
