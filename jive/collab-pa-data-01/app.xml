@@ -13,7 +13,7 @@
     <Require feature="osapi"/> 
     <Require feature="settitle"/> 
     <Require feature="views" />
-
+	<Require feature="minimessage"/>
     <!-- Additional Options ... -->
   </ModulePrefs>
 
