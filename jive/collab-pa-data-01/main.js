@@ -11,10 +11,8 @@ var user;
 //--- On-view-load initialization
 function init() {
     mini = new gadgets.MiniMessage();
-	mini.createDismissibleMessage("about to start init()...");
     registerHandlers();
     loadUser();
-	mini.createDismissibleMessage("user.name = ");
 }
 
 
@@ -38,6 +36,11 @@ function loadUser() {
             $(".user-name").html("").html(user.name);
             loadGroups();
         });
+}
+
+function onClickSave() {
+	mini.createDismissibleMessage("save button clicked");
+
 }
 
 //--- Register our on-view-load handler
