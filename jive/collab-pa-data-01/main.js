@@ -39,6 +39,7 @@ function loadUser() {
 }
 
 function onClickSave() {
+	alert("save button clicked");
 	mini.createDismissibleMessage("save button clicked");
 
 }
