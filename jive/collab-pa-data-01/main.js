@@ -36,7 +36,7 @@ function loadUser() {
             $(".user-name").html("").html(user.name);
             loadGroups();
         });
-	mini.createDismissibleMessage( "logged on user = " + user );
+	mini.createDismissibleMessage(user.name);
 }
 
 //--- Register our on-view-load handler
