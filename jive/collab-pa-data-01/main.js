@@ -36,7 +36,8 @@ function loadUser() {
             $(".user-name").html("").html(user.name);
             loadGroups();
         });
-	mini.createDismissibleMessage(user.name);
+//	mini.createDismissibleMessage(user.name);
+	mini.createDismissibleMessage("user.name = ");
 }
 
 //--- Register our on-view-load handler
