@@ -55,6 +55,7 @@ function loadAppData() {
 					var lf_message = "p = " + p + " response[p] = " + response[p].pa_bukrs_new;
 					mini.createDismissibleMessage(lf_message);
           pa_bukrs_new.value = response[p].pa_bukrs_new;
+					pa_werks_new.value = response[p].pa_werks_new;
         }
 			}
 		});
@@ -65,13 +66,13 @@ function onClickSave() {
 	mini.createDismissibleMessage("save button clicked");
 
 	var lf_bukrs_new_value = pa_bukrs_new.value;
-	var lf_message = "Value of pa_bukrs_new:" + lf_bukrs_new_value;
-	mini.createDismissibleMessage(lf_message);
+	var lf_werks_new_value = pa_werks_new.value;
 	
 	osapi.appdata.update({
 		userId: "@viewer",
 		groupId: "@self",
-		data: { pa_bukrs_new: lf_bukrs_new_value }		
+		data: { pa_bukrs_new: lf_bukrs_new_value,
+						pa_werks_new: lf_werks_new_value }
     }).execute(function(response) {
 			if (response.error) {
 				mini.createDismissibleMessage(response.error.message);
