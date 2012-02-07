@@ -11,6 +11,7 @@ var user;
 //--- On-view-load initialization
 function init() {
     mini = new gadgets.MiniMessage();
+	mini.createDismissibleMessage("about to start init()...");
     registerHandlers();
     loadUser();
 	mini.createDismissibleMessage("user.name = ");
@@ -27,7 +28,7 @@ function registerHandlers() {
 //--- Load the currently logged in user
 function loadUser() {
     console.log("loadUser() started");
-//	mini.createDismissibleMessage("loadUser() started");
+	mini.createDismissibleMessage("loadUser() started");
     showMessage("Loading the currently logged in user ...");
     osapi.jive.core.users.get({
         id : '@viewer'
