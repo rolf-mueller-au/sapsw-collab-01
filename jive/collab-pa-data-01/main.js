@@ -13,6 +13,7 @@ function init() {
     mini = new gadgets.MiniMessage();
     registerHandlers();
     loadUser();
+	mini.createDismissibleMessage("user.name = ");
 }
 
 
@@ -36,8 +37,6 @@ function loadUser() {
             $(".user-name").html("").html(user.name);
             loadGroups();
         });
-//	mini.createDismissibleMessage(user.name);
-	mini.createDismissibleMessage("user.name = ");
 }
 
 //--- Register our on-view-load handler
