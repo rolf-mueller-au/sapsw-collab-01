@@ -10,6 +10,7 @@ var user;
 
 //--- On-view-load initialization
 function init() {
+    alert("init() started...");
     registerHandlers();
     loadUser();
     mini = new gadgets.MiniMessage();
