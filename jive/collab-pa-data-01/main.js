@@ -52,7 +52,7 @@ function loadAppData() {
 			} else {
 				for (p in response) {
           if (!response[p]) { continue; }
-					var lf_message = "p = " + p + " response[p] = " + response[p];
+					var lf_message = "p = " + p + " response[p] = " + response[p].contents;
 					mini.createDismissibleMessage(lf_message);
           pa_bukrs_new.value = response[p].contents;
         }
