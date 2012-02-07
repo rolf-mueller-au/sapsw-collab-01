@@ -52,9 +52,9 @@ function loadAppData() {
 			} else {
 				for (p in response) {
           if (!response[p]) { continue; }
-					var lf_message = "p = " + p + " response[p] = " + response[p].contents;
+					var lf_message = "p = " + p + " response[p] = " + response[p].lf_bukrs_new_value;
 					mini.createDismissibleMessage(lf_message);
-          pa_bukrs_new.value = response[p].contents;
+          pa_bukrs_new.value = response[p].lf_bukrs_new_value;
         }
 			}
 		});
