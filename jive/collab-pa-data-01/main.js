@@ -45,16 +45,16 @@ function onClickSave() {
 	var lf_message = "Value of pa_bukrs_new:" + lf_bukrs_new_value;
 	mini.createDismissibleMessage(lf_message);
 	
-	osapi.appdata.update({
-       userId: "@viewer",
-	  groupId: "@self",
-         data: { pa_bukrs_new: lf_bukrs_new_value }		
-      }).execute(function(response) {
-		if (response.error)
-			mini.createDismissibleMessage(response.error.message);
-		else
-			mini.createDismissibleMessage("pa_bukrs_new saved...");
-		};
+//	osapi.appdata.update({
+//		userId: "@viewer",
+//		groupId: "@self",
+//       data: { pa_bukrs_new: lf_bukrs_new_value }		
+//    }).execute(function(response) {
+//		if (response.error)
+//			mini.createDismissibleMessage(response.error.message);
+//		else
+//			mini.createDismissibleMessage("pa_bukrs_new saved...");
+//		};
 }
 
 //--- Register our on-view-load handler
