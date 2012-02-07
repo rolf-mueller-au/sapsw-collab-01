@@ -13,6 +13,7 @@ function init() {
     mini = new gadgets.MiniMessage();
     registerHandlers();
     loadUser();
+		loadAppData();
 }
 
 
@@ -38,6 +39,26 @@ function loadUser() {
         });
 }
 
+//-- Loading the data, which has been saved from the form
+function loadAppData() {
+	mini.createDismissibleMessage("loadAppData() started");
+
+	osapi.appdata.get({
+		userId: "@viewer",
+		groupId: "@self"
+		}).execute(function(response) {
+      if (response.error) {
+				mini.createDismissibleMessage(response.error.message);
+			} else {
+				for (p in response) {
+          if (!response[p]) { continue; }
+          pa_bukrs_new.value = response[p].contents;
+        }
+			}
+		});
+}
+
+//-- Saving the data entered into the form
 function onClickSave() {
 	mini.createDismissibleMessage("save button clicked");
 
