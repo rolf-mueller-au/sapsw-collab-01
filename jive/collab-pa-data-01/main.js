@@ -46,12 +46,12 @@ function onClickSave() {
 	mini.createDismissibleMessage(lf_message);
 	
 	osapi.appdata.update({
-      userId: "@owner",
-        data: { "field_id" : "pa_bukrs_new"
-                "field_value" : lf_bukrs_new_value }		
+       userId: "@viewer",
+	  groupId: "@self",
+         data: { pa_bukrs_new: lf_bukrs_new_value }		
       }).execute(function(response) {
 		if (response.error)
-			mini.createDismissibleMessage("pa_bukrs_new saving failed!");
+			mini.createDismissibleMessage(response.error.message);
 		else
 			mini.createDismissibleMessage("pa_bukrs_new saved...");
 		};
