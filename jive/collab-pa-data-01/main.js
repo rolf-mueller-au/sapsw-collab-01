@@ -27,7 +27,7 @@ function registerHandlers() {
 //--- Load the currently logged in user
 function loadUser() {
     console.log("loadUser() started");
-	mini.createDismissibleMessage("loadUser() started");
+//	mini.createDismissibleMessage("loadUser() started");
     showMessage("Loading the currently logged in user ...");
     osapi.jive.core.users.get({
         id : '@viewer'
