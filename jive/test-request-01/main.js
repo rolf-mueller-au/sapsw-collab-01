@@ -14,7 +14,7 @@ function init() {
 }
 
 
-//--- Saving the data entered into the form
+//--- test gadgets.io.makeRequest
 function makeRequest() {
 	mini.createDismissibleMessage("FIRE button clicked...");
 
@@ -24,9 +24,12 @@ function makeRequest() {
   gadgets.io.makeRequest(url, response, params);	
 }
 
+//--- and find out the response
 function response(obj) {
+	mini.createDismissibleMessage("response received...");
   //obj.data contains a Document DOM element corresponding to the page that was requested
   output(obj.data);
+	mini.createDismissibleMessage(obj.data);
 };
 
 //--- Register our on-view-load handler
