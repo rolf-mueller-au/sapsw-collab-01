@@ -10,11 +10,11 @@
     <!-- Commonly used features -->
     <Require feature="dynamic-height" /> 
     <Require feature="jive-core-v2" /> 
-    <Require feature="osapi"/> 
+    <Require feature="osapi"/>
     <Require feature="settitle"/> 
     <Require feature="views" />
 		<Require feature="minimessage"/>
-		<Require feature="gadgets" />
+		<!-- <Require feature="gadgets" /> -->
     <!-- Additional Options ... -->
   </ModulePrefs>
 
