@@ -15,23 +15,55 @@ function init() {
 
 
 //--- test gadgets.io.makeRequest
-function makeRequest() {
-	mini.createDismissibleMessage("FIRE button clicked...");
-
+function makeNormalRequest() {
+	mini.createDismissibleMessage("makeJsonRequest() started...");
   var params = {};
-  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-  var url = "http://graargh.returnstrue.com/buh/fetchme.php";
-  gadgets.io.makeRequest(url, response, params);	
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+	var lf_url = url.value;
+  gadgets.io.makeRequest(lf_url, responseNormal, params);	
+}
+//--- and analyse the response
+function responseNormal(obj) {
+	mini.createDismissibleMessage("responseNormal(obj) started...");
+  //obj.text contains the text of the page that was requested
+	var message = "response = " + obj.text;
+	mini.createDismissibleMessage(message);
 }
 
-//--- and find out the response
-function response(obj) {
-	mini.createDismissibleMessage("response received");
+//--- test gadgets.io.makeRequest
+function makeDomRequest() {
+	mini.createDismissibleMessage("makeDomRequest() started...");
+  var params = {};
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+	var lf_url = url.value;
+  gadgets.io.makeRequest(lf_url, responseDom, params);	
+}
+//--- and analyse the response
+function responseDom(obj) {
+	mini.createDismissibleMessage("responseDom(obj) started...");
+  //obj.text contains the text of the page that was requested
+	var message = "response = " + obj.data;
+	mini.createDismissibleMessage(message);
+}
+
+//--- test gadgets.io.makeRequest
+function makeJsonRequest() {
+	mini.createDismissibleMessage("makeJsonRequest() started...");
+  var params = {};
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+	var lf_url = url.value;
+  gadgets.io.makeRequest(lf_url, responseJson, params);	
+}
+//--- and analyse the response
+function responseJson(obj) {
+	mini.createDismissibleMessage("responseJson(obj) started...");
   //obj.data contains a JavaScript object corresponding to the data that was requested
   //output(obj.data);
 	var message = "response = " + obj.data;
 	mini.createDismissibleMessage(message);
-};
+}
+
+
 
 //--- Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);
