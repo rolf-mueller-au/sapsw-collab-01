@@ -19,17 +19,17 @@ function makeRequest() {
 	mini.createDismissibleMessage("FIRE button clicked...");
 
   var params = {};
-  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-  var url = "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml";
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+  var url = "http://graargh.returnstrue.com/buh/fetchme.php";
   gadgets.io.makeRequest(url, response, params);	
 }
 
 //--- and find out the response
 function response(obj) {
-	mini.createDismissibleMessage("response received...");
-  //obj.data contains a Document DOM element corresponding to the page that was requested
+  //obj.data contains a JavaScript object corresponding to the data that was requested
   output(obj.data);
-	mini.createDismissibleMessage(obj.data);
+	var message = "response = " + obj.data;
+	mini.createDismissibleMessage(message);
 };
 
 //--- Register our on-view-load handler
