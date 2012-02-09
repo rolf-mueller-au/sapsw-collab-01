@@ -58,12 +58,25 @@ function makeJsonRequest() {
 function responseJson(obj) {
 	mini.createDismissibleMessage("responseJson(obj) started...");
   //obj.data contains a JavaScript object corresponding to the data that was requested
-  //output(obj.data);
 	var message = "response = " + obj.data;
 	mini.createDismissibleMessage(message);
 }
 
-
+//--- test gadgets.io.makeRequest
+function makeFeedRequest() {
+	mini.createDismissibleMessage("makeFeedRequest() started...");
+  var params = {};
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+	var lf_url = url.value;
+  gadgets.io.makeRequest(lf_url, responseFeed, params);	
+}
+//--- and analyse the response
+function responseFeed(obj) {
+	mini.createDismissibleMessage("responseFeed(obj) started...");
+  //obj.data contains a JavaScript object corresponding to the data that was requested
+	var message = "response = " + obj.data;
+	mini.createDismissibleMessage(message);
+}
 
 //--- Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);
