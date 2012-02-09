@@ -26,6 +26,7 @@ function makeRequest() {
 
 //--- and find out the response
 function response(obj) {
+	mini.createDismissibleMessage("response received");
   //obj.data contains a JavaScript object corresponding to the data that was requested
   output(obj.data);
 	var message = "response = " + obj.data;
