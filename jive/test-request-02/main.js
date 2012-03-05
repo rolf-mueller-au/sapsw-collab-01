@@ -16,7 +16,7 @@ function init() {
 
 //--- test gadgets.io.makeRequest
 function makeNormalRequest() {
-	mini.createDismissibleMessage("makeJsonRequest() started...");
+	mini.createDismissibleMessage("makeNormalRequest() started...");
   var params = {};
   params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
 	var lf_url = url.value;
@@ -30,13 +30,22 @@ function responseNormal(obj) {
 	mini.createDismissibleMessage(message);
 }
 
+
 //--- test gadgets.io.makeRequest
 function makeDomRequest() {
-	mini.createDismissibleMessage("makeDomRequest() started...");
-  var params = {};
-  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-	var lf_url = url.value;
-  gadgets.io.makeRequest(lf_url, responseDom, params);	
+    mini.createDismissibleMessage("makeDomRequest() started...");
+    var lf_soapEnvelope = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:soap:functions:mc-style\"><soapenv:Header/><soapenv:Body><urn:ZmurCollabGetWorklist><ImSapuser>RILKEE</ImSapuser></urn:ZmurCollabGetWorklist></soapenv:Body></soapenv:Envelope>";
+    var lf_params = {};
+    lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
+    lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    lf_params[gadgets.io.RequestParameters.HEADERS] = {
+        "SOAPAction": "ZmurCollabGetWorklistRequest",
+        "Content-Type": "text/xml; charset=utf-8"
+    };
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+    var lf_url = url.value;
+    gadgets.io.makeRequest(lf_url, responseDom, lf_params);
 }
 //--- and analyse the response
 function responseDom(obj) {
