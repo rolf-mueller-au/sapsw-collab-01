@@ -16,7 +16,7 @@ function init() {
 
 //--- test gadgets.io.makeRequest
 function makeNormalRequest() {
-	mini.createDismissibleMessage("makeJsonRequest() started...");
+	mini.createDismissibleMessage("makeNormalRequest() started...");
   var params = {};
   params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
 	var lf_url = url.value;
