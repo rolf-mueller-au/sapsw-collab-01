@@ -53,7 +53,7 @@ function responseDom(obj) {
     obj_data.value = obj.data;
 
     var lf_domdata = obj.data;
-    var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME');
+    var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0];
     var lf_display_name_2 = lf_el_display_name.childNodes[0].childNodes[0].nodeValue;
     var lf_display_name = lf_domdata.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].nodeValue;
     node_value.value = lf_display_name_2;
