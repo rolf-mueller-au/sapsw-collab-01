@@ -50,6 +50,8 @@ function responseDom(obj) {
 //	  mini.createDismissibleMessage(lf_message);
 
     pa_display_name.value = 'this is a test :-)';
+    div_test.value = 'test test test :-)';
+
     var lf_display_name = lf_domdata.getElementsByTagName("EX_F_DISPLAY_NAME").item(0).attributes.item(0).nodeValue;
 //    lf_message = "Employee Name = " + lf_display_name;
 //    mini.createDismissibleMessage(lf_message);
