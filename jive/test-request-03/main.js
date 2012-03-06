@@ -21,7 +21,8 @@ function makeDomRequest() {
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
 //    lf_message = "URL = " + lf_url;
 //    mini.createDismissibleMessage(lf_message);
-    var lf_soapEnvelope = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:soap:functions:mc-style\"><soapenv:Header/><soapenv:Body><urn:ZmurCollabGetWorklist><ImSapuser>RILKEE</ImSapuser></urn:ZmurCollabGetWorklist></soapenv:Body></soapenv:Envelope>";
+//    var lf_soapEnvelope = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:soap:functions:mc-style\"><soapenv:Header/><soapenv:Body><urn:ZmurCollabGetWorklist><ImSapuser>RILKEE</ImSapuser></urn:ZmurCollabGetWorklist></soapenv:Body></soapenv:Envelope>";
+    var lf_soapEnvelope = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_GET_EE_NAME><IM_F_PERNR>1000</IM_F_PERNR></urn:ZMUR_HCM_GET_EE_NAME></soapenv:Body></soapenv:Envelope>"
 //    lf_message = "SoapEnvelope = " + lf_lf_soapEnvelope;
 //    mini.createDismissibleMessage(lf_message);
 
