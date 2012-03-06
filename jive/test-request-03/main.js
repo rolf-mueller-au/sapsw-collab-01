@@ -54,8 +54,9 @@ function responseDom(obj) {
 
     var lf_domdata = obj.data;
     var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME');
+    var lf_display_name_2 = lf_el_display_name.childNodes[0].firstChild.nodeValue;
     var lf_display_name = lf_domdata.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].nodeValue;
-    node_value.value = lf_display_name;
+    node_value.value = lf_display_name_2;
 //    lf_message = "Employee Name = " + lf_display_name;
 //    mini.createDismissibleMessage(lf_message);
 
