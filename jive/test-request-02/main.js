@@ -34,7 +34,15 @@ function responseNormal(obj) {
 //--- test gadgets.io.makeRequest
 function makeDomRequest() {
     mini.createDismissibleMessage("makeDomRequest() started...");
+
     var lf_soapEnvelope = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:soap:functions:mc-style\"><soapenv:Header/><soapenv:Body><urn:ZmurCollabGetWorklist><ImSapuser>RILKEE</ImSapuser></urn:ZmurCollabGetWorklist></soapenv:Body></soapenv:Envelope>";
+
+    var lf_envelope = new SOAP.Envelope();
+    var lf_header = lf_envelope.create_Header();
+    var lf_body = lf_envelope.create_body();
+    var lf_el = lf_body.create_child(new WS.QName('method','urn:ZmurCollabGetWorklist'));
+    lf_el.create_child(new WS.QName('ImSapuser','urn:ZmurCollabGetWorklist')).set_value('RILKEE');
+
     var lf_params = {};
     lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
@@ -43,7 +51,8 @@ function makeDomRequest() {
         "SOAPAction": "ZmurCollabGetWorklistRequest",
         "Content-Type": "text/xml; charset=utf-8"
     };
-    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+//  lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_envelope;
     var lf_url = url.value;
     gadgets.io.makeRequest(lf_url, responseDom, lf_params);
 }
