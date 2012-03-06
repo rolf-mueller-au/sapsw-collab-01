@@ -50,9 +50,12 @@ function makeDomRequest() {
 //--- and analyse the response
 function responseDom(obj) {
 	mini.createDismissibleMessage("responseDom(obj) started...");
-  //obj.text contains the text of the page that was requested
-	var message = "response = " + obj.data;
-	mini.createDismissibleMessage(message);
+    //obj.text contains the text of the page that was requested
+    var lf_message;
+    lf_message = "obj.text = " + obj.text;
+    mini.createDismissibleMessage(lf_message);
+	lf_message = "obj.data = " + obj.data;
+	mini.createDismissibleMessage(lf_message);
 }
 
 //--- test gadgets.io.makeRequest
