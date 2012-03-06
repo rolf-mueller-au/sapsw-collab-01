@@ -51,8 +51,8 @@ function makeDomRequest() {
         "SOAPAction": "ZmurCollabGetWorklistRequest",
         "Content-Type": "text/xml; charset=utf-8"
     };
-//  lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_envelope;
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+ // lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_envelope;
     var lf_url = url.value;
     gadgets.io.makeRequest(lf_url, responseDom, lf_params);
 }
