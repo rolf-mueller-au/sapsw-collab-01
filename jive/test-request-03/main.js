@@ -44,13 +44,12 @@ function responseDom(obj) {
     //obj.text contains the text of the page that was requested
     var lf_domdata = obj.data;
     var lf_message;
-//    lf_message = "obj.text = " + obj.text;
-//    mini.createDismissibleMessage(lf_message);
-//	  lf_message = "obj.data = " + obj.data;
-//	  mini.createDismissibleMessage(lf_message);
+    lf_message = "obj.text = " + obj.text;
+    mini.createDismissibleMessage(lf_message);
+    lf_message = "obj.data = " + obj.data;
+    mini.createDismissibleMessage(lf_message);
 
     pa_display_name.value = 'this is a test :-)';
-    div_test.value = 'test test test :-)';
 
     var lf_display_name = lf_domdata.getElementsByTagName("EX_F_DISPLAY_NAME").item(0).attributes.item(0).nodeValue;
 //    lf_message = "Employee Name = " + lf_display_name;
