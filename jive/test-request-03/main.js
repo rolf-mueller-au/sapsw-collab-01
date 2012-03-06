@@ -43,19 +43,21 @@ function responseDom(obj) {
 	mini.createDismissibleMessage("responseDom(obj) started...");
     //obj.text contains the text of the page that was requested
     var lf_message;
-    lf_message = "obj.text = " + obj.text;
-    mini.createDismissibleMessage(lf_message);
-    lf_message = "obj.data = " + obj.data;
-    mini.createDismissibleMessage(lf_message);
+//    lf_message = "obj.text = " + obj.text;
+//    mini.createDismissibleMessage(lf_message);
+//    lf_message = "obj.data = " + obj.data;
+//    mini.createDismissibleMessage(lf_message);
 
 //  pa_display_name.value = obj.text;
+    obj_text.value = obj.text;
+    obj_data.value = obj.data;
 
     var lf_domdata = obj.data;
-//  var lf_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME').firstChild.nodeValue;
-    var lf_display_name = lf_domdata.documentElement.firstChild.nodeValue;
-    pa_display_name.value = lf_display_name;
-    lf_message = "Employee Name = " + lf_display_name;
-    mini.createDismissibleMessage(lf_message);
+    var lf_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME').firstChild.nodeValue;
+//  var lf_display_name = lf_domdata.documentElement.firstChild.nodeValue;
+    pa_node_value.value = lf_display_name;
+//    lf_message = "Employee Name = " + lf_display_name;
+//    mini.createDismissibleMessage(lf_message);
 
 }
 
