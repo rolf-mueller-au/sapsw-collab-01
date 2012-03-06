@@ -52,7 +52,7 @@ function responseDom(obj) {
     var lf_display_name = lf_domdata.getElementsByTagName("EX_F_DISPLAY_NAME").item(0).attributes.item(0).nodeValue;
 //    lf_message = "Employee Name = " + lf_display_name;
 //    mini.createDismissibleMessage(lf_message);
-    div_display_name.value = lf_display_name;
+    div_display_name.value = 'this is a test :-)';
 }
 
 //--- Register our on-view-load handler
