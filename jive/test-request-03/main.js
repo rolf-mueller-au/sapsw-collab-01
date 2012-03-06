@@ -51,7 +51,7 @@ function responseDom(obj) {
     var lf_domdata = obj.data;
     pa_display_name.value = obj.text;
 
-    var lf_display_name = obj.text.getElementsByTagName("EX_F_DISPLAY_NAME").firstChild.nodeValue;
+    var lf_display_name = lf_domdata.text.getElementsByTagName('EX_F_DISPLAY_NAME').nodeValue;
     pa_display_name.value = lf_display_name;
     lf_message = "Employee Name = " + lf_display_name;
     mini.createDismissibleMessage(lf_message);
