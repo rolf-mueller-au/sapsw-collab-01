@@ -37,11 +37,11 @@ function makeDomRequest() {
 
     var lf_soapEnvelope = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:soap:functions:mc-style\"><soapenv:Header/><soapenv:Body><urn:ZmurCollabGetWorklist><ImSapuser>RILKEE</ImSapuser></urn:ZmurCollabGetWorklist></soapenv:Body></soapenv:Envelope>";
 
-    var lf_envelope = new SOAP.Envelope();
-    var lf_header = lf_envelope.create_Header();
-    var lf_body = lf_envelope.create_body();
-    var lf_el = lf_body.create_child(new WS.QName('method','urn:ZmurCollabGetWorklist'));
-    lf_el.create_child(new WS.QName('ImSapuser','urn:ZmurCollabGetWorklist')).set_value('RILKEE');
+//    var lf_envelope = new SOAP.Envelope();
+//    var lf_header = lf_envelope.create_Header();
+//    var lf_body = lf_envelope.create_body();
+//    var lf_el = lf_body.create_child(new WS.QName('method','urn:ZmurCollabGetWorklist'));
+//    lf_el.create_child(new WS.QName('ImSapuser','urn:ZmurCollabGetWorklist')).set_value('RILKEE');
 
     var lf_params = {};
     lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
