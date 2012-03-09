@@ -1,0 +1,209 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- <link rel="stylesheet" href="stylesheets/main.css" type="text/css" media="screen" /> --> 
+  <script type="text/javascript" charset="utf-8" src="main.js"></script>
+</head>
+
+<body>
+
+<style media="screen" type="text/css">
+  .tdHeader{ background-color: #d3d3d3;
+             padding: 3px; }
+  .tdHeader2{ background-color: #d3d3d3;
+              padding: 3px; }
+</style>
+  
+<table border="0" style="width: 100%">
+  <caption>Position Change Permanent/Temporary</caption>
+  <tbody>
+    <tr>
+      <td class="tdHeader">Employee Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Employee No.</td>
+              <td><input type="text" size="20" id="pa_pernr">
+                  <button type="button" id="button_submit" onclick="loadPernrDetails()">Submit</button></td>
+              <td>Employee Name</td>
+              <td><input type="text" size="40" disabled="disabled" id="pa_name"></td>
+            </tr>
+            <tr>
+              <td>Effective Date</td>
+              <td><input type="text" size="12"  id="pa_date"></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdHeader">Action Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Action Type</td>
+              <td>
+                <input type="text" size="4" id="pa_action"> 
+                <input type="text" size="20" disabled="disabled" id="pa_action_name"></td>
+              <td>Action Reason</td>
+              <td><input type="text" id="pa_action_reason"></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdHeader">Organizational Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td class="tdHeader2">Actual Situation</td>
+              <td class="tdHeader2">Future Situation</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px">
+                <table border="0" style="width: 100%">
+                  <tbody>
+                    <tr>
+                      <td>Company Code</td>
+                      <td>
+                        <input type="text" size="4" disabled="disabled" id="pa_bukrs_old"> 
+                        <input type="text" size="20" disabled="disabled" id="pa_bukrstxt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Personnel Area</td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_werks_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_werkstxt_old">
+					  </td>
+                    </tr>
+                    <tr>
+                      <td>Personnel SubArea</td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_btrtl_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_btrtltxt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>OrgUnit ID</td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_orgid_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_orgtxt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Position</td>
+                      <td>
+					    <input type="text" size="4" disabled="disabled" id="pa_position_old"> 
+						<input type="text" size="20" disabled="disabled" id="pa_positiontxt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Personnel Admin.</td>
+                        <td>
+                            <input type="text" size="4" disabled="disabled" id="pa_sachp_old">
+                            <input type="text" size="20" disabled="disabled" id="pa_sachptxt_old">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Job</td>
+                        <td>
+                            <input type="text" size="4" disabled="disabled" id="pa_stelle_old">
+                            <input type="text" size="20" disabled="disabled" id="pa_stelletxt_old">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cost Center</td>
+                        <td>
+                            <input type="text" size="4" disabled="disabled" id="pa_costl_old">
+                            <input type="text" size="20" disabled="disabled" id="pa_costltxt_old">
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="padding: 5px">
+                <table border="0" style="width: 100%">
+                  <tbody>
+                    <tr>
+					  <td>Company Code</td>
+					  <td>
+					    <input type="text" size="3" maxlength="4" id="pa_bukrs_new"> 
+					    <input type="text" size="20" disabled="disabled" id="pa_bukrstxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>Personnel Area</td>
+					  <td>
+					    <input type="text" size="3" maxlength="4" id="pa_werks_new"> 
+					    <input type="text" size="20" disabled="disabled" id="pa_werkstxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>Personnel SubArea</td>
+					  <td>
+					    <input type="text" size="3" maxlength="4" id="pa_btrtl_new"> 
+					    <input type="text" size="20" disabled="disabled" id="pa_btrtltxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>OrgUnit ID</td>
+					  <td>
+					    <input type="text" size="3" maxlength="4" id="pa_orgid_new"> 
+					    <input type="text" size="20" disabled="disabled" id="pa_orgtxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>Position</td>
+					  <td>
+					    <input type="text" size="3" maxlength="4" id="pa_position_new"> 
+					    <input type="text" size="20" disabled="disabled" id="pa_positiontxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+                        <td>Personnel Admin.</td>
+                        <td>
+                            <input type="text" size="4" id="pa_sachp_new">
+                            <input type="text" size="20" disabled="disabled" id="pa_sachptxt_new">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Job</td>
+                        <td>
+                            <input type="text" size="4" id="pa_stelle_new">
+                            <input type="text" size="20" disabled="disabled" id="pa_stelletxt_new">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cost Center</td>
+                        <td>
+                            <input type="text" size="4" id="pa_costl_new">
+                            <input type="text" size="20" disabled="disabled" id="pa_costltxt_new">
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" id="button_load" onclick="loadAppData()">Load</button>
+<button type="button" id="button_save" onclick="onClickSave()">Save</button>
+
+</body>
