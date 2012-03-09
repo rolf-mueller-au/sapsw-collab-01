@@ -22,7 +22,7 @@ function makeDomRequest() {
     var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_GET_EE_NAME><IM_F_PERNR>";
     var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_GET_EE_NAME></soapenv:Body></soapenv:Envelope>";
     var lf_soapEnvelope = lf_soapEnvelope_1 + pa_pernr + lf_soapEnvelope_2;
-    soap_envelope = lf_soapEnvelope;
+    soap_envelope.value = lf_soapEnvelope;
 
     var lf_params = {};
     lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
