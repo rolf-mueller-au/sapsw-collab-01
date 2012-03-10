@@ -82,6 +82,7 @@ function onClickSave() {
 
 //--- for loadPernrDetails, we call the backend web-service...
 function loadPernrDetails() {
+    mini.createDismissibleMessage("loadPernrDetails() started...");
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_GET_EE_NAME><IM_F_PERNR>";
     var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_GET_EE_NAME></soapenv:Body></soapenv:Envelope>";
@@ -101,6 +102,7 @@ function loadPernrDetails() {
 
 //--- ...to receive the pernrDetails
 function responseLoadPernrDetails(obj) {
+    mini.createDismissibleMessage("responseLoadPernrDetails() started...");
     var lf_domdata = obj.data;
     var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0];
     var lf_display_name = lf_el_display_name.childNodes[0].nodeValue;
