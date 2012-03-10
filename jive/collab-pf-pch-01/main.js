@@ -100,7 +100,7 @@ function loadPernrDetails() {
 }
 
 //--- ...to receive the pernrDetails
-function responseDom(obj) {
+function responseLoadPernrDetails(obj) {
     var lf_domdata = obj.data;
     var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0];
     var lf_display_name = lf_el_display_name.childNodes[0].nodeValue;
