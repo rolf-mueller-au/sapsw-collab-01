@@ -104,6 +104,10 @@ function loadPernrDetails() {
 function responseLoadPernrDetails(obj) {
     mini.createDismissibleMessage("responseLoadPernrDetails() started...");
     var lf_domdata = obj.data;
+//--- retrieve display name
+    var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0];
+    var lf_display_name = lf_el_display_name.childNodes[0].nodeValue;
+    pa_name.value = lf_display_name;
 //--- retrieve BUKRS
     var lf_el_bukrs = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0];
     var lf_bukrs = lf_el_bukrs.childNodes[0].nodeValue;
@@ -112,10 +116,6 @@ function responseLoadPernrDetails(obj) {
     var lf_el_bukrs_txt = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0];
     var lf_bukrs_txt = lf_el_bukrs_txt.childNodes[0].nodeValue;
     pa_bukrstxt_old.value = lf_bukrs_txt;
-//--- retrieve display name
-    var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0];
-    var lf_display_name = lf_el_display_name.childNodes[0].nodeValue;
-    pa_name.value = lf_display_name;
 }
 
 
