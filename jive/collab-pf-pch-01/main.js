@@ -135,9 +135,9 @@ function responseLoadPernrDetails(obj) {
 //--- retrieve STELL_TXT
     pa_stell_txt_old.value = lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0].nodeValue;
 //--- retrieve WERKS
-    pa_stell_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0].nodeValue;
+    pa_werks_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0].nodeValue;
 //--- retrieve WERKS_TXT
-    pa_stell_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue;
+    pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue;
 
 }
 
