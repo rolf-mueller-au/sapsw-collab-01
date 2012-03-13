@@ -104,9 +104,18 @@ function loadPernrDetails() {
 function responseLoadPernrDetails(obj) {
     mini.createDismissibleMessage("responseLoadPernrDetails() started...");
     var lf_domdata = obj.data;
+//--- retrieve display name
     var lf_el_display_name = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0];
     var lf_display_name = lf_el_display_name.childNodes[0].nodeValue;
     pa_name.value = lf_display_name;
+//--- retrieve BUKRS
+    var lf_el_bukrs = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0];
+    var lf_bukrs = lf_el_display_name.childNodes[0].nodeValue;
+    pa_bukrs_old.value = lf_bukrs;
+//--- retrieve BUKRS_TXT
+    var lf_el_bukrs_txt = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0];
+    var lf_bukrs_txt = lf_el_display_name.childNodes[0].nodeValue;
+    pa_bukrstxt_old.value = lf_bukrs_txt;
 }
 
 
