@@ -109,7 +109,7 @@ function responseLoadPernrDetails(obj) {
 //--- retrieve BUKRS
     pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue;
 //--- retrieve BUKRS_TXT
-    pa_bukrs_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0].nodeValue;
+//    pa_bukrs_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0].nodeValue;
 //--- retrieve BTRTL
     pa_btrtl_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0].nodeValue;
 //--- retrieve BTRTL_TXT
