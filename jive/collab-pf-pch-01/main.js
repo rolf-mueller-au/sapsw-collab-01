@@ -20,14 +20,14 @@ function init() {
 //--- Register UI event handlers
 function registerHandlers() {
     console.log("registerHandlers() started");
-	mini.createDismissibleMessage("registerHandlers() started");
+	//mini.createDismissibleMessage("registerHandlers() started");
 
 }
 
 //--- Load the currently logged in user
 function loadUser() {
-  console.log("loadUser() started");
-	mini.createDismissibleMessage("loadUser() started");
+    //console.log("loadUser() started");
+	//mini.createDismissibleMessage("loadUser() started");
     showMessage("Loading the currently logged in user ...");
     osapi.jive.core.users.get({
         id : '@viewer'
@@ -84,8 +84,8 @@ function onClickSave() {
 function loadPernrDetails() {
     mini.createDismissibleMessage("loadPernrDetails() started...");
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
-    var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_GET_EE_NAME><IM_F_PERNR>";
-    var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_GET_EE_NAME></soapenv:Body></soapenv:Envelope>";
+    var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_GET_EE_DETAILS><IM_F_PERNR>";
+    var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_GET_EE_DETAILS></soapenv:Body></soapenv:Envelope>";
     var lf_soapEnvelope = lf_soapEnvelope_1 + pa_pernr.value + lf_soapEnvelope_2;
 
     var lf_params = {};
