@@ -110,11 +110,11 @@ function responseLoadPernrDetails(obj) {
     pa_name.value = lf_display_name;
 //--- retrieve BUKRS
     var lf_el_bukrs = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0];
-    var lf_bukrs = lf_el_display_name.childNodes[0].nodeValue;
+    var lf_bukrs = lf_el_bukrs.childNodes[0].nodeValue;
     pa_bukrs_old.value = lf_bukrs;
 //--- retrieve BUKRS_TXT
-    var lf_el_bukrs_txt = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0];
-    var lf_bukrs_txt = lf_el_display_name.childNodes[0].nodeValue;
+    var lf_el_bukrs_txt = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0];
+    var lf_bukrs_txt = lf_el_bukrs_txt.childNodes[0].nodeValue;
     pa_bukrstxt_old.value = lf_bukrs_txt;
 }
 
