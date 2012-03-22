@@ -158,7 +158,7 @@ function checkAppData() {
 //    var lf_soapEnvelope_Werks = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
 
     var lf_soapEnvelope_Btrtl = "<IM_F_BTRTL_NEW>" + "</IM_F_BTRTL_NEW>";
-    var lf_soapEnvelope_Bukrs = "<IM_F_BUKRS_NEW>" + "</IM_F_BUKRS_NEW>";
+    var lf_soapEnvelope_Bukrs = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
     var lf_soapEnvelope_Kostl = "<IM_F_KOSTL_NEW>" + "</IM_F_KOSTL_NEW>";
     var lf_soapEnvelope_Orgeh = "<IM_F_ORGEH_NEW>" + "</IM_F_ORGEH_NEW>";
     var lf_soapEnvelope_Plans = "<IM_F_PLANS_NEW>" + "</IM_F_PLANS_NEW>";
