@@ -53,7 +53,7 @@ function loadAppData() {
 				for (p in response) {
           if (!response[p]) { continue; }
           pa_bukrs_new.value = response[p].pa_bukrs_new;
-					pa_werks_new.value = response[p].pa_werks_new;
+		  pa_werks_new.value = response[p].pa_werks_new;
         }
 			}
 		});
@@ -70,7 +70,7 @@ function onClickSave() {
 		userId: "@viewer",
 		groupId: "@self",
 		data: { pa_bukrs_new: lf_bukrs_new_value,
-						pa_werks_new: lf_werks_new_value }
+				pa_werks_new: lf_werks_new_value }
     }).execute(function(response) {
 			if (response.error) {
 				mini.createDismissibleMessage(response.error.message);
@@ -141,6 +141,51 @@ function responseLoadPernrDetails(obj) {
 
 }
 
+//--- for loadPernrDetails, we call the backend web-service...
+function checkAppData() {
+    mini.createDismissibleMessage("checkAppData() started...");
+    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
+    var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_CHECK>";
+    var lf_soapEnvelope_2 = "</urn:ZMUR_HCM_PNF_PCH_CHECK></soapenv:Body></soapenv:Envelope>";
+    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_Btrtl = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
+    var lf_soapEnvelope_Bukrs = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
+    var lf_soapEnvelope_Kostl = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";
+    var lf_soapEnvelope_Orgeh = "<IM_F_ORGEH_NEW>" + pa_orgeh_new.value + "</IM_F_ORGEH_NEW>";
+    var lf_soapEnvelope_Plans = "<IM_F_PLANS_NEW>" + pa_plans_new.value + "</IM_F_PLANS_NEW>";
+    var lf_soapEnvelope_Sachp = "<IM_F_SACHP_NEW>" + pa_sachp_new.value + "</IM_F_SACHP_NEW>";
+    var lf_soapEnvelope_Stell = "<IM_F_STELL_NEW>" + pa_stell_new.value + "</IM_F_STELL_NEW>";
+    var lf_soapEnvelope_Werks = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
+
+    var lf_soapEnvelope = lf_soapEnvelope_1 + lf_soapEnvelope_Btrtl
+                                            + lf_soapEnvelope_Bukrs
+                                            + lf_soapEnvelope_Kostl
+                                            + lf_soapEnvelope_Orgeh
+                                            + lf_soapEnvelope_Pernr
+                                            + lf_soapEnvelope_Plans
+                                            + lf_soapEnvelope_Sachp
+                                            + lf_soapEnvelope_Stell
+                                            + lf_soapEnvelope_Werks + lf_soapEnvelope_2;
+
+    var lf_params = {};
+    lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
+    lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    lf_params[gadgets.io.RequestParameters.HEADERS] = {
+        "SOAPAction": "ZmurCollabGetWorklistRequest",
+        "Content-Type": "text/xml; charset=utf-8"
+    };
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+    gadgets.io.makeRequest(lf_url, responseCheckAppData, lf_params);
+}
+
+function responseCheckAppData(obj) {
+    mini.createDismissibleMessage("responseCheckAppData() started...");
+    var lf_domdata = obj.data;
+//--- get message table
+    var elMessage = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
+
+}
 
 //--- Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);
