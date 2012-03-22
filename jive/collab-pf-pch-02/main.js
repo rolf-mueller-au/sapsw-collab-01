@@ -41,22 +41,23 @@ function loadUser() {
 
 //--- Loading the data, which has been saved from the form
 function loadAppData() {
-	//mini.createDismissibleMessage("loadAppData() started");
+    //mini.createDismissibleMessage("loadAppData() started");
 
-	osapi.appdata.get({
-		userId: "@viewer",
-		groupId: "@self"
-		}).execute(function(response) {
-      if (response.error) {
-				mini.createDismissibleMessage(response.error.message);
-			} else {
-				for (p in response) {
+  osapi.appdata.get({
+    userId: "@viewer",
+    groupId: "@self"
+  }).execute(function(response) {
+    if (response.error) {
+      mini.createDismissibleMessage(response.error.message);
+    } else {
+        for (p in response) {
           if (!response[p]) { continue; }
-          pa_bukrs_new.value = response[p].pa_bukrs_new;
-		  pa_werks_new.value = response[p].pa_werks_new;
+          if (typeof(response[p].pa_bukrs_new)!=='undefined') {pa_bukrs_new.value = response[p].pa_bukrs_new;}
+          if (typeof(response[p].pa_werks_new)!=='undefined') {pa_werks_new.value = response[p].pa_werks_new;}
         }
-			}
-		});
+      }
+    }
+  );
 }
 
 //--- Saving the data entered into the form
