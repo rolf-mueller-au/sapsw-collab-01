@@ -578,7 +578,8 @@
             '/* Week number heading */'                                 +
             'td.scwWeekNumberHead       {color:             #6666CC;}'  +
             '/* Week day headings */'                                   +
-            'td.scwWeek                 {color:             #CCCCCC;}'  +
+//          'td.scwWeek                 {color:             #CCCCCC;}'  +
+            'td.scwWeek                 {color:             #AAAAAA;}'  +
             '/* Week numbers */'                                        +
             'td.scwWeekNo               {background-color:  #776677;'   +
                                         'color:             #CCCCCC;}'  +
