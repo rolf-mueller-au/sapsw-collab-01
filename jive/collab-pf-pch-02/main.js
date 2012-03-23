@@ -195,7 +195,7 @@ function responseCheckAppData(obj) {
         var lf_elItem = lf_elMessages.childNodes[x];
 //      var lf_message = lf_elItem.getElementsByName('MESSAGE')[0].childNodes[0].value;
         var lf_elMessage = lf_elItem.getElementsByTagName('MESSAGE')[0];
-        var lf_Message = lf_elItem.childNodes[3].value;
+        var lf_Message = lf_elMessage.childNodes[0].value;
         mini.createDismissibleMessage(lf_message);
     }
 
