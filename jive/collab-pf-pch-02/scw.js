@@ -570,7 +570,8 @@
                                         'vertical-align:    middle;}'   +
             '/* Blend the colours into your page here...    */'         +
             '/* Calendar background */'                                 +
-            'table.scw                  {background-color:  #6666CC;}'  +
+//          'table.scw                  {background-color:  #6666CC;}'  +
+            'table.scw                  {background-color:  #d0d0d0;}'  +
             '/* Drag Handle */'                                         +
             'td.scwDrag                 {background-color:  #9999CC;'   +
                                         'color:             #CCCCFF;}'  +
