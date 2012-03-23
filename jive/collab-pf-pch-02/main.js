@@ -193,8 +193,11 @@ function responseCheckAppData(obj) {
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
     for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
         var lf_elItem = lf_elMessages.childNodes[x];
-        var lf_message = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
-        mini.createDismissibleMessage(lf_message);
+        var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
+        var lf_msgNumber = lf_elItem.getElementsByTagName('NUMBER')[0].childNodes[0].nodeValue;
+        var lf_msgMessage = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
+        var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' ' + lf_msgMessage;
+        mini.createDismissibleMessage(lf_msg);
     }
 
 }
