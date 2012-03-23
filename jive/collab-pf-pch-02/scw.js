@@ -598,7 +598,7 @@
             '/* Today selector */'                                      +
 //            'td.scwNow                  {background-color:  #6666CC;'   +
 //                                        'color:             #FFFFFF;}'  +
-            'td.scwNow                  {background-color:  #EEDDDD;'   +
+            'td.scwNow                  {background-color:  #AAAAAA;'   +
                                         'color:             #FFFFFF;}'  +
             '/* Clear Button */'                                        +
             'td.scwClear                {padding:           0px;}'      +
