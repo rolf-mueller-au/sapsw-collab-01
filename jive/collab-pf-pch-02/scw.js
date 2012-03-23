@@ -571,7 +571,7 @@
             '/* Blend the colours into your page here...    */'         +
             '/* Calendar background */'                                 +
 //          'table.scw                  {background-color:  #6666CC;}'  +
-            'table.scw                  {background-color:  #a0a0a0;}'  +
+            'table.scw                  {background-color:  #d9d9d9;}'  +
             '/* Drag Handle */'                                         +
             'td.scwDrag                 {background-color:  #9999CC;'   +
                                         'color:             #CCCCFF;}'  +
