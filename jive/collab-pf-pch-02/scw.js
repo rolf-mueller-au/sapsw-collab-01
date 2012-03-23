@@ -571,7 +571,7 @@
             '/* Blend the colours into your page here...    */'         +
             '/* Calendar background */'                                 +
 //          'table.scw                  {background-color:  #6666CC;}'  +
-            'table.scw                  {background-color:  #ececec;}'  +
+            'table.scw                  {background-color:  #e0e0e0;}'  +
             '/* Drag Handle */'                                         +
             'td.scwDrag                 {background-color:  #9999CC;'   +
                                         'color:             #CCCCFF;}'  +
@@ -598,7 +598,7 @@
             '/* Today selector */'                                      +
 //            'td.scwNow                  {background-color:  #6666CC;'   +
 //                                        'color:             #FFFFFF;}'  +
-            'td.scwNow                  {background-color:  #CCCCCC;'   +
+            'td.scwNow                  {background-color:  #EEDDDD;'   +
                                         'color:             #FFFFFF;}'  +
             '/* Clear Button */'                                        +
             'td.scwClear                {padding:           0px;}'      +
