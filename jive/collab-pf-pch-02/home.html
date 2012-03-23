@@ -2,6 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- <link rel="stylesheet" href="stylesheets/main.css" type="text/css" media="screen" /> --> 
   <script type="text/javascript" charset="utf-8" src="main.js"></script>
+  <script type="text/javascript" charset="utf-8" src="scw.js"></script>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
 </style>
   
 <table border="0" style="width: 100%">
-  <caption>Position Change Permanent/Temporary V2.1</caption>
+  <caption>Position Change Permanent/Temporary V2.2</caption>
   <tbody>
     <tr>
       <td class="tdHeader">Employee Information</td>
@@ -32,7 +33,10 @@
             </tr>
             <tr>
               <td>Effective Date</td>
-              <td><input type="text" size="12"  id="pa_date"></td>
+              <td>
+                <input type="text" size="12"  id="pa_date">
+                <img src='scw.gif' title='Click Here' alt='Click Here' onclick="scwShow(scwID('pa_date'),event,3);" />
+              </td>
               <td></td>
               <td></td>
             </tr>

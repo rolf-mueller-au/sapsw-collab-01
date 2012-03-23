@@ -189,7 +189,7 @@ function checkAppData() {
 function responseCheckAppData(obj) {
     //mini.createDismissibleMessage("responseCheckAppData() started...");
     var lf_domdata = obj.data;
-//--- get message table
+//--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
     for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
         var lf_elItem = lf_elMessages.childNodes[x];
