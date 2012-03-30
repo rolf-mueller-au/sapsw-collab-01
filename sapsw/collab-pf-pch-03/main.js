@@ -141,7 +141,6 @@ function responseLoadPernrDetails(obj) {
     pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue;
 
 //--- get bukrs_select table, and add values to the
-    var lf_paBukrsNewSelect = document.getElementById("pa_bukrs_new")[0];
     var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
     for( var x = 0; x < lf_elBukrsNewSelects.childNodes.length; x++ ) {
         var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x];
@@ -152,7 +151,6 @@ function responseLoadPernrDetails(obj) {
     }
 
 //--- get massg_select table, and add values to the
-    var lf_paActionSelect=document.getElementById("pa_action")[0];
     var lf_elActionSelects = lf_domdata.getElementsByTagName('EX_T_MASSG_SELECT')[0];
     for( var x = 0; x < lf_elActionSelects.childNodes.length; x++ ) {
         var lf_elActionItem = lf_elActionSelects.childNodes[x];
