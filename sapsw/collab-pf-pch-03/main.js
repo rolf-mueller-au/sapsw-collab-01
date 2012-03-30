@@ -164,7 +164,7 @@ function responseLoadPernrDetails(obj) {
 
 //--- for loadPernrDetails, we call the backend web-service...
 function checkAppData() {
-    //mini.createDismissibleMessage("checkAppData() started...");
+    mini.createDismissibleMessage("checkAppData() started...");
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_CHECK>";
     var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_CHECK></soapenv:Body></soapenv:Envelope>";
@@ -211,7 +211,7 @@ function checkAppData() {
 }
 
 function responseCheckAppData(obj) {
-    //mini.createDismissibleMessage("responseCheckAppData() started...");
+    mini.createDismissibleMessage("responseCheckAppData() started...");
     var lf_domdata = obj.data;
 //--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
