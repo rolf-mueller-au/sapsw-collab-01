@@ -140,15 +140,6 @@ function responseLoadPernrDetails(obj) {
 //--- retrieve WERKS_TXT
     pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue;
 
-//--- get bukrs_select table, and add values to the
-    var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
-    for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
-        var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x1];
-        var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
-        var lf_butxt = lf_elBukrsItem.getElementsByTagName('BUTXT')[0].childNodes[0].nodeValue;
-        var lf_bukrs_text = lf_bukrs + ' - ' + lf_butxt;
-        pa_bukrs_new.add(new Option(lf_bukrs_text, lf_bukrs));
-    }
 
 //--- get massg_select table, and add values to the
     var lf_elActionSelects = lf_domdata.getElementsByTagName('EX_T_MASSG_SELECT')[0];
@@ -158,6 +149,16 @@ function responseLoadPernrDetails(obj) {
         var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
         var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
         pa_action.add(new Option(lf_massg_tex, lf_massg));
+    }
+
+//--- get bukrs_select table, and add values to the
+    var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
+    for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
+        var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x1];
+        var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
+        var lf_butxt = lf_elBukrsItem.getElementsByTagName('BUTXT')[0].childNodes[0].nodeValue;
+        var lf_bukrs_text = lf_bukrs + ' - ' + lf_butxt;
+        pa_bukrs_new.add(new Option(lf_bukrs_text, lf_bukrs));
     }
 
 }
