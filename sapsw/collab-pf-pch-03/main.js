@@ -171,6 +171,8 @@ function checkAppData() {
 
 //--- get all the values from the input fields and package them into tags
     var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_Date  = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
+    var lf_soapEnvelope_Massg = "<IM_F_MASSG>" + pa_action.value  + "</IM_F_MASSG>";
     var lf_soapEnvelope_Btrtl = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
     var lf_soapEnvelope_Bukrs = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
     var lf_soapEnvelope_Kostl = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";
@@ -185,7 +187,9 @@ function checkAppData() {
     lf_soapEnvelope = lf_soapEnvelope_beg
         + lf_soapEnvelope_Btrtl
         + lf_soapEnvelope_Bukrs
+        + lf_soapEnvelope_Date
         + lf_soapEnvelope_Kostl
+        + lf_soapEnvelope_Massg
         + lf_soapEnvelope_Orgeh
         + lf_soapEnvelope_Pernr
         + lf_soapEnvelope_Plans
