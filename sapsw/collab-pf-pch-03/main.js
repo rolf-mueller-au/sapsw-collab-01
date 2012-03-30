@@ -148,7 +148,7 @@ function responseLoadPernrDetails(obj) {
         var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
         var lf_butxt = lf_elBukrsItem.getElementsByTagName('BUTXT')[0].childNodes[0].nodeValue;
         var lf_bukrs_text = lf_bukrs + ' - ' + lf_butxt;
-        lf_paBukrsNewSelect.add(new Option(lf_bukrs_text, lf_bukrs));
+        pa_bukrs_new.add(new Option(lf_bukrs_text, lf_bukrs));
     }
 
 //--- get massg_select table, and add values to the
@@ -159,7 +159,7 @@ function responseLoadPernrDetails(obj) {
         var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
         var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
         var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
-        lf_paActionSelect.add(new Option(lf_massg_tex, lf_massg));
+        pa_action.add(new Option(lf_massg_tex, lf_massg));
     }
 
 }
