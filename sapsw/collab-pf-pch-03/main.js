@@ -142,8 +142,8 @@ function responseLoadPernrDetails(obj) {
 
 //--- get bukrs_select table, and add values to the
     var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
-    for( var x = 0; x < lf_elBukrsNewSelects.childNodes.length; x++ ) {
-        var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x];
+    for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
+        var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x1];
         var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
         var lf_butxt = lf_elBukrsItem.getElementsByTagName('BUTXT')[0].childNodes[0].nodeValue;
         var lf_bukrs_text = lf_bukrs + ' - ' + lf_butxt;
@@ -152,8 +152,8 @@ function responseLoadPernrDetails(obj) {
 
 //--- get massg_select table, and add values to the
     var lf_elActionSelects = lf_domdata.getElementsByTagName('EX_T_MASSG_SELECT')[0];
-    for( var x = 0; x < lf_elActionSelects.childNodes.length; x++ ) {
-        var lf_elActionItem = lf_elActionSelects.childNodes[x];
+    for( var x2 = 0; x2 < lf_elActionSelects.childNodes.length; x2++ ) {
+        var lf_elActionItem = lf_elActionSelects.childNodes[x2];
         var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
         var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
         var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
