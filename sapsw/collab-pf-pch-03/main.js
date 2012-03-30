@@ -157,7 +157,7 @@ function responseLoadPernrDetails(obj) {
         var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
         var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
         var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
-        pa_action.add(new Option(lf_massg_tex, lf_massg));
+        pa_action.add(new Option(lf_massg_text, lf_massg));
     }
 
 }
