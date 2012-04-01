@@ -271,6 +271,8 @@ function responseCheckAppData(obj) {
 }
 
 function resetAppData( ) {
+  var answer = confirm("This will reset all appData! Would you like to proceed?");
+  if (answer) {
 //--- clear all values
     pa_pernr.value = "";
     pa_date.value = "";
@@ -307,7 +309,7 @@ function resetAppData( ) {
 //--- and open pa_pernr again
     pa_pernr.disabled = "";
     button_loadPernr.disabled = "";
-
+  } else {alert("...action cancelled!")}
 }
 
 //--- Register our on-view-load handler
