@@ -254,7 +254,7 @@ function checkAppData() {
 }
 
 function responseCheckAppData(obj) {
-    mini.createDismissibleMessage("responseCheckAppData() started...");
+    //mini.createDismissibleMessage("responseCheckAppData() started...");
     var lf_domdata = obj.data;
 //--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
@@ -267,6 +267,26 @@ function responseCheckAppData(obj) {
         mini.createDismissibleMessage(lf_msg);
     }
 
+}
+
+function resetAppData( ) {
+//--- clear all values
+    pa_pernr.value = "";
+    pa_date.value = "";
+    pa_massg.value = "";
+    my_status.value = "";
+    pa_bukrs_new.value = "";
+    pa_werks_new.value = "";
+    pa_btrtl_new.value = "";
+    pa_orgeh_new.value = "";
+    pa_plans_new.value = "";
+    pa_sachp_new.value = "";
+    pa_stell_new.value = "";
+    pa_kostl_new.value = "";
+//--- then save AppData
+    saveAppData();
+//--- and open pa_pernr again
+    pa_pernr.disabled = "";
 }
 
 //--- Register our on-view-load handler
