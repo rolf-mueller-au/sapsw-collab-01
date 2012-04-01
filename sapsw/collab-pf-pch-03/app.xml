@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Collaboration - Process and Forms - Position Change - Version 3"
-               description="This is a first POC on how to collaborate on P+F in SAP"
+  <ModulePrefs title="Collaboration - Process and Forms - Position Change - Version 3.2"
+               description="This is a first POC on how to collaborate on PnF in SAP Streamwork"
                author="Rolf Mueller"
                author_affiliation="Accenture"
                author_email="rolf.mueller@accenture.com"

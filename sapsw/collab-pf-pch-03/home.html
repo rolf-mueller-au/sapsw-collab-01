@@ -30,15 +30,6 @@
               <td>Employee Name</td>
               <td><input type="text" size="40" disabled="disabled" id="pa_name"></td>
             </tr>
-            <tr>
-              <td>Effective Date</td>
-              <td>
-                <input type="text" size="12"  id="pa_date">
-                <img src='scw.gif' title='Click Here' alt='Click Here' onclick="scwShow(scwID('pa_date'),event);" />
-              </td>
-              <td></td>
-              <td></td>
-            </tr>
           </tbody>
         </table>
       </td>
@@ -51,17 +42,14 @@
         <table border="0" style="width: 100%">
           <tbody>
             <tr>
+              <td>Effective Date</td>
+              <td>
+                <input type="text" size="12"  id="pa_date">
+                <img src='scw.gif' title='Click Here' alt='Click Here' onclick="scwShow(scwID('pa_date'),event);" />
+              </td>
               <td>Action Reason</td>
               <td>
                 <select id="pa_massg">
-                </select>
-              </td>
-              <td>Gadget Status</td>
-              <td>
-                <select id="my_status" disabled="disabled">
-                    <option value=""> = Initial</option>
-                    <option value="1">1 = Pernr Retrieved</option>
-                    <option value="2">2 = AppData Saved</option>
                 </select>
               </td>
             </tr>
@@ -215,12 +203,26 @@
   </tbody>
 </table>
 
-<div id="action">
-  <button type="button" id="button_resetAppData" onclick="resetAppData()">Reset</button>
-  <button type="button" id="button_loadAppData" onclick="loadAppData()">Load</button>
-  <button type="button" id="button_saveAppData" onclick="saveAppData()">Save</button>
-  <button type="button" id="button_checkAppData" onclick="checkAppData()">Check Data</button>
-  <button type="button" id="button_submitAppData" onclick="submitAppData()">Submit Data</button>
-</div>
+<table border="0" style="width: 100%">
+  <tbody>
+    <tr>
+      <td>
+        <button type="button" id="button_resetAppData" onclick="resetAppData()">Reset</button>
+        <button type="button" id="button_loadAppData" onclick="loadAppData()">Load</button>
+        <button type="button" id="button_saveAppData" onclick="saveAppData()">Save</button>
+        <button type="button" id="button_checkAppData" onclick="checkAppData()">Check Data</button>
+        <button type="button" id="button_submitAppData" onclick="submitAppData()">Submit Data</button>
+      </td>
+      <td align="right">
+        Gadget Status:
+        <select id="my_status" disabled="disabled">
+          <option value=""> = Initial</option>
+          <option value="1">1 = Pernr Retrieved</option>
+          <option value="2">2 = AppData Saved</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 </body>
