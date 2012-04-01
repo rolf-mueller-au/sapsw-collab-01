@@ -68,6 +68,9 @@ function loadAppData() {
       }
     }
   );
+
+//--- if pa_bukrs_old is empty, the perform loadPernrDetails()
+  if (pa_bukrs_old.value=='undefined') { loadPernrDetails() }
 }
 
 //--- Saving the data entered into the form
