@@ -65,17 +65,11 @@ function loadAppData() {
           if (typeof(response[p].pa_stell_new)!=='undefined') {pa_stell_new.value = response[p].pa_stell_new;}
           if (typeof(response[p].pa_kostl_new)!=='undefined') {pa_kostl_new.value = response[p].pa_kostl_new;}
         }
+//--- if pa_bukrs_old is empty, the perform loadPernrDetails()
+        if (pa_bukrs_old.value=='') { loadPernrDetails() }
       }
     }
   );
-
-//--- if pa_bukrs_old is empty, the perform loadPernrDetails()
-  var lf_message = "pa_pernr = " + pa_pernr.value;
-  mini.createDismissibleMessage(lf_message);
-  mini.createDismissibleMessage('checking on pa_bukrs_old...');
-  lf_message = 'pa_bukrs_old = ' + pa_bukrs_old.value;
-  mini.createDismissibleMessage(lf_message);
-  if (pa_bukrs_old.value=='') { loadPernrDetails() }
 }
 
 //--- Saving the data entered into the form
