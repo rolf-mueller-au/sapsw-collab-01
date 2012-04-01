@@ -70,8 +70,10 @@ function loadAppData() {
   );
 
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
+  var lf_message = "pa_pernr = " + pa_pernr.value;
+  mini.createDismissibleMessage(lf_message);
   mini.createDismissibleMessage('checking on pa_bukrs_old...');
-  var lf_message = 'pa_bukrs_old = ' + pa_bukrs_old.value;
+  lf_message = 'pa_bukrs_old = ' + pa_bukrs_old.value;
   mini.createDismissibleMessage(lf_message);
   if (pa_bukrs_old.value=='') { loadPernrDetails() }
 }
