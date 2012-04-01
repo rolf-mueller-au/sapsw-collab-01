@@ -52,8 +52,18 @@ function loadAppData() {
     } else {
         for (p in response) {
           if (!response[p]) { continue; }
+          if (typeof(response[p].pa_pernr)!=='undefined') {pa_pernr.value = response[p].pa_pernr;}
+          if (typeof(response[p].pa_date)!=='undefined') {pa_date.value = response[p].pa_date;}
+          if (typeof(response[p].pa_massg)!=='undefined') {pa_massg.value = response[p].pa_massg;}
+          if (typeof(response[p].my_status)!=='undefined') {my_status.value = response[p].my_status;}
           if (typeof(response[p].pa_bukrs_new)!=='undefined') {pa_bukrs_new.value = response[p].pa_bukrs_new;}
           if (typeof(response[p].pa_werks_new)!=='undefined') {pa_werks_new.value = response[p].pa_werks_new;}
+          if (typeof(response[p].pa_btrtl_new)!=='undefined') {pa_btrtl_new.value = response[p].pa_btrtl_new;}
+          if (typeof(response[p].pa_orgeh_new)!=='undefined') {pa_orgeh_new.value = response[p].pa_orgeh_new;}
+          if (typeof(response[p].pa_plans_new)!=='undefined') {pa_plans_new.value = response[p].pa_plans_new;}
+          if (typeof(response[p].pa_sachp_new)!=='undefined') {pa_sachp_new.value = response[p].pa_sachp_new;}
+          if (typeof(response[p].pa_stell_new)!=='undefined') {pa_stell_new.value = response[p].pa_stell_new;}
+          if (typeof(response[p].pa_kostl_new)!=='undefined') {pa_kostl_new.value = response[p].pa_kostl_new;}
         }
       }
     }
@@ -61,17 +71,38 @@ function loadAppData() {
 }
 
 //--- Saving the data entered into the form
-function onClickSave() {
-	mini.createDismissibleMessage("save button clicked");
+function saveAppData() {
+	//mini.createDismissibleMessage("save button clicked");
 
+    var lf_pernr_value     = pa_pernr.value;
+    var lf_date_value      = pa_date.value;
+    var lf_massg_value     = pa_massg.value;
+    var lf_my_status_value = my_status.value;
 	var lf_bukrs_new_value = pa_bukrs_new.value;
 	var lf_werks_new_value = pa_werks_new.value;
-	
+    var lf_btrtl_new_value = pa_btrtl_new.value;
+    var lf_orgeh_new_value = pa_orgeh_new.value;
+    var lf_plans_new_value = pa_plans_new.value;
+    var lf_sachp_new_value = pa_sachp_new.value;
+    var lf_stell_new_value = pa_stell_new.value;
+    var lf_kostl_new_value = pa_kostl_new.value;
+
 	osapi.appdata.update({
 		userId: "@viewer",
 		groupId: "@self",
-		data: { pa_bukrs_new: lf_bukrs_new_value,
-				pa_werks_new: lf_werks_new_value }
+		data: { pa_pernr:     lf_pernr_value,
+                pa_date:      lf_date_value,
+                pa_massg:     lf_massg_value,
+                my_status:    lf_my_status_value,
+                pa_bukrs_new: lf_bukrs_new_value,
+			    pa_werks_new: lf_werks_new_value,
+                pa_btrtl_new: lf_btrtl_new_value,
+                pa_orgeh_new: lf_orgeh_new_value,
+                pa_plans_new: lf_plans_new_value,
+                pa_sachp_new: lf_sachp_new_value,
+                pa_stell_new: lf_stell_new_value,
+                pa_kostl_new: lf_kostl_new_value
+        }
     }).execute(function(response) {
 			if (response.error) {
 				mini.createDismissibleMessage(response.error.message);
@@ -157,14 +188,18 @@ function responseLoadPernrDetails(obj) {
         var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
         var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
         var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
-        pa_action.add(new Option(lf_massg_text, lf_massg));
+        pa_massg.add(new Option(lf_massg_text, lf_massg));
     }
+
+
+//--- at the end, we set the my_status field accordingly
+    my_status.value = "1";
 
 }
 
 //--- for loadPernrDetails, we call the backend web-service...
 function checkAppData() {
-    mini.createDismissibleMessage("checkAppData() started...");
+    //mini.createDismissibleMessage("checkAppData() started...");
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_CHECK>";
     var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_CHECK></soapenv:Body></soapenv:Envelope>";
@@ -172,7 +207,7 @@ function checkAppData() {
 //--- get all the values from the input fields and package them into tags
     var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
     var lf_soapEnvelope_Date  = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
-    var lf_soapEnvelope_Massg = "<IM_F_MASSG>" + pa_action.value  + "</IM_F_MASSG>";
+    var lf_soapEnvelope_Massg = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
     var lf_soapEnvelope_Btrtl = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
     var lf_soapEnvelope_Bukrs = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
     var lf_soapEnvelope_Kostl = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";

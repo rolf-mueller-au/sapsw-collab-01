@@ -51,13 +51,19 @@
         <table border="0" style="width: 100%">
           <tbody>
             <tr>
-              <td>Action Type</td>
+              <td>Action Reason</td>
               <td>
-                <select id="pa_action">
+                <select id="pa_massg">
                 </select>
               </td>
-              <td>Action Reason</td>
-              <td><input type="text" id="pa_action_reason"></td>
+              <td>Gadget Status</td>
+              <td>
+                <select id="my_status" disabled="disabled">
+                    <option value=""> = Initial</option>
+                    <option value="1">1 = Pernr Retrieved</option>
+                    <option value="2">2 = AppData Saved</option>
+                </select>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -211,7 +217,7 @@
 
 <div id="action">
   <button type="button" id="button_loadAppData" onclick="loadAppData()">Load</button>
-  <button type="button" id="button_saveAppData" onclick="onClickSave()">Save</button>
+  <button type="button" id="button_saveAppData" onclick="saveAppData()">Save</button>
   <button type="button" id="button_checkAppData" onclick="checkAppData()">Check Data</button>
   <button type="button" id="button_submitAppData" onclick="submitAppData()">Submit Data</button>
 </div>
