@@ -119,8 +119,8 @@ function saveAppData() {
 
 //--- for loadPernrDetails, we call the backend web-service...
 function loadPernrDetails() {
-    var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
-    mini.createDismissibleMessage(lf_message);
+    //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
+    //mini.createDismissibleMessage(lf_message);
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_OPEN><IM_F_PERNR>";
     var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_PNF_PCH_OPEN></soapenv:Body></soapenv:Envelope>";
@@ -200,8 +200,9 @@ function responseLoadPernrDetails(obj) {
 //--- at the end, we set the my_status field accordingly
     my_status.value = "1";
 
-//--- and we also disable the pernr field
+//--- and we also disable the pernr field and hide pushbutton
     pa_pernr.disabled = "disabled";
+    button_loadPernr.disabled = "disabled";
 
 }
 
@@ -293,10 +294,20 @@ function resetAppData( ) {
     pa_sachp_old.value = "";
     pa_stell_old.value = "";
     pa_kostl_old.value = "";
+    pa_bukrs_txt_old.value = "";
+    pa_werks_txt_old.value = "";
+    pa_btrtl_txt_old.value = "";
+    pa_orgeh_txt_old.value = "";
+    pa_plans_txt_old.value = "";
+    pa_sachp_txt_old.value = "";
+    pa_stell_txt_old.value = "";
+    pa_kostl_txt_old.value = "";
 //--- then save AppData
     saveAppData();
 //--- and open pa_pernr again
     pa_pernr.disabled = "";
+    button_loadPernr.disabled = "";
+
 }
 
 //--- Register our on-view-load handler
