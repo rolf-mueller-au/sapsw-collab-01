@@ -66,7 +66,7 @@ function loadAppData() {
           if (typeof(response[p].pa_kostl_new)!=='undefined') {pa_kostl_new.value = response[p].pa_kostl_new;}
         }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
-        if (pa_bukrs_old.value=='') { loadPernrDetails() }
+        if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails() }
       }
     }
   );
@@ -275,6 +275,7 @@ function resetAppData( ) {
     pa_date.value = "";
     pa_massg.value = "";
     my_status.value = "";
+//--- clear new-values
     pa_bukrs_new.value = "";
     pa_werks_new.value = "";
     pa_btrtl_new.value = "";
@@ -283,6 +284,15 @@ function resetAppData( ) {
     pa_sachp_new.value = "";
     pa_stell_new.value = "";
     pa_kostl_new.value = "";
+//--- clear old-values
+    pa_bukrs_old.value = "";
+    pa_werks_old.value = "";
+    pa_btrtl_old.value = "";
+    pa_orgeh_old.value = "";
+    pa_plans_old.value = "";
+    pa_sachp_old.value = "";
+    pa_stell_old.value = "";
+    pa_kostl_old.value = "";
 //--- then save AppData
     saveAppData();
 //--- and open pa_pernr again
