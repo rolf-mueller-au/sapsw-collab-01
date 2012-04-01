@@ -123,7 +123,8 @@ function saveAppData() {
 
 //--- for loadPernrDetails, we call the backend web-service...
 function loadPernrDetails() {
-    //mini.createDismissibleMessage("loadPernrDetails() started...");
+    var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
+    mini.createDismissibleMessage(lf_message);
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_OPEN><IM_F_PERNR>";
     var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_PNF_PCH_OPEN></soapenv:Body></soapenv:Envelope>";
