@@ -70,7 +70,10 @@ function loadAppData() {
   );
 
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
-  if (pa_bukrs_old.value=='    ') { loadPernrDetails() }
+  mini.createDismissibleMessage('checking on pa_bukrs_old...');
+  var lf_message = 'pa_bukrs_old = ' + pa_bukrs_old.value;
+  mini.createDismissibleMessage(lf_message);
+  if (pa_bukrs_old.value=='') { loadPernrDetails() }
 }
 
 //--- Saving the data entered into the form
