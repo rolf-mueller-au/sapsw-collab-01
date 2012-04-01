@@ -110,7 +110,7 @@ function saveAppData() {
 			if (response.error) {
 				mini.createDismissibleMessage(response.error.message);
 			} else {
-				mini.createDismissibleMessage("pa_bukrs_new saved...");
+				mini.createDismissibleMessage("appData saved...");
 			} 
 		});
 }
