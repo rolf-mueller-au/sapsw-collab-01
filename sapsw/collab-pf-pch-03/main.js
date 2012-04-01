@@ -73,11 +73,13 @@ function loadAppData() {
 }
 
 //--- Saving the data entered into the form
-function saveAppData() {
+function saveAppData(im_f_my_status) {
 	//mini.createDismissibleMessage("save button clicked");
 
-//--- at the beginning, we assume the save will be successfull
-    my_status.value = "2";
+//--- at the beginning, we assume the set the status, since
+//    it needs to be persisted as well. It can either be
+//    a "2" for successfully saved, or " " for initial
+    my_status.value = im_f_my_status;
 
     var lf_pernr_value     = pa_pernr.value;
     var lf_date_value      = pa_date.value;
@@ -304,8 +306,8 @@ function resetAppData( ) {
     pa_sachp_txt_old.value = "";
     pa_stell_txt_old.value = "";
     pa_kostl_txt_old.value = "";
-//--- then save AppData
-    saveAppData();
+//--- then save AppData, with status set to inital
+    saveAppData('');
 //--- and open pa_pernr again
     pa_pernr.disabled = "";
     button_loadPernr.disabled = "";
