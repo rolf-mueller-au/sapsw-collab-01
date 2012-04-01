@@ -74,6 +74,9 @@ function loadAppData() {
 function saveAppData() {
 	//mini.createDismissibleMessage("save button clicked");
 
+//--- at the beginning, we assume the save will be successfull
+    my_status.value = "2";
+
     var lf_pernr_value     = pa_pernr.value;
     var lf_date_value      = pa_date.value;
     var lf_massg_value     = pa_massg.value;
@@ -191,9 +194,11 @@ function responseLoadPernrDetails(obj) {
         pa_massg.add(new Option(lf_massg_text, lf_massg));
     }
 
-
 //--- at the end, we set the my_status field accordingly
     my_status.value = "1";
+
+//--- and we also disable the pernr field
+    pa_pernr.disabled = "disabled";
 
 }
 
