@@ -120,6 +120,8 @@ function saveAppData(im_f_my_status) {
 				mini.createDismissibleMessage(response.error.message);
 			} else {
 				mini.createDismissibleMessage("appData saved...");
+                var lf_message = "pa_massg = " + lf_massg;
+                mini.createDismissibleMessage(lf_message);
 			} 
 		});
 }
