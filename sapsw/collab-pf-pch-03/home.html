@@ -57,7 +57,16 @@
               <td>
                 <select id="pa_massg">
                 </select>
+                <input id="pa_massg_ct" type="hidden">
               </td>
+              <td class="tdHeader3" align="right">
+                  Status:
+                  <select id="my_status" disabled="disabled">
+                      <option value=""> = Initial</option>
+                      <option value="1">1 = Pernr Retrieved</option>
+                      <option value="2">2 = AppData Saved</option>
+                  </select>
+                </td>
             </tr>
           </tbody>
         </table>
@@ -72,7 +81,7 @@
           <tbody>
             <tr>
               <td class="tdHeader2">Current Situation</td>
-              <td class="tdHeader2">Intended Situation</td>
+              <td class="tdHeader2">Proposed Situation</td>
             </tr>
             <tr>
               <td style="padding: 5px">
@@ -143,10 +152,9 @@
                     <tr>
 					  <td>Company Code</td>
 					  <td>
-					    <!-- <input type="text" size="8" maxlength="4" id="pa_bukrs_new"> -->
-                        <!-- <input type="text" size="30" disabled="disabled" id="pa_bukrstxt_new"> -->
                         <select id="pa_bukrs_new">
                         </select>
+                        <input id="pa_bukrs_new_ct" type="hidden">
 					  </td>
                     </tr>
                     <tr>
@@ -220,15 +228,7 @@
         <button type="button" id="button_submitAppData" onclick="submitAppData()">Submit Data</button>
         <button type="button" id="button_alertFieldValue" onclick="alertFieldValue()">Alert Field Value</button>
       </td>
-      <td class="tdHeader4" align="left">collab-pf-pch-03 V3.2</td>
-      <td class="tdHeader3" align="right">
-        Status:
-        <select id="my_status" disabled="disabled">
-          <option value=""> = Initial</option>
-          <option value="1">1 = Pernr Retrieved</option>
-          <option value="2">2 = AppData Saved</option>
-        </select>
-      </td>
+      <td class="tdHeader4" align="right">collab-pf-pch-03 V3.2</td>
     </tr>
   </tbody>
 </table>
