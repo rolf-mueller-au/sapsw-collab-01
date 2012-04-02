@@ -70,6 +70,8 @@ function loadAppData() {
         if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails() }
 
 //--- after we loaded the options through loadPernrDetails(), we can set the SELECT fields
+        lf_message = 'pa_massg = ' + lf_massg;
+        alert(lf_message);
         pa_massg.value = lf_massg;
         pa_bukrs_new.value = lf_bukrs_new;
       }
