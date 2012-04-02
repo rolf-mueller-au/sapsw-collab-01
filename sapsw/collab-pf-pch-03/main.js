@@ -50,13 +50,14 @@ function loadAppData() {
     if (response.error) {
       mini.createDismissibleMessage(response.error.message);
     } else {
+        var lf_massg, lf_bukrs_new;
         for (p in response) {
           if (!response[p]) { continue; }
           if (typeof(response[p].pa_pernr)!=='undefined') {pa_pernr.value = response[p].pa_pernr;}
           if (typeof(response[p].pa_date)!=='undefined') {pa_date.value = response[p].pa_date;}
-          if (typeof(response[p].pa_massg)!=='undefined') {pa_massg.value = response[p].pa_massg;}
+          if (typeof(response[p].pa_massg)!=='undefined') {lf_massg = response[p].pa_massg;}
           if (typeof(response[p].my_status)!=='undefined') {my_status.value = response[p].my_status;}
-          if (typeof(response[p].pa_bukrs_new)!=='undefined') {pa_bukrs_new.value = response[p].pa_bukrs_new;}
+          if (typeof(response[p].pa_bukrs_new)!=='undefined') {lf_bukrs_new = response[p].pa_bukrs_new;}
           if (typeof(response[p].pa_werks_new)!=='undefined') {pa_werks_new.value = response[p].pa_werks_new;}
           if (typeof(response[p].pa_btrtl_new)!=='undefined') {pa_btrtl_new.value = response[p].pa_btrtl_new;}
           if (typeof(response[p].pa_orgeh_new)!=='undefined') {pa_orgeh_new.value = response[p].pa_orgeh_new;}
@@ -67,6 +68,10 @@ function loadAppData() {
         }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
         if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails() }
+
+//--- after we loaded the options through loadPernrDetails(), we can set the SELECT fields
+        pa_massg.value = lf_massg;
+        pa_bukrs_new.value = lf_bukrs_new;
       }
     }
   );
