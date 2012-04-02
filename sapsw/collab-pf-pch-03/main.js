@@ -330,7 +330,7 @@ function resetAppData( ) {
 
 function alertFieldValue() {
     var lf_message = 'pa_massg = ' + pa_massg.value;
-    alert:lf_message;
+    alert(lf_message);
 }
 
 //--- Register our on-view-load handler
