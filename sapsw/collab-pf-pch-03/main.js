@@ -308,6 +308,15 @@ function resetAppData( ) {
     pa_kostl_txt_old.value = "";
 //--- then save AppData, with status set to inital
     saveAppData('');
+// then, we can remove the options from the select fields
+    var i;
+    for (i=pa_massg.length-1;i>=0;i--) {
+      pa_massg.remove(i);
+    }
+    for (i=pa_bukrs_new.length-1;i>=0;i--) {
+      pa_bukrs_new.remove(i);
+    }
+
 //--- and open pa_pernr again
     pa_pernr.disabled = "";
     button_loadPernr.disabled = "";
