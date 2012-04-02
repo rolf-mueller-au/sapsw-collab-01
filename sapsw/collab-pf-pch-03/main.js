@@ -38,11 +38,11 @@ function loadUser() {
             loadGroups();
         });
 }
-
-//--- Loading the data, which has been saved from the form
+//--- ------------------------------------------------------------------------------ ---//
+//--- Loading the data, which has been saved from the form                           ---//
+//--- ------------------------------------------------------------------------------ ---//
 function loadAppData() {
-    //mini.createDismissibleMessage("loadAppData() started");
-
+  //mini.createDismissibleMessage("loadAppData() started");
   osapi.appdata.get({
     userId: "@viewer",
     groupId: "@self"
@@ -71,8 +71,9 @@ function loadAppData() {
     }
   );
 }
-
-//--- Saving the data entered into the form
+//--- ------------------------------------------------------------------------------ ---//
+//--- Saving the data entered into the form                                          ---//
+//--- ------------------------------------------------------------------------------ ---//
 function saveAppData(im_f_my_status) {
 	//mini.createDismissibleMessage("save button clicked");
 
@@ -119,7 +120,9 @@ function saveAppData(im_f_my_status) {
 		});
 }
 
-//--- for loadPernrDetails, we call the backend web-service...
+//--- ------------------------------------------------------------------------------ ---//
+//--- for loadPernrDetails, we call the backend web-service...                       ---//
+//--- ------------------------------------------------------------------------------ ---//
 function loadPernrDetails() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
@@ -140,7 +143,9 @@ function loadPernrDetails() {
     gadgets.io.makeRequest(lf_url, responseLoadPernrDetails, lf_params);
 }
 
-//--- ...to receive the pernrDetails
+//--- ------------------------------------------------------------------------------ ---//
+//--- ...to receive the pernrDetails                                                 ---//
+//--- ------------------------------------------------------------------------------ ---//
 function responseLoadPernrDetails(obj) {
     //mini.createDismissibleMessage("responseLoadPernrDetails() started...");
     var lf_domdata = obj.data;
@@ -208,7 +213,9 @@ function responseLoadPernrDetails(obj) {
 
 }
 
-//--- for loadPernrDetails, we call the backend web-service...
+//--- ------------------------------------------------------------------------------ ---//
+//--- for loadPernrDetails, we call the backend web-service...                       ---//
+//--- ------------------------------------------------------------------------------ ---//
 function loadPernrDetails2() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
@@ -229,7 +236,9 @@ function loadPernrDetails2() {
     gadgets.io.makeRequest(lf_url, responseLoadPernrDetails2, lf_params);
 }
 
-//--- ...to receive the pernrDetails
+//--- ------------------------------------------------------------------------------ ---//
+//--- ...to receive the pernrDetails                                                 ---//
+//--- ------------------------------------------------------------------------------ ---//
 function responseLoadPernrDetails2(obj) {
 
 //--- we call the main function first
@@ -241,8 +250,9 @@ function responseLoadPernrDetails2(obj) {
     pa_bukrs_new.value = pa_bukrs_new_ct.value;
 }
 
-
-//--- for loadPernrDetails, we call the backend web-service...
+//--- ------------------------------------------------------------------------------ ---//
+//--- for checkAppData, we call the backend web-service...                           ---//
+//--- ------------------------------------------------------------------------------ ---//
 function checkAppData() {
     //mini.createDismissibleMessage("checkAppData() started...");
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
@@ -290,6 +300,9 @@ function checkAppData() {
     gadgets.io.makeRequest(lf_url, responseCheckAppData, lf_params);
 }
 
+//--- ------------------------------------------------------------------------------ ---//
+//--- response for CheckAppData                                                      ---//
+//--- ------------------------------------------------------------------------------ ---//
 function responseCheckAppData(obj) {
     //mini.createDismissibleMessage("responseCheckAppData() started...");
     var lf_domdata = obj.data;
@@ -306,11 +319,15 @@ function responseCheckAppData(obj) {
 
 }
 
+//--- ------------------------------------------------------------------------------ ---//
+//--- Reset Application Data. This will reset everything...                          ---//
+//--- ------------------------------------------------------------------------------ ---//
 function resetAppData( ) {
   var answer = confirm("This will reset all appData! Would you like to proceed?");
   if (answer) {
 //--- clear all values
     pa_pernr.value = "";
+    pa_name.value = "";
     pa_date.value = "";
     pa_massg.value = "";
     my_status.value = "";
@@ -355,14 +372,6 @@ function resetAppData( ) {
     pa_pernr.disabled = "";
     button_loadPernr.disabled = "";
   } else { mini.createDismissibleMessage("...action cancelled, no data cleared."); }
-}
-
-function alertFieldValue() {
-    var lf_message;
-    lf_message = 'pa_massg = ' + pa_massg.value;
-    alert(lf_message);
-    lf_message = 'pa_bukrs_new = ' + pa_bukrs_new.value;
-    alert(lf_message);
 }
 
 //--- Register our on-view-load handler
