@@ -329,7 +329,10 @@ function resetAppData( ) {
 }
 
 function alertFieldValue() {
-    var lf_message = 'pa_massg = ' + pa_massg.value;
+    var lf_message;
+    lf_message = 'pa_massg = ' + pa_massg.value;
+    alert(lf_message);
+    lf_message = 'pa_bukrs_new = ' + pa_bukrs_new.value;
     alert(lf_message);
 }
 
