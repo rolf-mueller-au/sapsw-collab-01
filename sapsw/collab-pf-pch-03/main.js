@@ -12,8 +12,8 @@ var user;
 function init() {
     mini = new gadgets.MiniMessage();
     registerHandlers();
-		loadAppData();
-//  loadUser();
+	loadAppData();
+    loadUser();
 }
 
 
@@ -26,18 +26,19 @@ function registerHandlers() {
 
 //--- Load the currently logged in user
 function loadUser() {
-    //console.log("loadUser() started");
-	//mini.createDismissibleMessage("loadUser() started");
-    showMessage("Loading the currently logged in user ...");
-    osapi.jive.core.users.get({
-        id : '@viewer'
-    }).execute(function(response) {
-            console.log("loadUser() response = " + JSON.stringify(response));
-            user = response.data;
-            $(".user-name").html("").html(user.name);
-            loadGroups();
-        });
-}
+    osapi.people.getViewer().execute(function(result){
+        if (result.error){
+            var lf_message = "loadUser(): " + result.error.message;
+            mini.createDismissibleMessage(lf_message);
+        } else {
+            var lf_message = "loadUser(): displayName = " + result.displayName;
+            mini.createDismissibleMessage(lf_message);
+            lf_message = "loadUser(): ID = " + result.id;
+            mini.createDismissibleMessage(lf_message);
+        }
+    });
+};
+
 //--- ------------------------------------------------------------------------------ ---//
 //--- Loading the data, which has been saved from the form                           ---//
 //--- ------------------------------------------------------------------------------ ---//
