@@ -13,7 +13,6 @@ function init() {
     mini = new gadgets.MiniMessage();
     registerHandlers();
 	loadAppData();
-    loadUser();
 }
 
 
