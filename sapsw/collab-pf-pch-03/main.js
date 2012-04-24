@@ -31,11 +31,11 @@ function loadUser() {
             var lf_message = "loadUser(): " + result.error.message;
             mini.createDismissibleMessage(lf_message);
         } else {
-//            return result.displayName;
-            var lf_message = "loadUser(): displayName = " + result.displayName;
-            mini.createDismissibleMessage(lf_message);
-            lf_message = "loadUser(): ID = " + result.id;
-            mini.createDismissibleMessage(lf_message);
+            return result.displayName;
+//            var lf_message = "loadUser(): displayName = " + result.displayName;
+//            mini.createDismissibleMessage(lf_message);
+//            lf_message = "loadUser(): ID = " + result.id;
+//            mini.createDismissibleMessage(lf_message);
         }
     });
 };
@@ -128,11 +128,22 @@ function saveAppData(im_f_my_status) {
 function loadPernrDetails() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/800/zmur_hcm_collab/zmur_hcm_collab";
-    var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_OPEN><IM_F_PERNR>";
-    var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_PNF_PCH_OPEN></soapenv:Body></soapenv:Envelope>";
-    var lf_soapEnvelope = lf_soapEnvelope_1 + pa_pernr.value + lf_soapEnvelope_2;
+//--- we need to get the userID of the current user first
+    var lf_userId = loadUser();
+    mini.createDismissibleMessage(lf_userId);
 
+//--- here we put the request (soapEnvelope) together
+    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
+    var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_OPEN>";
+    var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_OPEN></soapenv:Body></soapenv:Envelope>";
+    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + lf_userId  + "</IM_F_USERID>";
+    var lf_soapEnvelope =   lf_soapEnvelope_beg
+                          + lf_soapEnvelope_Pernr
+                          + lf_soapEnvelope_UserId
+                          + lf_soapEnvelope_end;
+
+//--- and put the request together
     var lf_params = {};
     lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
@@ -221,7 +232,7 @@ function responseLoadPernrDetails(obj) {
 function loadPernrDetails2() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/800/zmur_hcm_collab/zmur_hcm_collab";
+    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_OPEN><IM_F_PERNR>";
     var lf_soapEnvelope_2 = "</IM_F_PERNR></urn:ZMUR_HCM_PNF_PCH_OPEN></soapenv:Body></soapenv:Envelope>";
     var lf_soapEnvelope = lf_soapEnvelope_1 + pa_pernr.value + lf_soapEnvelope_2;
@@ -257,7 +268,7 @@ function responseLoadPernrDetails2(obj) {
 //--- ------------------------------------------------------------------------------ ---//
 function checkAppData() {
     //mini.createDismissibleMessage("checkAppData() started...");
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/800/zmur_hcm_collab/zmur_hcm_collab";
+    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_CHECK>";
     var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_CHECK></soapenv:Body></soapenv:Envelope>";
 
@@ -325,7 +336,7 @@ function responseCheckAppData(obj) {
 //--- ------------------------------------------------------------------------------ ---//
 function submitAppData() {
     mini.createDismissibleMessage("submitAppData() started...");
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/800/zmur_hcm_collab/zmur_hcm_collab";
+    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
     var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_SEND>";
     var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_SEND></soapenv:Body></soapenv:Envelope>";
 
