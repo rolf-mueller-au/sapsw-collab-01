@@ -31,7 +31,7 @@ function loadUser() {
             var lf_message = "loadUser(): " + result.error.message;
             mini.createDismissibleMessage(lf_message);
         } else {
-            return result.displayName;
+            return result.id;
 //            var lf_message = "loadUser(): displayName = " + result.displayName;
 //            mini.createDismissibleMessage(lf_message);
 //            lf_message = "loadUser(): ID = " + result.id;
