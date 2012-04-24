@@ -129,7 +129,8 @@ function loadPernrDetails() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
 //--- we need to get the userID of the current user first
-    var lf_userId = loadUser();
+    var lf_userId;
+    lf_userId = loadUser();
     mini.createDismissibleMessage(lf_userId);
 
 //--- here we put the request (soapEnvelope) together
