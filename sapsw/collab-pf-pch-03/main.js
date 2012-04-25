@@ -272,17 +272,18 @@ function checkAppData() {
     var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_CHECK></soapenv:Body></soapenv:Envelope>";
 
 //--- get all the values from the input fields and package them into tags
-    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
-    var lf_soapEnvelope_Date  = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
-    var lf_soapEnvelope_Massg = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
-    var lf_soapEnvelope_Btrtl = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
-    var lf_soapEnvelope_Bukrs = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
-    var lf_soapEnvelope_Kostl = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";
-    var lf_soapEnvelope_Orgeh = "<IM_F_ORGEH_NEW>" + pa_orgeh_new.value + "</IM_F_ORGEH_NEW>";
-    var lf_soapEnvelope_Plans = "<IM_F_PLANS_NEW>" + pa_plans_new.value + "</IM_F_PLANS_NEW>";
-    var lf_soapEnvelope_Sachp = "<IM_F_SACHP_NEW>" + pa_sachp_new.value + "</IM_F_SACHP_NEW>";
-    var lf_soapEnvelope_Stell = "<IM_F_STELL_NEW>" + pa_stell_new.value + "</IM_F_STELL_NEW>";
-    var lf_soapEnvelope_Werks = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
+    var lf_soapEnvelope_Pernr  = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
+    var lf_soapEnvelope_Date   = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
+    var lf_soapEnvelope_Massg  = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
+    var lf_soapEnvelope_Btrtl  = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
+    var lf_soapEnvelope_Bukrs  = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
+    var lf_soapEnvelope_Kostl  = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";
+    var lf_soapEnvelope_Orgeh  = "<IM_F_ORGEH_NEW>" + pa_orgeh_new.value + "</IM_F_ORGEH_NEW>";
+    var lf_soapEnvelope_Plans  = "<IM_F_PLANS_NEW>" + pa_plans_new.value + "</IM_F_PLANS_NEW>";
+    var lf_soapEnvelope_Sachp  = "<IM_F_SACHP_NEW>" + pa_sachp_new.value + "</IM_F_SACHP_NEW>";
+    var lf_soapEnvelope_Stell  = "<IM_F_STELL_NEW>" + pa_stell_new.value + "</IM_F_STELL_NEW>";
+    var lf_soapEnvelope_Werks  = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
 
 //--- put the complete soap envelope together
     var lf_soapEnvelope;
@@ -297,6 +298,7 @@ function checkAppData() {
         + lf_soapEnvelope_Plans
         + lf_soapEnvelope_Sachp
         + lf_soapEnvelope_Stell
+        + lf_soapEnvelope_UserId
         + lf_soapEnvelope_Werks
         + lf_soapEnvelope_end;
 
@@ -340,18 +342,19 @@ function submitAppData() {
     var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_SEND></soapenv:Body></soapenv:Envelope>";
 
 //--- get all the values from the input fields and package them into tags
-    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
-    var lf_soapEnvelope_Date  = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
-    var lf_soapEnvelope_Massg = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
-    var lf_soapEnvelope_Btrtl = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
-    var lf_soapEnvelope_Bukrs = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
-    var lf_soapEnvelope_Kostl = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";
-    var lf_soapEnvelope_Orgeh = "<IM_F_ORGEH_NEW>" + pa_orgeh_new.value + "</IM_F_ORGEH_NEW>";
-    var lf_soapEnvelope_Plans = "<IM_F_PLANS_NEW>" + pa_plans_new.value + "</IM_F_PLANS_NEW>";
-    var lf_soapEnvelope_Sachp = "<IM_F_SACHP_NEW>" + pa_sachp_new.value + "</IM_F_SACHP_NEW>";
-    var lf_soapEnvelope_Stell = "<IM_F_STELL_NEW>" + pa_stell_new.value + "</IM_F_STELL_NEW>";
-    var lf_soapEnvelope_Werks = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
-    var lf_soapEnvelope_Event = "<IM_F_EVENT>SEND</IM_F_EVENT>";
+    var lf_soapEnvelope_Pernr  = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
+    var lf_soapEnvelope_Date   = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
+    var lf_soapEnvelope_Massg  = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
+    var lf_soapEnvelope_Btrtl  = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
+    var lf_soapEnvelope_Bukrs  = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
+    var lf_soapEnvelope_Kostl  = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";
+    var lf_soapEnvelope_Orgeh  = "<IM_F_ORGEH_NEW>" + pa_orgeh_new.value + "</IM_F_ORGEH_NEW>";
+    var lf_soapEnvelope_Plans  = "<IM_F_PLANS_NEW>" + pa_plans_new.value + "</IM_F_PLANS_NEW>";
+    var lf_soapEnvelope_Sachp  = "<IM_F_SACHP_NEW>" + pa_sachp_new.value + "</IM_F_SACHP_NEW>";
+    var lf_soapEnvelope_Stell  = "<IM_F_STELL_NEW>" + pa_stell_new.value + "</IM_F_STELL_NEW>";
+    var lf_soapEnvelope_Werks  = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
+    var lf_soapEnvelope_Event  = "<IM_F_EVENT>SEND</IM_F_EVENT>";
 
 //--- put the complete soap envelope together
     var lf_soapEnvelope;
@@ -367,6 +370,7 @@ function submitAppData() {
         + lf_soapEnvelope_Plans
         + lf_soapEnvelope_Sachp
         + lf_soapEnvelope_Stell
+        + lf_soapEnvelope_UserId
         + lf_soapEnvelope_Werks
         + lf_soapEnvelope_end;
 
