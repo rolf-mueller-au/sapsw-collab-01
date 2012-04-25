@@ -130,6 +130,8 @@ function saveAppData(im_f_my_status) {
     gr_prefs.set("pa_stell_new", lf_stell_new_value);
     gr_prefs.set("pa_kostl_new", lf_kostl_new_value);
 
+    var lf_test = gr_prefs.getString("pa_pernr");
+
     mini.createDismissibleMessage("Application data saved...");
 
 }
