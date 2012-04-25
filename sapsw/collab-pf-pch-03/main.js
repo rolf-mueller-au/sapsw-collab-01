@@ -156,7 +156,8 @@ function responseLoadPernrDetails(obj) {
     //mini.createDismissibleMessage("responseLoadPernrDetails() started...");
     var lf_domdata = obj.data;
 //--- retrieve display name
-    pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue;
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue)!=='undefined')
+      { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
     pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue;
 //--- retrieve BUKRS_TXT
