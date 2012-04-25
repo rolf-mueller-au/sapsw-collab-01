@@ -210,6 +210,17 @@ function responseLoadPernrDetails(obj) {
         pa_massg.add(new Option(lf_massg_text, lf_massg));
     }
 
+//--- get message table, and out them as messages
+    var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
+    for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
+        var lf_elItem = lf_elMessages.childNodes[x];
+        var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
+        var lf_msgNumber = lf_elItem.getElementsByTagName('NUMBER')[0].childNodes[0].nodeValue;
+        var lf_msgMessage = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
+        var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
+        mini.createDismissibleMessage(lf_msg);
+    }
+
 //--- at the end, we set the my_status field accordingly
     my_status.value = "1";
 
