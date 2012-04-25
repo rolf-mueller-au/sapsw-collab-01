@@ -10,6 +10,8 @@
     <!-- Commonly used features -->
     <Require feature="dynamic-height" /> 
     <Require feature="osapi"/>
+    <Require feature="getprefs"/>
+    <Require feature="setprefs"/>
     <Require feature="settitle"/> 
     <Require feature="views" />
 	<Require feature="minimessage"/>

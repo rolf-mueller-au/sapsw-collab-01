@@ -7,10 +7,12 @@ var mini;
 //--- Currently logged in user
 var gf_userId;
 
+var gr_prefs;
 
 //--- On-view-load initialization
 function init() {
     mini = new gadgets.MiniMessage();
+    gr_prefs = new gadgets.Prefs();
     registerHandlers();
 	loadAppData();
     loadUser();
@@ -40,6 +42,27 @@ function loadUser() {
 //--- Loading the data, which has been saved from the form                           ---//
 //--- ------------------------------------------------------------------------------ ---//
 function loadAppData() {
+
+    pa_pernr.value     = gr_prefs.get("pa_pernr");
+    pa_date.value      = gr_prefs.get("pa_date");
+    pa_massg.value     = gr_prefs.get("pa_massg");
+    my_status.value    = gr_prefs.get("my_status");
+    pa_bukrs_new.value = gr_prefs.get("pa_bukrs_new");
+    pa_werks_new.value = gr_prefs.get("pa_werks_new");
+    pa_btrtl_new.value = gr_prefs.get("pa_btrtl_new");
+    pa_orgeh_new.value = gr_prefs.get("pa_orgeh_new");
+    pa_plans_new.value = gr_prefs.get("pa_plans_new");
+    pa_sachp_new.value = gr_prefs.get("pa_sachp_new");
+    pa_stell_new.value = gr_prefs.get("pa_stell_new");
+    pa_kostl_new.value = gr_prefs.get("pa_kostl_new");
+
+}
+
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Loading the data, which has been saved from the form                           ---//
+//--- ------------------------------------------------------------------------------ ---//
+function loadAppData2() {
   //mini.createDismissibleMessage("loadAppData() started");
   osapi.appdata.get({
     userId: "@viewer",
@@ -69,10 +92,50 @@ function loadAppData() {
     }
   );
 }
+
 //--- ------------------------------------------------------------------------------ ---//
 //--- Saving the data entered into the form                                          ---//
 //--- ------------------------------------------------------------------------------ ---//
 function saveAppData(im_f_my_status) {
+    //mini.createDismissibleMessage("save button clicked");
+
+//--- at the beginning, we assume the set the status, since
+//    it needs to be persisted as well. It can either be
+//    a "2" for successfully saved, or " " for initial
+    my_status.value = im_f_my_status;
+
+    var lf_pernr_value     = pa_pernr.value;
+    var lf_date_value      = pa_date.value;
+    var lf_massg_value     = pa_massg.value;
+    var lf_my_status_value = my_status.value;
+    var lf_bukrs_new_value = pa_bukrs_new.value;
+    var lf_werks_new_value = pa_werks_new.value;
+    var lf_btrtl_new_value = pa_btrtl_new.value;
+    var lf_orgeh_new_value = pa_orgeh_new.value;
+    var lf_plans_new_value = pa_plans_new.value;
+    var lf_sachp_new_value = pa_sachp_new.value;
+    var lf_stell_new_value = pa_stell_new.value;
+    var lf_kostl_new_value = pa_kostl_new.value;
+
+    gr_prefs.set("pa_pernr",     lf_pernr_value);
+    gr_prefs.set("pa_date",      lf_date_value);
+    gr_prefs.set("pa_massg",     lf_massg_value);
+    gr_prefs.set("my_status",    lf_my_status_value);
+    gr_prefs.set("pa_bukrs_new", lf_bukrs_new_value);
+    gr_prefs.set("pa_werks_new", lf_werks_new_value);
+    gr_prefs.set("pa_btrtl_new", lf_btrtl_new_value);
+    gr_prefs.set("pa_orgeh_new", lf_orgeh_new_value);
+    gr_prefs.set("pa_plans_new", lf_plans_new_value);
+    gr_prefs.set("pa_sachp_new", lf_sachp_new_value);
+    gr_prefs.set("pa_stell_new", lf_stell_new_value);
+    gr_prefs.set("pa_kostl_new", lf_kostl_new_value);
+
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Saving the data entered into the form                                          ---//
+//--- ------------------------------------------------------------------------------ ---//
+function saveAppData2(im_f_my_status) {
 	//mini.createDismissibleMessage("save button clicked");
 
 //--- at the beginning, we assume the set the status, since
