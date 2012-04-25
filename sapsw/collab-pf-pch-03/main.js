@@ -42,8 +42,8 @@ function loadUser() {
 function loadAppData() {
   //mini.createDismissibleMessage("loadAppData() started");
   osapi.appdata.get({
-    userId: "@viewer",
-    groupId: "@self"
+//    userId: "@viewer",
+//    groupId: "@self"
   }).execute(function(response) {
     if (response.error) {
       mini.createDismissibleMessage(response.error.message);
@@ -94,8 +94,8 @@ function saveAppData(im_f_my_status) {
     var lf_kostl_new_value = pa_kostl_new.value;
 
 	osapi.appdata.update({
-		userId: "@viewer",
-		groupId: "@self",
+//		userId: "@viewer",
+//		groupId: "@self",
 		data: { pa_pernr:     lf_pernr_value,
                 pa_date:      lf_date_value,
                 pa_massg:     lf_massg_value,
