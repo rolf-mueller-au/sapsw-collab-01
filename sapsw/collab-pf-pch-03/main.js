@@ -447,7 +447,10 @@ function resetAppData( ) {
 //--- and open pa_pernr again
     pa_pernr.disabled = "";
     button_loadPernr.disabled = "";
+
+    mini.createDismissibleMessage("Application data cleared..");
   } else { mini.createDismissibleMessage("...action cancelled, no data cleared."); }
+
 }
 
 //--- Register our on-view-load handler
