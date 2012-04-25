@@ -32,10 +32,6 @@ function loadUser() {
             mini.createDismissibleMessage(lf_message);
         } else {
             gf_userId = result.id;
-//            var lf_message = "loadUser(): displayName = " + result.displayName;
-//            mini.createDismissibleMessage(lf_message);
-//            lf_message = "loadUser(): ID = " + result.id;
-//            mini.createDismissibleMessage(lf_message);
         }
     });
 };
@@ -128,10 +124,6 @@ function saveAppData(im_f_my_status) {
 function loadPernrDetails() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
-//--- we need to get the userID of the current user first
-//    var lf_userId;
-//    lf_userId = loadUser();
-    mini.createDismissibleMessage(gf_userId);
 
 //--- here we put the request (soapEnvelope) together
     var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
