@@ -43,18 +43,18 @@ function loadUser() {
 //--- ------------------------------------------------------------------------------ ---//
 function loadAppData() {
 
-    pa_pernr.value     = gr_prefs.get("pa_pernr");
-    pa_date.value      = gr_prefs.get("pa_date");
-    pa_massg.value     = gr_prefs.get("pa_massg");
-    my_status.value    = gr_prefs.get("my_status");
-    pa_bukrs_new.value = gr_prefs.get("pa_bukrs_new");
-    pa_werks_new.value = gr_prefs.get("pa_werks_new");
-    pa_btrtl_new.value = gr_prefs.get("pa_btrtl_new");
-    pa_orgeh_new.value = gr_prefs.get("pa_orgeh_new");
-    pa_plans_new.value = gr_prefs.get("pa_plans_new");
-    pa_sachp_new.value = gr_prefs.get("pa_sachp_new");
-    pa_stell_new.value = gr_prefs.get("pa_stell_new");
-    pa_kostl_new.value = gr_prefs.get("pa_kostl_new");
+    pa_pernr.value     = gr_prefs.getString("pa_pernr");
+    pa_date.value      = gr_prefs.getString("pa_date");
+    pa_massg.value     = gr_prefs.getString("pa_massg");
+    my_status.value    = gr_prefs.getString("my_status");
+    pa_bukrs_new.value = gr_prefs.getString("pa_bukrs_new");
+    pa_werks_new.value = gr_prefs.getString("pa_werks_new");
+    pa_btrtl_new.value = gr_prefs.getString("pa_btrtl_new");
+    pa_orgeh_new.value = gr_prefs.getString("pa_orgeh_new");
+    pa_plans_new.value = gr_prefs.getString("pa_plans_new");
+    pa_sachp_new.value = gr_prefs.getString("pa_sachp_new");
+    pa_stell_new.value = gr_prefs.getString("pa_stell_new");
+    pa_kostl_new.value = gr_prefs.getString("pa_kostl_new");
 
 }
 
@@ -129,6 +129,8 @@ function saveAppData(im_f_my_status) {
     gr_prefs.set("pa_sachp_new", lf_sachp_new_value);
     gr_prefs.set("pa_stell_new", lf_stell_new_value);
     gr_prefs.set("pa_kostl_new", lf_kostl_new_value);
+
+    mini.createDismissibleMessage("Application data saved...");
 
 }
 
