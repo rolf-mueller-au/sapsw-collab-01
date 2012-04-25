@@ -158,7 +158,6 @@ function responseLoadPernrDetails(obj) {
 //--- retrieve display name
     if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
       { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
-    var value = (elem and elem[0] and elem[0].childNodes[0]) ? elem[0].childNodes[0].nodeValue : null;
 //--- retrieve BUKRS
     pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue;
 //--- retrieve BUKRS_TXT
