@@ -4,9 +4,15 @@
 //--- Factory for mini messages
 var mini;
 
-//--- Currently logged in user
+//--- Currently logged in user and owner of the activity
 var gf_userId;
+var gf_ownerId;
+var gf_ownerName;
 
+//--- UUID for this tool
+var gf_uuid;
+
+//--- Preference Handler
 var gr_prefs;
 
 //--- On-view-load initialization
@@ -14,8 +20,9 @@ function init() {
     mini = new gadgets.MiniMessage();
     gr_prefs = new gadgets.Prefs();
     registerHandlers();
-	loadAppData();
     loadUser();
+    loadOwner();
+	loadAppData();
 }
 
 
@@ -26,7 +33,9 @@ function registerHandlers() {
 
 }
 
-//--- Load the currently logged in user
+//--- ------------------------------------------------------------------------------ ---//
+//--- Load the currently logged in user                                              ---//
+//--- ------------------------------------------------------------------------------ ---//
 function loadUser() {
     osapi.people.getViewer().execute(function(result){
         if (result.error){
@@ -39,9 +48,63 @@ function loadUser() {
 };
 
 //--- ------------------------------------------------------------------------------ ---//
+//--- Load the owner of this activity                                                ---//
+//--- ------------------------------------------------------------------------------ ---//
+function loadOwner() {
+    osapi.people.getOwner().execute(function(result){
+        if (result.error){
+            var lf_message = "loadOwner(): " + result.error.message;
+            mini.createDismissibleMessage(lf_message);
+        } else {
+            gf_ownerId = result.id;
+            gf_ownerName = result.displayName;
+        }
+    });
+};
+
+//--- ------------------------------------------------------------------------------ ---//
 //--- Loading the data, which has been saved from the form                           ---//
 //--- ------------------------------------------------------------------------------ ---//
 function loadAppData() {
+    //mini.createDismissibleMessage("loadAppData() started");
+    osapi.appdata.get({
+        userId: "@owner",
+        groupId: "@group"
+    }).execute(function(response) {
+            if (response.error) {
+                mini.createDismissibleMessage(response.error.message);
+            } else {
+                for (p in response) {
+                    if (!response[p]) { continue; }
+//--- response is fine let's read UUID
+                    if (typeof(response[p].pch_uuid)!=='undefined') {
+                        gf_uuid = response[p].pch_uuid;
+//--- ok, we have the UUID, now let's read the data from the backend
+
+                    } else {
+//--- we don't have a UUID yet, hence alert
+                        if (gf_ownerId!=gf_userId ) {
+                            var lf_message = 'The owner has not linked a process to this activity yet. ' +
+                                             'Please contact the owner (' + gf_ownerName + ').';
+                            alert (lf_message);
+                        } else {
+                            var lf_message = 'Please enter a personalnumber and start the activity by ' +
+                                'clicking on the "register" button.';
+                            alert (lf_message);
+                        }
+                    }
+                }
+////--- if pa_bukrs_old is empty, the perform loadPernrDetails()
+//                if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
+            }
+        }
+    );
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Loading the data, which has been saved from the form                           ---//
+//--- ------------------------------------------------------------------------------ ---//
+function loadAppData2() {
 
     pa_pernr.value     = gr_prefs.getString("pa_pernr");
     pa_date.value      = gr_prefs.getString("pa_date");
@@ -62,7 +125,7 @@ function loadAppData() {
 //--- ------------------------------------------------------------------------------ ---//
 //--- Loading the data, which has been saved from the form                           ---//
 //--- ------------------------------------------------------------------------------ ---//
-function loadAppData2() {
+function loadAppData3() {
   //mini.createDismissibleMessage("loadAppData() started");
   osapi.appdata.get({
     userId: "@viewer",
