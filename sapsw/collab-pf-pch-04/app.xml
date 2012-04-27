@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Collaboration - Process and Forms - Position Change - Version 4.0"
+               description="This is a first POC on how to collaborate on PnF in SAP Streamwork"
+               author="Rolf Mueller"
+               author_affiliation="Accenture"
+               author_email="rolf.mueller@accenture.com"
+			   height="500">
+
+    <!-- Commonly used features -->
+    <Require feature="dynamic-height" /> 
+    <Require feature="osapi"/>
+    <Require feature="setprefs"/>
+    <Require feature="settitle"/> 
+    <Require feature="views" />
+	<Require feature="minimessage"/>
+    <!-- Additional Options ... -->
+  </ModulePrefs>
+
+  <!-- To begin development, remove the hello view and uncomment the home and canvas views below -->
+  <Content view="home,canvas" href="home.html">
+  </Content>
+
+ <!--
+  <Content view="home" href="home.html" />
+  <Content view="canvas" href="canvas.html" />
+  -->
+
+</Module>
