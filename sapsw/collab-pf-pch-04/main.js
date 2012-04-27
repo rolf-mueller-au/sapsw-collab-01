@@ -11,18 +11,12 @@ var gf_userId;
 //--- On-view-load initialization
 function init() {
     mini = new gadgets.MiniMessage();
-    registerHandlers();
+    alert('loadAppData()');
     loadAppData();
+    alert('loadUser()');
     loadUser();
 }
 
-
-//--- Register UI event handlers
-function registerHandlers() {
-    console.log("registerHandlers() started");
-    //mini.createDismissibleMessage("registerHandlers() started");
-
-}
 
 //--- Load the currently logged in user
 function loadUser() {
