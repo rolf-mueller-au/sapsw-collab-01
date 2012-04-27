@@ -34,6 +34,11 @@ function init() {
     while (gf_userId=='' && gf_ownerId=='');
     alert(lf_counter);
 
+    lf_message = 'loadUser(): ' + gf_userId;
+    alert(lf_message);
+    lf_message = 'loadOwner(): ' + gf_ownerId;
+    alert(lf_message);
+
 }
 
 
