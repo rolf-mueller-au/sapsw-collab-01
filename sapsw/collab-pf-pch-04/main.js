@@ -31,12 +31,12 @@ function init() {
 
     var lf_counter = 0;
     do { lf_counter = lf_counter + 1}
-    while (gf_userId=='' && gf_ownerId=='');
+    while (hi_userId.value=='' && hi_ownerId.value=='');
     alert(lf_counter);
 
-    lf_message = 'loadUser(): ' + gf_userId;
+    lf_message = 'loadUser(): ' + hi_userId.value;
     alert(lf_message);
-    lf_message = 'loadOwner(): ' + gf_ownerId;
+    lf_message = 'loadOwner(): ' + hi_ownerId.value;
     alert(lf_message);
 
 }
@@ -53,6 +53,7 @@ function loadUser() {
                 mini.createDismissibleMessage(lf_message);
             } else {
                 gf_userId = result.id;
+                hi_userId.value = result.id;
             }
         }
     );
@@ -70,6 +71,8 @@ function loadOwner() {
             } else {
                 gf_ownerId = result.id;
                 gf_ownerName = result.displayName;
+                hi_ownerId.value = result.id;
+                hi_ownerName.value = result.displayName;
             }
         }
     );
