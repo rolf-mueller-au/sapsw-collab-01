@@ -18,8 +18,8 @@ var gr_prefs;
 //--- On-view-load initialization
 function init() {
     mini = new gadgets.MiniMessage();
-    gr_prefs = new gadgets.Prefs();
-    registerHandlers();
+//  gr_prefs = new gadgets.Prefs();
+//  registerHandlers();
     loadUser();
     loadOwner();
 	loadAppData();
@@ -28,9 +28,10 @@ function init() {
 
 //--- Register UI event handlers
 function registerHandlers() {
-    console.log("registerHandlers() started");
-	//mini.createDismissibleMessage("registerHandlers() started");
-
+//--- since we don't work with handlers at the moment,
+//    nothing to register here...
+//    console.log("registerHandlers() started");
+//mini.createDismissibleMessage("registerHandlers() started");
 }
 
 //--- ------------------------------------------------------------------------------ ---//
