@@ -5,11 +5,11 @@
 var mini;
 
 //--- Currently logged in user
-var gf_userId;
+var gf_userId = '';
 
 //--- Owner of this activity/tool
-var gf_ownerId;
-var gf_ownerName;
+var gf_ownerId = '';
+var gf_ownerName = '';
 
 
 //--- On-view-load initialization
