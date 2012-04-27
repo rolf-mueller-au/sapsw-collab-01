@@ -29,6 +29,11 @@ function init() {
     lf_message = 'loadOwner(): ' + gf_ownerId;
     alert(lf_message);
 
+    var lf_counter = 0;
+    do { lf_counter = lf_counter + 1}
+    while (gf_userId=='' && gf_ownerId=='');
+    alert(lf_counter);
+
 }
 
 
