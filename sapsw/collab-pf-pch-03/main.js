@@ -38,12 +38,12 @@ function registerHandlers() {
 //--- Load the currently logged in user                                              ---//
 //--- ------------------------------------------------------------------------------ ---//
 function loadUser() {
-    osapi.people.getViewer().execute(function(result){
-        if (result.error){
-            var lf_message = "loadUser(): " + result.error.message;
+    osapi.people.getViewer().execute(function(resultLoadUser){
+        if (resultLoadUser.error){
+            var lf_message = "loadUser(): " + resultLoadUser.error.message;
             mini.createDismissibleMessage(lf_message);
         } else {
-            gf_userId = result.id;
+            gf_userId = resultLoadUser.id;
         }
     });
 };
@@ -52,13 +52,13 @@ function loadUser() {
 //--- Load the owner of this activity                                                ---//
 //--- ------------------------------------------------------------------------------ ---//
 function loadOwner() {
-    osapi.people.getOwner().execute(function(result){
-        if (result.error){
-            var lf_message = "loadOwner(): " + result.error.message;
+    osapi.people.getOwner().execute(function(resultLoadOwner){
+        if (resultLoadOwner.error){
+            var lf_message = "loadOwner(): " + resultLoadOwner.error.message;
             mini.createDismissibleMessage(lf_message);
         } else {
-            gf_ownerId = result.id;
-            gf_ownerName = result.displayName;
+            gf_ownerId = resultLoadOwner.id;
+            gf_ownerName = resultLoadOwner.displayName;
         }
     });
 };
