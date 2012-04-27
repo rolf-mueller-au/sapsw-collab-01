@@ -20,24 +20,7 @@ function init() {
     lf_message = 'loadAppData()';
     alert(lf_message);
     loadAppData();
-
     loadUser();
-    lf_message = 'loadUser(): ' + gf_userId;
-    alert(lf_message);
-
-    loadOwner();
-    lf_message = 'loadOwner(): ' + gf_ownerId;
-    alert(lf_message);
-
-    var lf_counter = 0;
-    do { lf_counter = lf_counter + 1}
-    while (hi_userId.value=='' && hi_ownerId.value=='');
-    alert(lf_counter);
-
-    lf_message = 'loadUser(): ' + hi_userId.value;
-    alert(lf_message);
-    lf_message = 'loadOwner(): ' + hi_ownerId.value;
-    alert(lf_message);
 
 }
 
@@ -53,7 +36,7 @@ function loadUser() {
                 mini.createDismissibleMessage(lf_message);
             } else {
                 gf_userId = result.id;
-                hi_userId.value = result.id;
+                loadOwner();
             }
         }
     );
@@ -71,8 +54,8 @@ function loadOwner() {
             } else {
                 gf_ownerId = result.id;
                 gf_ownerName = result.displayName;
-                hi_ownerId.value = result.id;
-                hi_ownerName.value = result.displayName;
+                alert(gf_userId);
+                alert(gf_ownerId);
             }
         }
     );
