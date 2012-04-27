@@ -52,15 +52,15 @@ function loadUser() {
 //--- Load the owner of this activity                                                ---//
 //--- ------------------------------------------------------------------------------ ---//
 function loadOwner() {
-    osapi.people.getOwner().execute(function(resultLoadOwner){
-        if (resultLoadOwner.error){
-            var lf_message = "loadOwner(): " + resultLoadOwner.error.message;
-            mini.createDismissibleMessage(lf_message);
-        } else {
-            gf_ownerId = resultLoadOwner.id;
-            gf_ownerName = resultLoadOwner.displayName;
-        }
-    });
+//    osapi.people.getOwner().execute(function(resultLoadOwner){
+//        if (resultLoadOwner.error){
+//            var lf_message = "loadOwner(): " + resultLoadOwner.error.message;
+//            mini.createDismissibleMessage(lf_message);
+//        } else {
+//            gf_ownerId = resultLoadOwner.id;
+//            gf_ownerName = resultLoadOwner.displayName;
+//        }
+//    });
 };
 
 //--- ------------------------------------------------------------------------------ ---//
