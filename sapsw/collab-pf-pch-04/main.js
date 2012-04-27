@@ -14,13 +14,21 @@ var gf_ownerName;
 
 //--- On-view-load initialization
 function init() {
+    var lf_message;
     mini = new gadgets.MiniMessage();
-    alert('loadAppData()');
+
+    lf_message = 'loadAppData()';
+    alert(lf_message);
     loadAppData();
-    alert('loadUser()');
+
     loadUser();
-    alert('loadOwner()');
+    lf_message = 'loadUser(): ' + gf_userId;
+    alert(lf_message);
+
     loadOwner();
+    lf_message = 'loadOwner(): ' + gf_ownerId;
+    alert(lf_message);
+
 }
 
 
