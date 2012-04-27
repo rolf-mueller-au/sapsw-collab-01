@@ -7,6 +7,10 @@ var mini;
 //--- Currently logged in user
 var gf_userId;
 
+//--- Owner of this activity/tool
+var gf_ownerId;
+var gf_ownerName;
+
 
 //--- On-view-load initialization
 function init() {
@@ -15,19 +19,42 @@ function init() {
     loadAppData();
     alert('loadUser()');
     loadUser();
+    alert('loadOwner()');
+    loadOwner();
 }
 
 
-//--- Load the currently logged in user
+//--- ------------------------------------------------------------------------------ ---//
+//--- Load the currently logged in user                                              ---//
+//--- ------------------------------------------------------------------------------ ---//
 function loadUser() {
-    osapi.people.getViewer().execute(function(result){
-        if (result.error){
-            var lf_message = "loadUser(): " + result.error.message;
-            mini.createDismissibleMessage(lf_message);
-        } else {
-            gf_userId = result.id;
+    osapi.people.getViewer().execute(
+        function(result){
+            if (result.error){
+                var lf_message = "loadUser(): " + result.error.message;
+                mini.createDismissibleMessage(lf_message);
+            } else {
+                gf_userId = result.id;
+            }
         }
-    });
+    );
+};
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Load the currently logged in user                                              ---//
+//--- ------------------------------------------------------------------------------ ---//
+function loadOwner() {
+    osapi.people.getOwner().execute(
+        function(result){
+            if (result.error){
+                var lf_message = "loadOwner(): " + result.error.message;
+                mini.createDismissibleMessage(lf_message);
+            } else {
+                gf_ownerId = result.id;
+                gf_ownerName = result.displayName;
+            }
+        }
+    );
 };
 
 //--- ------------------------------------------------------------------------------ ---//
