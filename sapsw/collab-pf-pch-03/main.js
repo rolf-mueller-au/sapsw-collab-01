@@ -4,63 +4,36 @@
 //--- Factory for mini messages
 var mini;
 
-//--- Currently logged in user and owner of the activity
+//--- Currently logged in user
 var gf_userId;
-var gf_ownerId;
-var gf_ownerName;
 
-//--- UUID for this tool
-var gf_uuid;
-
-//--- Preference Handler
-var gr_prefs;
 
 //--- On-view-load initialization
 function init() {
     mini = new gadgets.MiniMessage();
-//  gr_prefs = new gadgets.Prefs();
-//  registerHandlers();
+    registerHandlers();
+    loadAppData();
     loadUser();
-    loadOwner();
-	loadAppData();
 }
 
 
 //--- Register UI event handlers
 function registerHandlers() {
-//--- since we don't work with handlers at the moment,
-//    nothing to register here...
-//    console.log("registerHandlers() started");
-//mini.createDismissibleMessage("registerHandlers() started");
+    console.log("registerHandlers() started");
+    //mini.createDismissibleMessage("registerHandlers() started");
+
 }
 
-//--- ------------------------------------------------------------------------------ ---//
-//--- Load the currently logged in user                                              ---//
-//--- ------------------------------------------------------------------------------ ---//
+//--- Load the currently logged in user
 function loadUser() {
-    osapi.people.getViewer().execute(function(resultLoadUser){
-        if (resultLoadUser.error){
-            var lf_message = "loadUser(): " + resultLoadUser.error.message;
+    osapi.people.getViewer().execute(function(result){
+        if (result.error){
+            var lf_message = "loadUser(): " + result.error.message;
             mini.createDismissibleMessage(lf_message);
         } else {
-            gf_userId = resultLoadUser.id;
+            gf_userId = result.id;
         }
     });
-};
-
-//--- ------------------------------------------------------------------------------ ---//
-//--- Load the owner of this activity                                                ---//
-//--- ------------------------------------------------------------------------------ ---//
-function loadOwner() {
-//    osapi.people.getOwner().execute(function(resultLoadOwner){
-//        if (resultLoadOwner.error){
-//            var lf_message = "loadOwner(): " + resultLoadOwner.error.message;
-//            mini.createDismissibleMessage(lf_message);
-//        } else {
-//            gf_ownerId = resultLoadOwner.id;
-//            gf_ownerName = resultLoadOwner.displayName;
-//        }
-//    });
 };
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -69,94 +42,33 @@ function loadOwner() {
 function loadAppData() {
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
-        userId: "@owner",
-        groupId: "@group"
+        userId: "@viewer",
+        groupId: "@friends"
     }).execute(function(response) {
             if (response.error) {
                 mini.createDismissibleMessage(response.error.message);
             } else {
                 for (p in response) {
                     if (!response[p]) { continue; }
-//--- response is fine let's read UUID
-                    if (typeof(response[p].pch_uuid)!=='undefined') {
-                        gf_uuid = response[p].pch_uuid;
-//--- ok, we have the UUID, now let's read the data from the backend
-
-                    } else {
-//--- we don't have a UUID yet, hence alert
-                        if (gf_ownerId!=gf_userId ) {
-                            var lf_message = 'The owner has not linked a process to this activity yet. ' +
-                                             'Please contact the owner (' + gf_ownerName + ').';
-                            alert (lf_message);
-                        } else {
-                            var lf_message = 'Please enter a personalnumber and start the activity by ' +
-                                'clicking on the "register" button.';
-                            alert (lf_message);
-                        }
-                    }
+                    if (typeof(response[p].pa_pernr)!=='undefined')     {pa_pernr.value = response[p].pa_pernr;}
+                    if (typeof(response[p].pa_date)!=='undefined')      {pa_date.value = response[p].pa_date;}
+                    if (typeof(response[p].pa_massg)!=='undefined')     {pa_massg_ct.value = response[p].pa_massg;}
+                    if (typeof(response[p].my_status)!=='undefined')    {my_status.value = response[p].my_status;}
+                    if (typeof(response[p].pa_bukrs_new)!=='undefined') {pa_bukrs_new_ct.value= response[p].pa_bukrs_new;}
+                    if (typeof(response[p].pa_werks_new)!=='undefined') {pa_werks_new.value = response[p].pa_werks_new;}
+                    if (typeof(response[p].pa_btrtl_new)!=='undefined') {pa_btrtl_new.value = response[p].pa_btrtl_new;}
+                    if (typeof(response[p].pa_orgeh_new)!=='undefined') {pa_orgeh_new.value = response[p].pa_orgeh_new;}
+                    if (typeof(response[p].pa_plans_new)!=='undefined') {pa_plans_new.value = response[p].pa_plans_new;}
+                    if (typeof(response[p].pa_sachp_new)!=='undefined') {pa_sachp_new.value = response[p].pa_sachp_new;}
+                    if (typeof(response[p].pa_stell_new)!=='undefined') {pa_stell_new.value = response[p].pa_stell_new;}
+                    if (typeof(response[p].pa_kostl_new)!=='undefined') {pa_kostl_new.value = response[p].pa_kostl_new;}
                 }
-////--- if pa_bukrs_old is empty, the perform loadPernrDetails()
-//                if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
+//--- if pa_bukrs_old is empty, the perform loadPernrDetails()
+                if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
             }
         }
     );
 }
-
-//--- ------------------------------------------------------------------------------ ---//
-//--- Loading the data, which has been saved from the form                           ---//
-//--- ------------------------------------------------------------------------------ ---//
-function loadAppData2() {
-
-    pa_pernr.value     = gr_prefs.getString("pa_pernr");
-    pa_date.value      = gr_prefs.getString("pa_date");
-    pa_massg.value     = gr_prefs.getString("pa_massg");
-    my_status.value    = gr_prefs.getString("my_status");
-    pa_bukrs_new.value = gr_prefs.getString("pa_bukrs_new");
-    pa_werks_new.value = gr_prefs.getString("pa_werks_new");
-    pa_btrtl_new.value = gr_prefs.getString("pa_btrtl_new");
-    pa_orgeh_new.value = gr_prefs.getString("pa_orgeh_new");
-    pa_plans_new.value = gr_prefs.getString("pa_plans_new");
-    pa_sachp_new.value = gr_prefs.getString("pa_sachp_new");
-    pa_stell_new.value = gr_prefs.getString("pa_stell_new");
-    pa_kostl_new.value = gr_prefs.getString("pa_kostl_new");
-
-}
-
-
-//--- ------------------------------------------------------------------------------ ---//
-//--- Loading the data, which has been saved from the form                           ---//
-//--- ------------------------------------------------------------------------------ ---//
-function loadAppData3() {
-  //mini.createDismissibleMessage("loadAppData() started");
-  osapi.appdata.get({
-    userId: "@viewer",
-    groupId: "@self"
-  }).execute(function(response) {
-    if (response.error) {
-      mini.createDismissibleMessage(response.error.message);
-    } else {
-        for (p in response) {
-          if (!response[p]) { continue; }
-          if (typeof(response[p].pa_pernr)!=='undefined')     {pa_pernr.value = response[p].pa_pernr;}
-          if (typeof(response[p].pa_date)!=='undefined')      {pa_date.value = response[p].pa_date;}
-          if (typeof(response[p].pa_massg)!=='undefined')     {pa_massg_ct.value = response[p].pa_massg;}
-          if (typeof(response[p].my_status)!=='undefined')    {my_status.value = response[p].my_status;}
-          if (typeof(response[p].pa_bukrs_new)!=='undefined') {pa_bukrs_new_ct.value= response[p].pa_bukrs_new;}
-          if (typeof(response[p].pa_werks_new)!=='undefined') {pa_werks_new.value = response[p].pa_werks_new;}
-          if (typeof(response[p].pa_btrtl_new)!=='undefined') {pa_btrtl_new.value = response[p].pa_btrtl_new;}
-          if (typeof(response[p].pa_orgeh_new)!=='undefined') {pa_orgeh_new.value = response[p].pa_orgeh_new;}
-          if (typeof(response[p].pa_plans_new)!=='undefined') {pa_plans_new.value = response[p].pa_plans_new;}
-          if (typeof(response[p].pa_sachp_new)!=='undefined') {pa_sachp_new.value = response[p].pa_sachp_new;}
-          if (typeof(response[p].pa_stell_new)!=='undefined') {pa_stell_new.value = response[p].pa_stell_new;}
-          if (typeof(response[p].pa_kostl_new)!=='undefined') {pa_kostl_new.value = response[p].pa_kostl_new;}
-        }
-//--- if pa_bukrs_old is empty, the perform loadPernrDetails()
-        if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
-      }
-    }
-  );
-}
-
 //--- ------------------------------------------------------------------------------ ---//
 //--- Saving the data entered into the form                                          ---//
 //--- ------------------------------------------------------------------------------ ---//
@@ -181,72 +93,29 @@ function saveAppData(im_f_my_status) {
     var lf_stell_new_value = pa_stell_new.value;
     var lf_kostl_new_value = pa_kostl_new.value;
 
-    gr_prefs.set("pa_pernr",     lf_pernr_value);
-    gr_prefs.set("pa_date",      lf_date_value);
-    gr_prefs.set("pa_massg",     lf_massg_value);
-    gr_prefs.set("my_status",    lf_my_status_value);
-    gr_prefs.set("pa_bukrs_new", lf_bukrs_new_value);
-    gr_prefs.set("pa_werks_new", lf_werks_new_value);
-    gr_prefs.set("pa_btrtl_new", lf_btrtl_new_value);
-    gr_prefs.set("pa_orgeh_new", lf_orgeh_new_value);
-    gr_prefs.set("pa_plans_new", lf_plans_new_value);
-    gr_prefs.set("pa_sachp_new", lf_sachp_new_value);
-    gr_prefs.set("pa_stell_new", lf_stell_new_value);
-    gr_prefs.set("pa_kostl_new", lf_kostl_new_value);
-
-    var lf_test = gr_prefs.getString("pa_pernr");
-
-    mini.createDismissibleMessage("Application data saved...");
-
-}
-
-//--- ------------------------------------------------------------------------------ ---//
-//--- Saving the data entered into the form                                          ---//
-//--- ------------------------------------------------------------------------------ ---//
-function saveAppData2(im_f_my_status) {
-	//mini.createDismissibleMessage("save button clicked");
-
-//--- at the beginning, we assume the set the status, since
-//    it needs to be persisted as well. It can either be
-//    a "2" for successfully saved, or " " for initial
-    my_status.value = im_f_my_status;
-
-    var lf_pernr_value     = pa_pernr.value;
-    var lf_date_value      = pa_date.value;
-    var lf_massg_value     = pa_massg.value;
-    var lf_my_status_value = my_status.value;
-	var lf_bukrs_new_value = pa_bukrs_new.value;
-	var lf_werks_new_value = pa_werks_new.value;
-    var lf_btrtl_new_value = pa_btrtl_new.value;
-    var lf_orgeh_new_value = pa_orgeh_new.value;
-    var lf_plans_new_value = pa_plans_new.value;
-    var lf_sachp_new_value = pa_sachp_new.value;
-    var lf_stell_new_value = pa_stell_new.value;
-    var lf_kostl_new_value = pa_kostl_new.value;
-
-	osapi.appdata.update({
-		userId: "@viewer",
-		groupId: "@self",
-		data: { pa_pernr:     lf_pernr_value,
-                pa_date:      lf_date_value,
-                pa_massg:     lf_massg_value,
-                my_status:    lf_my_status_value,
-                pa_bukrs_new: lf_bukrs_new_value,
-			    pa_werks_new: lf_werks_new_value,
-                pa_btrtl_new: lf_btrtl_new_value,
-                pa_orgeh_new: lf_orgeh_new_value,
-                pa_plans_new: lf_plans_new_value,
-                pa_sachp_new: lf_sachp_new_value,
-                pa_stell_new: lf_stell_new_value,
-                pa_kostl_new: lf_kostl_new_value
+    osapi.appdata.update({
+        userId: "@viewer",
+        groupId: "@friends",
+        data: { pa_pernr:     lf_pernr_value,
+            pa_date:      lf_date_value,
+            pa_massg:     lf_massg_value,
+            my_status:    lf_my_status_value,
+            pa_bukrs_new: lf_bukrs_new_value,
+            pa_werks_new: lf_werks_new_value,
+            pa_btrtl_new: lf_btrtl_new_value,
+            pa_orgeh_new: lf_orgeh_new_value,
+            pa_plans_new: lf_plans_new_value,
+            pa_sachp_new: lf_sachp_new_value,
+            pa_stell_new: lf_stell_new_value,
+            pa_kostl_new: lf_kostl_new_value
         }
     }).execute(function(response) {
-			if (response.error) {
-				mini.createDismissibleMessage(response.error.message);
-			} else {
-				mini.createDismissibleMessage("Application data saved...");
-			}
-		});
+            if (response.error) {
+                mini.createDismissibleMessage(response.error.message);
+            } else {
+                mini.createDismissibleMessage("Application data saved...");
+            }
+        });
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -263,9 +132,9 @@ function loadPernrDetails() {
     var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
     var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
     var lf_soapEnvelope =   lf_soapEnvelope_beg
-                          + lf_soapEnvelope_Pernr
-                          + lf_soapEnvelope_UserId
-                          + lf_soapEnvelope_end;
+        + lf_soapEnvelope_Pernr
+        + lf_soapEnvelope_UserId
+        + lf_soapEnvelope_end;
 
 //--- and put the request together
     var lf_params = {};
@@ -568,57 +437,57 @@ function responseSubmitAppData(obj) {
 //--- Reset Application Data. This will reset everything...                          ---//
 //--- ------------------------------------------------------------------------------ ---//
 function resetAppData( ) {
-  var answer = confirm("This will reset all appData! Would you like to proceed?");
-  if (answer) {
+    var answer = confirm("This will reset all appData! Would you like to proceed?");
+    if (answer) {
 //--- clear all values
-    pa_pernr.value = "";
-    pa_name.value = "";
-    pa_date.value = "";
-    pa_massg.value = "";
-    my_status.value = "";
+        pa_pernr.value = "";
+        pa_name.value = "";
+        pa_date.value = "";
+        pa_massg.value = "";
+        my_status.value = "";
 //--- clear new-values
-    pa_bukrs_new.value = "";
-    pa_werks_new.value = "";
-    pa_btrtl_new.value = "";
-    pa_orgeh_new.value = "";
-    pa_plans_new.value = "";
-    pa_sachp_new.value = "";
-    pa_stell_new.value = "";
-    pa_kostl_new.value = "";
+        pa_bukrs_new.value = "";
+        pa_werks_new.value = "";
+        pa_btrtl_new.value = "";
+        pa_orgeh_new.value = "";
+        pa_plans_new.value = "";
+        pa_sachp_new.value = "";
+        pa_stell_new.value = "";
+        pa_kostl_new.value = "";
 //--- clear old-values
-    pa_bukrs_old.value = "";
-    pa_werks_old.value = "";
-    pa_btrtl_old.value = "";
-    pa_orgeh_old.value = "";
-    pa_plans_old.value = "";
-    pa_sachp_old.value = "";
-    pa_stell_old.value = "";
-    pa_kostl_old.value = "";
-    pa_bukrs_txt_old.value = "";
-    pa_werks_txt_old.value = "";
-    pa_btrtl_txt_old.value = "";
-    pa_orgeh_txt_old.value = "";
-    pa_plans_txt_old.value = "";
-    pa_sachp_txt_old.value = "";
-    pa_stell_txt_old.value = "";
-    pa_kostl_txt_old.value = "";
+        pa_bukrs_old.value = "";
+        pa_werks_old.value = "";
+        pa_btrtl_old.value = "";
+        pa_orgeh_old.value = "";
+        pa_plans_old.value = "";
+        pa_sachp_old.value = "";
+        pa_stell_old.value = "";
+        pa_kostl_old.value = "";
+        pa_bukrs_txt_old.value = "";
+        pa_werks_txt_old.value = "";
+        pa_btrtl_txt_old.value = "";
+        pa_orgeh_txt_old.value = "";
+        pa_plans_txt_old.value = "";
+        pa_sachp_txt_old.value = "";
+        pa_stell_txt_old.value = "";
+        pa_kostl_txt_old.value = "";
 //--- then save AppData, with status set to inital
-    saveAppData('');
+        saveAppData('');
 // then, we can remove the options from the select fields
-    var i;
-    for (i=pa_massg.length-1;i>=0;i--) {
-      pa_massg.remove(i);
-    }
-    for (i=pa_bukrs_new.length-1;i>=0;i--) {
-      pa_bukrs_new.remove(i);
-    }
+        var i;
+        for (i=pa_massg.length-1;i>=0;i--) {
+            pa_massg.remove(i);
+        }
+        for (i=pa_bukrs_new.length-1;i>=0;i--) {
+            pa_bukrs_new.remove(i);
+        }
 
 //--- and open pa_pernr again
-    pa_pernr.disabled = "";
-    button_loadPernr.disabled = "";
+        pa_pernr.disabled = "";
+        button_loadPernr.disabled = "";
 
-    mini.createDismissibleMessage("Application data cleared..");
-  } else { mini.createDismissibleMessage("...action cancelled, no data cleared."); }
+        mini.createDismissibleMessage("Application data cleared..");
+    } else { mini.createDismissibleMessage("...action cancelled, no data cleared."); }
 
 }
 
