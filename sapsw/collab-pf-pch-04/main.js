@@ -78,7 +78,7 @@ function loadAppData() {
                 mini.createDismissibleMessage(response.error.message);
             } else {
                 for (p in response) {
-                    if (!response[p]) { continue; }
+                    if (!response[p]) { alert('loadAppData() continue'); continue; }
 
 //--- response is fine let's read UUID
                     if (typeof(response[p].pch_uuid)!=='undefined') {
