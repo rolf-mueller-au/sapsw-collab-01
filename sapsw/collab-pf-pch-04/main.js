@@ -70,10 +70,12 @@ function loadOwner() {
 //--- ------------------------------------------------------------------------------ ---//
 function loadAppData() {
     //mini.createDismissibleMessage("loadAppData() started");
+    alert('loadAppData() opsapi.appdata.get');
     osapi.appdata.get({
         userId: "@owner",
         groupId: "@friends"
     }).execute(function(response) {
+            alert('loadAppData() response');
             if (response.error) {
                 mini.createDismissibleMessage(response.error.message);
             } else {
