@@ -11,6 +11,9 @@ var gf_userId = '';
 var gf_ownerId = '';
 var gf_ownerName = '';
 
+//--- UUID for this tool
+var gf_uuid;
+
 
 //--- On-view-load initialization
 function init() {
@@ -67,7 +70,7 @@ function loadOwner() {
 function loadAppData() {
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
-        userId: "@viewer",
+        userId: "@owner",
         groupId: "@friends"
     }).execute(function(response) {
             if (response.error) {
@@ -75,21 +78,28 @@ function loadAppData() {
             } else {
                 for (p in response) {
                     if (!response[p]) { continue; }
-                    if (typeof(response[p].pa_pernr)!=='undefined')     {pa_pernr.value = response[p].pa_pernr;}
-                    if (typeof(response[p].pa_date)!=='undefined')      {pa_date.value = response[p].pa_date;}
-                    if (typeof(response[p].pa_massg)!=='undefined')     {pa_massg_ct.value = response[p].pa_massg;}
-                    if (typeof(response[p].my_status)!=='undefined')    {my_status.value = response[p].my_status;}
-                    if (typeof(response[p].pa_bukrs_new)!=='undefined') {pa_bukrs_new_ct.value= response[p].pa_bukrs_new;}
-                    if (typeof(response[p].pa_werks_new)!=='undefined') {pa_werks_new.value = response[p].pa_werks_new;}
-                    if (typeof(response[p].pa_btrtl_new)!=='undefined') {pa_btrtl_new.value = response[p].pa_btrtl_new;}
-                    if (typeof(response[p].pa_orgeh_new)!=='undefined') {pa_orgeh_new.value = response[p].pa_orgeh_new;}
-                    if (typeof(response[p].pa_plans_new)!=='undefined') {pa_plans_new.value = response[p].pa_plans_new;}
-                    if (typeof(response[p].pa_sachp_new)!=='undefined') {pa_sachp_new.value = response[p].pa_sachp_new;}
-                    if (typeof(response[p].pa_stell_new)!=='undefined') {pa_stell_new.value = response[p].pa_stell_new;}
-                    if (typeof(response[p].pa_kostl_new)!=='undefined') {pa_kostl_new.value = response[p].pa_kostl_new;}
+
+//--- response is fine let's read UUID
+                    if (typeof(response[p].pch_uuid)!=='undefined') {
+                        gf_uuid = response[p].pch_uuid;
+//--- ok, we have the UUID, now let's read the data from the backend
+
+                    } else {
+//--- we don't have a UUID yet, hence alert
+                        if (gf_ownerId!=gf_userId ) {
+                            var lf_message = 'The owner has not linked a process to this activity yet. ' +
+                                'Please contact the owner (' + gf_ownerName + ').';
+                            alert (lf_message);
+                        } else {
+                            var lf_message = 'Please enter a personalnumber and start the activity by ' +
+                                'clicking on the "register" button.';
+                            alert (lf_message);
+                        }
+                    }
+
                 }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
-                if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
+//              if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
             }
         }
     );
