@@ -20,9 +20,9 @@ function init() {
     var lf_message;
     mini = new gadgets.MiniMessage();
 
-    lf_message = 'loadAppData()';
-    alert(lf_message);
-    loadAppData();
+//    lf_message = 'loadAppData()';
+//    alert(lf_message);
+//    loadAppData();
     loadUser();
 
 }
@@ -59,6 +59,7 @@ function loadOwner() {
                 gf_ownerName = result.displayName;
                 alert(gf_userId);
                 alert(gf_ownerId);
+                loadAppData();
             }
         }
     );
