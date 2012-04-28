@@ -86,6 +86,8 @@ function loadAppData() {
                     if (typeof(response[p].pch_uuid)!=='undefined') {
                         gf_uuid = response[p].pch_uuid;
 //--- ok, we have the UUID, now let's read the data from the backend
+                        var lf_message = 'gf_uuid = ' + gf_uuid;
+                        alert (lf_message);
 
                     } else {
 //--- we don't have a UUID yet, hence alert
