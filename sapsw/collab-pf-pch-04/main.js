@@ -57,8 +57,6 @@ function loadOwner() {
             } else {
                 gf_ownerId = result.id;
                 gf_ownerName = result.displayName;
-                alert(gf_userId);
-                alert(gf_ownerId);
                 loadAppData();
             }
         }
@@ -66,9 +64,10 @@ function loadOwner() {
 };
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- Loading the data, which has been saved from the form                           ---//
+//--- Try to load the GUID. If we don't have any, then there is nothing              ---//
+//--- to collaboration about                                                         ---//
 //--- ------------------------------------------------------------------------------ ---//
-function loadAppData() {
+function loadGuid() {
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
         userId: "@owner",
@@ -80,7 +79,7 @@ function loadAppData() {
                 var lf_no_p_in_response = 0;
                 for (p in response) {
                     lf_no_p_in_response = lf_no_p_in_response + 1;
-                    if (!response[p]) { alert('loadAppData() continue'); continue; }
+                    if (!response[p]) { alert('loadAppData() continue...?!?!'); continue; }
 
 //--- response is fine let's read UUID
                     if (typeof(response[p].pch_uuid)!=='undefined') {
