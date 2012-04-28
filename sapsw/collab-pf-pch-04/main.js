@@ -79,7 +79,9 @@ function loadAppData() {
             if (response.error) {
                 mini.createDismissibleMessage(response.error.message);
             } else {
+                var lf_no_p_in_response = 0;
                 for (p in response) {
+                    lf_no_p_in_response = lf_no_p_in_response + 1;
                     if (!response[p]) { alert('loadAppData() continue'); continue; }
 
 //--- response is fine let's read UUID
@@ -102,6 +104,17 @@ function loadAppData() {
                         }
                     }
 
+                }
+                if (lf_no_p_in_response==0) {
+                    if (gf_ownerId!=gf_userId ) {
+                        var lf_message = 'The owner has not linked a process to this activity yet. ' +
+                            'Please contact the owner (' + gf_ownerName + ').';
+                        alert (lf_message);
+                    } else {
+                        var lf_message = 'Please enter a personalnumber and start the activity by ' +
+                            'clicking on the "register" button.';
+                        alert (lf_message);
+                    }
                 }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
 //              if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
