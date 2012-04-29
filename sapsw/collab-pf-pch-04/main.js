@@ -218,9 +218,9 @@ function updateUUIDinAppData() {
         groupId: "@friends",
         data: { pch_uuid: gf_uuid }
     }).execute(
-        function(responseUUIDinAppData) {
-            if (responseUUIDinAppData.error) {
-                mini.createDismissibleMessage(responseUUIDinAppData.error.message);
+        function(userData) {
+            if (userData.error) {
+                mini.createDismissibleMessage(userData.error.message);
             } else {
 //--- UUID registered, now we can show the buttons
                 button_saveAppData.style.visibility = 'visible';
