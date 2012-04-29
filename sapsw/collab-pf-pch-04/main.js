@@ -204,7 +204,8 @@ function responseRegUUID(obj) {
 //--- so we have retrieved the UUID from the backend, now we have to save it in APPDATA
         osapi.appdata.update({
             userId: "@viewer",
-            groupId: "@friends",
+//            groupId: "@friends",
+            groupId: "@self",
             data: { pch_uuid: gf_uuid }
         }).execute(function(response) {
                 if (response.error) {
