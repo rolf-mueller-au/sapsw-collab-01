@@ -244,7 +244,7 @@ function responseRegCheckPernr(obj) {
 
 //--- retrieve UUID from backend
     if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined') {
-        lf_failed = lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0].nodeValue;
+        lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue;
         if (lf_failed=='X') {
 //--- get message table, and out them as messages
             var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
