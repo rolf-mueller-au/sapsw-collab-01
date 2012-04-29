@@ -61,8 +61,20 @@ function loadOwner() {
                 var lf_message = "loadOwner(): " + result.error.message;
                 mini.createDismissibleMessage(lf_message);
             } else {
+//--- keep ownerId and ownerName
                 gf_ownerId = result.id;
                 gf_ownerName = result.displayName;
+//--- if viewer not equal owner,then hide buttons
+                if (gf_ownerId!=gf_userId) {
+                    pa_pernr.disabled = 'disabled';
+                    button_checkPernr.style.visibility = 'hidden';
+                    button_regOpen.style.visibility = 'hidden';
+                } else {
+                    pa_pernr.disabled = '';
+                    button_checkPernr.style.visibility = 'visible';
+                    button_regOpen.style.visibility = 'visible';
+                }
+
                 loadUuid();
             }
         }
@@ -103,6 +115,10 @@ function loadUuid() {
                                 'clicking on the "register" button.';
                             alert (lf_message);
                         }
+//--- regardless of the user, hide main buttons
+                        button_saveAppData.style.visibility = 'hidden';
+                        button_checkAppData.style.visibility = 'hidden';
+                        button_submitAppData.style.visibility = 'hidden';
                     }
 
                 }
@@ -116,6 +132,10 @@ function loadUuid() {
                             'clicking on the "register" button.';
                         alert (lf_message);
                     }
+//--- regardless of the user, hide main buttons
+                    button_saveAppData.style.visibility = 'hidden';
+                    button_checkAppData.style.visibility = 'hidden';
+                    button_submitAppData.style.visibility = 'hidden';
                 }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
 //              if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
@@ -130,14 +150,12 @@ function loadUuid() {
 function registerUUID() {
 
 //--- here we assemble the soapEnvelope for the request
-    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_REGISTER>';
-    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_REGISTER>';
-    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_REG_UUID>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_REG_UUID>';
     var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
 //--- assemble soapEnvelope
     var lf_soapEnvelope = gf_soapEnvelope_beg
         + lf_urn_beg
-        + lf_soapEnvelope_Pernr
         + lf_soapEnvelope_UserId
         + lf_urn_end
         + gf_soapEnvelope_end;
@@ -148,17 +166,17 @@ function registerUUID() {
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-//      "SOAPAction": "ZmurCollabGetWorklistRequest",
+        "SOAPAction": "",
         "Content-Type": "text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(gf_url, responseRegisterUUID, lf_params);
+    gadgets.io.makeRequest(gf_url, responseRegUUID, lf_params);
 }
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- responseRegisterUUID                                                           ---//
+//--- responseRegUUID                                                                ---//
 //--- ------------------------------------------------------------------------------ ---//
-function responseRegisterUUID(obj) {
+function responseRegUUID(obj) {
     //mini.createDismissibleMessage("responseRegisterUUID() started...");
     var lf_domdata = obj.data;
 
@@ -174,6 +192,11 @@ function responseRegisterUUID(obj) {
                 if (response.error) {
                     mini.createDismissibleMessage(response.error.message);
                 } else {
+//--- UUID registered, now we can show the buttons
+                    button_saveAppData.style.visibility = 'visible';
+                    button_checkAppData.style.visibility = 'visible';
+                    button_submitAppData.style.visibility = 'visible';
+//--- out success message
                     mini.createDismissibleMessage("UUID successfully registered and saved.");
                 }
             }
@@ -182,6 +205,249 @@ function responseRegisterUUID(obj) {
         alert('UUID could not be retrieved, registration of this tools failed.');
     }
 }
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- regCheckPernr                                                                  ---//
+//--- ------------------------------------------------------------------------------ ---//
+function regCheckPernr() {
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_REG_CHECK>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_REG_CHECK>';
+    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>"  + pa_pernr.value  + "</IM_F_PERNR>";
+//--- assemble soapEnvelope
+    var lf_soapEnvelope = gf_soapEnvelope_beg
+        + lf_urn_beg
+        + lf_soapEnvelope_Pernr
+        + lf_urn_end
+        + gf_soapEnvelope_end;
+
+//--- and put the request together
+    var lf_params = {};
+    lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
+    lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    lf_params[gadgets.io.RequestParameters.HEADERS] = {
+        "SOAPAction": "",
+        "Content-Type": "text/xml; charset=utf-8"
+    };
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+    gadgets.io.makeRequest(gf_url, responseRegCheckPernr, lf_params);
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- responseRegCheckPernr                                                          ---//
+//--- ------------------------------------------------------------------------------ ---//
+function responseRegCheckPernr(obj) {
+
+    var lf_domdata = obj.data;
+    var lf_failed  = '';
+
+//--- retrieve UUID from backend
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined') {
+        lf_failed = lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0].nodeValue;
+        if (lf_failed=='X') {
+//--- get message table, and out them as messages
+            var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
+            for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
+                var lf_elItem = lf_elMessages.childNodes[x];
+                var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
+                var lf_msgNumber = lf_elItem.getElementsByTagName('NUMBER')[0].childNodes[0].nodeValue;
+                var lf_msgMessage = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
+                var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
+                mini.createDismissibleMessage(lf_msg);
+            }
+            return;
+        }
+    }
+
+//--- retrieve display name
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
+    { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
+//--- retrieve BUKRS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
+    { pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
+//--- retrieve BUKRS_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0])!=='undefined')
+    { pa_bukrs_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve BTRTL
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0])!=='undefined')
+    { pa_btrtl_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0].nodeValue; }
+//--- retrieve BTRTL_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0])!=='undefined')
+    { pa_btrtl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve KOSTL
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0])!=='undefined')
+    { pa_kostl_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0].nodeValue; }
+//--- retrieve BTRTL_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0])!=='undefined')
+    { pa_kostl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve ORGEH
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0])!=='undefined')
+    { pa_orgeh_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0].nodeValue; }
+//--- retrieve ORGEH_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0])!=='undefined')
+    { pa_orgeh_txt_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve PLANS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0])!=='undefined')
+    { pa_plans_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0].nodeValue; }
+//--- retrieve PLANS_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0])!=='undefined')
+    { pa_plans_txt_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve SACHP
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0])!=='undefined')
+    { pa_sachp_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0].nodeValue; }
+//--- retrieve SACHP_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0])!=='undefined')
+    { pa_sachp_txt_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve STELL
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0])!=='undefined')
+    { pa_stell_old.value = lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0].nodeValue; }
+//--- retrieve STELL_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0])!=='undefined')
+    { pa_stell_txt_old.value = lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve WERKS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0])!=='undefined')
+    { pa_werks_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0].nodeValue; }
+//--- retrieve WERKS_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
+    { pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
+
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- regOpen                                                                        ---//
+//--- ------------------------------------------------------------------------------ ---//
+function regOpen() {
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_REG_OPEN>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_REG_OPEN>';
+    var lf_soapEnvelope_UUID = "<IM_F_UUID>"  + gf_uuid  + "</IM_F_UUID>";
+    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>"  + pa_pernr.value  + "</IM_F_PERNR>";
+    var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
+//--- assemble soapEnvelope
+    var lf_soapEnvelope = gf_soapEnvelope_beg
+        + lf_urn_beg
+        + lf_soapEnvelope_Pernr
+        + lf_soapEnvelope_UserId
+        + lf_soapEnvelope_UUID
+        + lf_urn_end
+        + gf_soapEnvelope_end;
+
+//--- and put the request together
+    var lf_params = {};
+    lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
+    lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    lf_params[gadgets.io.RequestParameters.HEADERS] = {
+        "SOAPAction": "",
+        "Content-Type": "text/xml; charset=utf-8"
+    };
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+    gadgets.io.makeRequest(gf_url, responseRegOpen, lf_params);
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- responseRegOpen()                                                              ---//
+//--- ------------------------------------------------------------------------------ ---//
+function responseRegOpen(obj) {
+    //mini.createDismissibleMessage("responseLoadPernrDetails() started...");
+    var lf_domdata = obj.data;
+//--- retrieve display name
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
+    { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
+//--- retrieve BUKRS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
+    { pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
+//--- retrieve BUKRS_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0])!=='undefined')
+    { pa_bukrs_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve BTRTL
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0])!=='undefined')
+    { pa_btrtl_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0].nodeValue; }
+//--- retrieve BTRTL_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0])!=='undefined')
+    { pa_btrtl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve KOSTL
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0])!=='undefined')
+    { pa_kostl_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0].nodeValue; }
+//--- retrieve BTRTL_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0])!=='undefined')
+    { pa_kostl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve ORGEH
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0])!=='undefined')
+    { pa_orgeh_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0].nodeValue; }
+//--- retrieve ORGEH_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0])!=='undefined')
+    { pa_orgeh_txt_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve PLANS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0])!=='undefined')
+    { pa_plans_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0].nodeValue; }
+//--- retrieve PLANS_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0])!=='undefined')
+    { pa_plans_txt_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve SACHP
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0])!=='undefined')
+    { pa_sachp_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0].nodeValue; }
+//--- retrieve SACHP_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0])!=='undefined')
+    { pa_sachp_txt_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve STELL
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0])!=='undefined')
+    { pa_stell_old.value = lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0].nodeValue; }
+//--- retrieve STELL_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0])!=='undefined')
+    { pa_stell_txt_old.value = lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve WERKS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0])!=='undefined')
+    { pa_werks_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0].nodeValue; }
+//--- retrieve WERKS_TXT
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
+    { pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
+
+//--- get bukrs_select table, and add values to the
+    var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
+    for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
+        var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x1];
+        var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
+        var lf_butxt = lf_elBukrsItem.getElementsByTagName('BUTXT')[0].childNodes[0].nodeValue;
+        var lf_bukrs_text = lf_bukrs + ' - ' + lf_butxt;
+        pa_bukrs_new.add(new Option(lf_bukrs_text, lf_bukrs));
+    }
+
+//--- get massg_select table, and add values to the
+    var lf_elActionSelects = lf_domdata.getElementsByTagName('EX_T_MASSG_SELECT')[0];
+    for( var x2 = 0; x2 < lf_elActionSelects.childNodes.length; x2++ ) {
+        var lf_elActionItem = lf_elActionSelects.childNodes[x2];
+        var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
+        var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
+        var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
+        pa_massg.add(new Option(lf_massg_text, lf_massg));
+    }
+
+//--- get message table, and out them as messages
+    var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
+    for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
+        var lf_elItem = lf_elMessages.childNodes[x];
+        var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
+        var lf_msgNumber = lf_elItem.getElementsByTagName('NUMBER')[0].childNodes[0].nodeValue;
+        var lf_msgMessage = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
+        var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
+        mini.createDismissibleMessage(lf_msg);
+    }
+
+//--- at the end, we set the my_status field accordingly
+    my_status.value = "1";
+
+//--- and we also disable the pernr field and hide pushbutton
+    pa_pernr.disabled = "disabled";
+    button_loadPernr.disabled = "disabled";
+
+}
+
+
+
+
+
 
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -266,7 +532,7 @@ function loadPernrDetails() {
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-//      "SOAPAction": "ZmurCollabGetWorklistRequest",
+        "SOAPAction": "",
         "Content-Type": "text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
@@ -397,7 +663,7 @@ function loadPernrDetails2() {
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-//      "SOAPAction": "ZmurCollabGetWorklistRequest",
+        "SOAPAction": "",
         "Content-Type": "text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
@@ -466,7 +732,7 @@ function checkAppData() {
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-//      "SOAPAction":"ZmurCollabGetWorklistRequest",
+        "SOAPAction": "",
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
@@ -540,7 +806,7 @@ function submitAppData() {
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-//      "SOAPAction":"ZmurCollabGetWorklistRequest",
+        "SOAPAction": "",
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
