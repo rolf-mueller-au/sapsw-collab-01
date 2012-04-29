@@ -110,6 +110,9 @@ function loadUuid() {
                             var lf_message = 'The owner has not linked a process to this activity yet. ' +
                                 'Please contact the owner (' + gf_ownerName + ').';
                             alert (lf_message);
+                            div_collab.style.visibility = 'hidden';
+                            div_message.style.visibility = 'visible';
+                            div_message.value = lf_message;
                         } else {
                             var lf_message = 'Please enter a personalnumber and start the activity by ' +
                                 'clicking on the "register" button.';
@@ -127,6 +130,9 @@ function loadUuid() {
                         var lf_message = 'The owner has not linked a process to this activity yet. ' +
                             'Please contact the owner (' + gf_ownerName + ').';
                         alert (lf_message);
+                        div_collab.style.visibility = 'hidden';
+                        div_message.style.visibility = 'visible';
+                        div_message.value = lf_message;
                     } else {
                         var lf_message = 'Please enter a personalnumber and start the activity by ' +
                             'clicking on the "register" button.';
