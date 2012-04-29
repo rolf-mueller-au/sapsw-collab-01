@@ -131,7 +131,7 @@ function loadUuid() {
                             'Please contact the owner (' + gf_ownerName + ').';
                         alert (lf_message);
                         div_collab.style.visibility = 'hidden';
-                        div_message.style.visibility = 'visible';
+//                        div_message.style.visibility = 'visible';
                         div_message.text( lf_message );
                     } else {
                         var lf_message = 'Please enter a personalnumber and start the activity by ' +
