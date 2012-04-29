@@ -195,7 +195,7 @@ function registerUUID() {
 //--- responseRegUUID                                                                ---//
 //--- ------------------------------------------------------------------------------ ---//
 function responseRegUUID(obj) {
-    //mini.createDismissibleMessage("responseRegisterUUID() started...");
+    //mini.createDismissibleMessage("responseRegUUID() started...");
     var lf_domdata = obj.data;
 
 //--- retrieve UUID from backend
@@ -205,7 +205,7 @@ function responseRegUUID(obj) {
         osapi.appdata.update({
             userId: "@viewer",
             groupId: "@friends",
-            data: { uuid: gf_uuid }
+            data: { pch_uuid: gf_uuid }
         }).execute(function(response) {
                 if (response.error) {
                     mini.createDismissibleMessage(response.error.message);
