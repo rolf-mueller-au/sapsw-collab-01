@@ -202,28 +202,38 @@ function responseRegUUID(obj) {
     if (typeof(lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0])!=='undefined') {
         gf_uuid = lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0].nodeValue;
 //--- so we have retrieved the UUID from the backend, now we have to save it in APPDATA
-        osapi.appdata.update({
-            userId: "@viewer",
-//            groupId: "@friends",
-            groupId: "@self",
-            data: { pch_uuid: gf_uuid }
-        }).execute(function(response) {
-                if (response.error) {
-                    mini.createDismissibleMessage(response.error.message);
-                } else {
-//--- UUID registered, now we can show the buttons
-                    button_saveAppData.style.visibility = 'visible';
-                    button_checkAppData.style.visibility = 'visible';
-                    button_submitAppData.style.visibility = 'visible';
-//--- out success message
-                    mini.createDismissibleMessage("UUID successfully registered and saved.");
-                }
-            }
-        );
+        updateUUIDinAppData();
     } else {
         alert('UUID could not be retrieved, registration of this tools failed.');
     }
 }
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- updateUUIDinAppData()                                                          ---//
+//--- ------------------------------------------------------------------------------ ---//
+function updateUUIDinAppData() {
+
+    osapi.appdata.update({
+        userId:  "@viewer",
+        groupId: "@friends",
+        data: { pch_uuid: gf_uuid }
+    }).execute(
+        function(response) {
+            if (response.error) {
+                mini.createDismissibleMessage(response.error.message);
+            } else {
+//--- UUID registered, now we can show the buttons
+                button_saveAppData.style.visibility = 'visible';
+                button_checkAppData.style.visibility = 'visible';
+                button_submitAppData.style.visibility = 'visible';
+//--- out success message
+                mini.createDismissibleMessage("UUID successfully registered and saved.");
+            }
+        }
+    );
+
+}
+
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- regCheckPernr                                                                  ---//
