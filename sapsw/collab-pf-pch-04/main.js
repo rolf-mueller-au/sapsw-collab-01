@@ -214,8 +214,8 @@ function responseRegUUID(obj) {
 function updateUUIDinAppData() {
 
     osapi.appdata.update({
-        userId:  "@viewer",
-        groupId: "@friends",
+//        userId:  "@viewer",
+//        groupId: "@friends",
         data: { pch_uuid: gf_uuid }
     }).execute(
         function(userData) {
