@@ -112,8 +112,16 @@ function loadUuid() {
                             alert (lf_message);
                             div_collab.style.visibility = 'hidden';
                         } else {
-                            var lf_message = 'Please enter a personalnumber and start the activity by ' +
-                                'clicking on the "register" button.';
+                            var lf_message = 'This activity has not been registered with the backend yet.'
+                                + ' Would you like to register now?';
+                            var lf_answer = confirm(lf_message);
+                            if (lf_answer) {
+                                registerUUID();
+                            } else {
+//--- we might have to add a button for RegisterUUID into the screen
+                            }
+                            lf_message = 'Please enter a personalnumber and start the activity by ' +
+                                'clicking on the "Register" button.';
                             alert (lf_message);
                         }
 //--- regardless of the user, hide main buttons
@@ -130,8 +138,16 @@ function loadUuid() {
                         alert (lf_message);
                         div_collab.style.visibility = 'hidden';
                     } else {
-                        var lf_message = 'Please enter a personalnumber and start the activity by ' +
-                            'clicking on the "register" button.';
+                        var lf_message = 'This activity has not been registered with the backend yet.'
+                                         + ' Would you like to register now?';
+                        var lf_answer = confirm(lf_message);
+                        if (lf_answer) {
+                            registerUUID();
+                        } else {
+//--- we might have to add a button for RegisterUUID into the screen
+                        }
+                        lf_message = 'Please enter a personalnumber and start the activity by ' +
+                            'clicking on the "Register" button.';
                         alert (lf_message);
                     }
 //--- regardless of the user, hide main buttons
