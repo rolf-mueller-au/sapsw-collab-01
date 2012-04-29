@@ -15,6 +15,12 @@ var gf_ownerName = '';
 var gf_uuid;
 
 
+//--- global variables related to the communicaiton with the backgend
+var gf_url = 'http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab';
+var gf_soapEnvelope_beg = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body>';
+var gf_soapEnvelope_end = "</soapenv:Body></soapenv:Envelope>";
+
+
 //--- On-view-load initialization
 function init() {
     var lf_message;
@@ -57,17 +63,17 @@ function loadOwner() {
             } else {
                 gf_ownerId = result.id;
                 gf_ownerName = result.displayName;
-                loadAppData();
+                loadUuid();
             }
         }
     );
 };
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- Try to load the GUID. If we don't have any, then there is nothing              ---//
+//--- Try to load the UUID. If we don't have any, then there is nothing              ---//
 //--- to collaboration about                                                         ---//
 //--- ------------------------------------------------------------------------------ ---//
-function loadGuid() {
+function loadUuid() {
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
         userId: "@owner",
@@ -117,6 +123,74 @@ function loadGuid() {
         }
     );
 }
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- registerUUID                                                                   ---//
+//--- ------------------------------------------------------------------------------ ---//
+function registerUUID() {
+
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_REGISTER>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_REGISTER>';
+    var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
+//--- assemble soapEnvelope
+    var lf_soapEnvelope = gf_soapEnvelope_beg
+        + lf_urn_beg
+        + lf_soapEnvelope_Pernr
+        + lf_soapEnvelope_UserId
+        + lf_urn_end
+        + gf_soapEnvelope_end;
+
+//--- and put the request together
+    var lf_params = {};
+    lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
+    lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    lf_params[gadgets.io.RequestParameters.HEADERS] = {
+//      "SOAPAction": "ZmurCollabGetWorklistRequest",
+        "Content-Type": "text/xml; charset=utf-8"
+    };
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+    gadgets.io.makeRequest(gf_url, responseRegisterUUID, lf_params);
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- responseRegisterUUID                                                           ---//
+//--- ------------------------------------------------------------------------------ ---//
+function responseRegisterUUID(obj) {
+    //mini.createDismissibleMessage("responseRegisterUUID() started...");
+    var lf_domdata = obj.data;
+
+//--- retrieve UUID from backend
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0])!=='undefined') {
+        gf_uuid = lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0].nodeValue;
+//--- so we have retrieved the UUID from the backend, now we have to save it in APPDATA
+        osapi.appdata.update({
+            userId: "@viewer",
+            groupId: "@friends",
+            data: { uuid: gf_uuid }
+        }).execute(function(response) {
+                if (response.error) {
+                    mini.createDismissibleMessage(response.error.message);
+                } else {
+                    mini.createDismissibleMessage("UUID successfully registered and saved.");
+                }
+            }
+        );
+    } else {
+        alert('UUID could not be retrieved, registration of this tools failed.');
+    }
+}
+
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Loading CollabData                                                             ---//
+//--- ------------------------------------------------------------------------------ ---//
+function loadCollabData() {
+
+}
+
 //--- ------------------------------------------------------------------------------ ---//
 //--- Saving the data entered into the form                                          ---//
 //--- ------------------------------------------------------------------------------ ---//
@@ -173,16 +247,18 @@ function loadPernrDetails() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
 
-//--- here we put the request (soapEnvelope) together
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
-    var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_OPEN>";
-    var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_OPEN></soapenv:Body></soapenv:Envelope>";
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_OPEN>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_OPEN>';
     var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
     var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
-    var lf_soapEnvelope =   lf_soapEnvelope_beg
+//--- assemble soapEnvelope
+    var lf_soapEnvelope = gf_soapEnvelope_beg
+        + lf_urn_beg
         + lf_soapEnvelope_Pernr
         + lf_soapEnvelope_UserId
-        + lf_soapEnvelope_end;
+        + lf_urn_end
+        + gf_soapEnvelope_end;
 
 //--- and put the request together
     var lf_params = {};
@@ -190,11 +266,11 @@ function loadPernrDetails() {
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-        "SOAPAction": "ZmurCollabGetWorklistRequest",
+//      "SOAPAction": "ZmurCollabGetWorklistRequest",
         "Content-Type": "text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(lf_url, responseLoadPernrDetails, lf_params);
+    gadgets.io.makeRequest(gf_url, responseLoadPernrDetails, lf_params);
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -301,27 +377,31 @@ function responseLoadPernrDetails(obj) {
 function loadPernrDetails2() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
-//--- here we put the request (soapEnvelope) together
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
-    var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_OPEN>";
-    var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_OPEN></soapenv:Body></soapenv:Envelope>";
+
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_OPEN>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_OPEN>';
     var lf_soapEnvelope_Pernr = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
     var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
-    var lf_soapEnvelope =   lf_soapEnvelope_beg
+//--- assemble soapEnvelope
+    var lf_soapEnvelope =  gf_soapEnvelope_beg
+        + lf_urn_beg
         + lf_soapEnvelope_Pernr
         + lf_soapEnvelope_UserId
-        + lf_soapEnvelope_end;
+        + lf_urn_end
+        + gf_soapEnvelope_end;
 
+//--- and put the request together
     var lf_params = {};
     lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-        "SOAPAction": "ZmurCollabGetWorklistRequest",
+//      "SOAPAction": "ZmurCollabGetWorklistRequest",
         "Content-Type": "text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(lf_url, responseLoadPernrDetails2, lf_params);
+    gadgets.io.makeRequest(gf_url, responseLoadPernrDetails2, lf_params);
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -343,9 +423,10 @@ function responseLoadPernrDetails2(obj) {
 //--- ------------------------------------------------------------------------------ ---//
 function checkAppData() {
     //mini.createDismissibleMessage("checkAppData() started...");
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
-    var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_CHECK>";
-    var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_CHECK></soapenv:Body></soapenv:Envelope>";
+
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_CHECK>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_CHECK>';
 
 //--- get all the values from the input fields and package them into tags
     var lf_soapEnvelope_Pernr  = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
@@ -363,7 +444,8 @@ function checkAppData() {
 
 //--- put the complete soap envelope together
     var lf_soapEnvelope;
-    lf_soapEnvelope = lf_soapEnvelope_beg
+    lf_soapEnvelope = gf_soapEnvelope_beg
+        + lf_urn_beg
         + lf_soapEnvelope_Btrtl
         + lf_soapEnvelope_Bukrs
         + lf_soapEnvelope_Date
@@ -376,14 +458,15 @@ function checkAppData() {
         + lf_soapEnvelope_Stell
         + lf_soapEnvelope_UserId
         + lf_soapEnvelope_Werks
-        + lf_soapEnvelope_end;
+        + lf_urn_end
+        + gf_soapEnvelope_end;
 
     var lf_params = {};
     lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-        "SOAPAction":"ZmurCollabGetWorklistRequest",
+//      "SOAPAction":"ZmurCollabGetWorklistRequest",
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
@@ -412,10 +495,10 @@ function responseCheckAppData(obj) {
 //--- for submitAppData, we call the backend web-service...                           ---//
 //--- ------------------------------------------------------------------------------ ---//
 function submitAppData() {
-    mini.createDismissibleMessage("submitAppData() started...");
-    var lf_url = "http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab";
-    var lf_soapEnvelope_beg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\"><soapenv:Header/><soapenv:Body><urn:ZMUR_HCM_PNF_PCH_SEND>";
-    var lf_soapEnvelope_end = "</urn:ZMUR_HCM_PNF_PCH_SEND></soapenv:Body></soapenv:Envelope>";
+
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_SEND>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_SEND>';
 
 //--- get all the values from the input fields and package them into tags
     var lf_soapEnvelope_Pernr  = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
@@ -434,7 +517,8 @@ function submitAppData() {
 
 //--- put the complete soap envelope together
     var lf_soapEnvelope;
-    lf_soapEnvelope = lf_soapEnvelope_beg
+    lf_soapEnvelope = gf_soapEnvelope_beg
+        + lf_urn_beg
         + lf_soapEnvelope_Btrtl
         + lf_soapEnvelope_Bukrs
         + lf_soapEnvelope_Date
@@ -448,14 +532,15 @@ function submitAppData() {
         + lf_soapEnvelope_Stell
         + lf_soapEnvelope_UserId
         + lf_soapEnvelope_Werks
-        + lf_soapEnvelope_end;
+        + lf_urn_end
+        + gf_soapEnvelope_end;
 
     var lf_params = {};
     lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
     lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
     lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     lf_params[gadgets.io.RequestParameters.HEADERS] = {
-        "SOAPAction":"ZmurCollabGetWorklistRequest",
+//      "SOAPAction":"ZmurCollabGetWorklistRequest",
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
