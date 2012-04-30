@@ -490,8 +490,8 @@ function pchRead() {
 //--- assemble soapEnvelope
     var lf_soapEnvelope = gf_soapEnvelope_beg
         + lf_urn_beg
-        + lf_soapEnvelope_UUID
         + lf_soapEnvelope_UserId
+        + lf_soapEnvelope_UUID
         + lf_urn_end
         + gf_soapEnvelope_end;
 
