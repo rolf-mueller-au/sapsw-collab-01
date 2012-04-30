@@ -625,7 +625,9 @@ function responsePchRead(obj) {
     }
 
 //--- Operation failed, let's out a generic warning
-    if (lf_failed=='X') mini.createDismissibleMessage('Operation failed because:');
+    if (lf_failed=='X') {
+        mini.createDismissibleMessage('Operation failed because:');
+    }
 
 //--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
@@ -641,9 +643,11 @@ function responsePchRead(obj) {
 //--- at the end, we set the my_status field accordingly
     my_status.value = "1";
 
-//--- and we also disable the pernr field and hide pushbutton
-    pa_pernr.disabled = "disabled";
-    button_loadPernr.disabled = "disabled";
+//--- and we also disable the pernr field and hide pushbutton, but only, if nothing failed
+    if (lf_failed!='X') {
+        pa_pernr.disabled = "disabled";
+        button_loadPernr.disabled = "disabled";
+    }
 
 }
 
