@@ -102,8 +102,8 @@ function loadUuid() {
 //--- response is fine let's read UUID
                     if (typeof(response[p].pch_uuid)!=='undefined') {
                         gf_uuid = response[p].pch_uuid;
-//--- ok, we have the UUID, now let's read the data from the backend
-                        read();
+//--- ok, we have the UUID, now let's read the data from the backend through pchRead()
+                        pchRead();
 
                     } else {
 //--- we don't have a UUID yet, hence alert
@@ -117,9 +117,9 @@ function loadUuid() {
                                 + ' Would you like to register now?';
                             var lf_answer = confirm(lf_message);
                             if (lf_answer) {
-                                registerUUID();
+                                pchRegUUID();
                             } else {
-//--- we might have to add a button for RegisterUUID into the screen
+//--- we might have to add a button for pchRegUUID into the screen
                             }
                             lf_message = 'Please enter a personalnumber and start the activity by ' +
                                 'clicking on the "Register" button.';
@@ -143,9 +143,9 @@ function loadUuid() {
                                          + ' Would you like to register now?';
                         var lf_answer = confirm(lf_message);
                         if (lf_answer) {
-                            registerUUID();
+                            pchRegUUID();
                         } else {
-//--- we might have to add a button for RegisterUUID into the screen
+//--- we might have to add a button for pchRegUUID into the screen
                         }
                         lf_message = 'Please enter a personalnumber and start the activity by ' +
                             'clicking on the "Register" button.';
@@ -164,9 +164,9 @@ function loadUuid() {
 }
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- registerUUID                                                                   ---//
+//--- pchRegUUID                                                                     ---//
 //--- ------------------------------------------------------------------------------ ---//
-function registerUUID() {
+function pchRegUUID() {
 
 //--- here we assemble the soapEnvelope for the request
     var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_REG_UUID>';
@@ -476,9 +476,9 @@ function responseRegOpen(obj) {
 
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- read()                                                                         ---//
+//--- pchRead()                                                                      ---//
 //--- ------------------------------------------------------------------------------ ---//
-function read() {
+function pchRead() {
     //var lf_message = "loadPernrDetails() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
 
@@ -505,19 +505,22 @@ function read() {
         "Content-Type": "text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(gf_url, responseRead, lf_params);
+    gadgets.io.makeRequest(gf_url, responsePchRead, lf_params);
 }
 
-
 //--- ------------------------------------------------------------------------------ ---//
-//--- ...to receive the pernrDetails                                                 ---//
+//--- responsePchRead()                                                              ---//
 //--- ------------------------------------------------------------------------------ ---//
-function responseRead(obj) {
-    //mini.createDismissibleMessage("responseLoadPernrDetails() started...");
+function responsePchRead(obj) {
+    //mini.createDismissibleMessage("responsePchRead(obj) started...");
     var lf_domdata = obj.data;
+    var lf_failed  = '';
 //--- retrieve display name
     if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
     { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
+//--- retrieve BUKRS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined')
+    { lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
     { pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
@@ -567,6 +570,40 @@ function responseRead(obj) {
     if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
     { pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
 
+//--- now retrieve collaboration data, we have this in this request too...
+
+//--- retrieve DATE
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_DATE')[0].childNodes[0])!=='undefined')
+    { pa_date.value = lf_domdata.getElementsByTagName('EX_F_DATE')[0].childNodes[0].nodeValue; }
+//--- retrieve MASSG
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_MASSG')[0].childNodes[0])!=='undefined')
+    { pa_massg.value = lf_domdata.getElementsByTagName('EX_F_MASSG')[0].childNodes[0].nodeValue; }
+//--- retrieve BUKRS_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS_NEW')[0].childNodes[0])!=='undefined')
+    { pa_bukrs_new.value = lf_domdata.getElementsByTagName('EX_F_BUKRS_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve WERKS_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_NEW')[0].childNodes[0])!=='undefined')
+    { pa_werks_new.value = lf_domdata.getElementsByTagName('EX_F_WERKS_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve BTRTL_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL_NEW')[0].childNodes[0])!=='undefined')
+    { pa_btrtl_new.value = lf_domdata.getElementsByTagName('EX_F_BTRTL_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve KOSTL_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL_NEW')[0].childNodes[0])!=='undefined')
+    { pa_kostl_new.value = lf_domdata.getElementsByTagName('EX_F_KOSTL_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve ORGEH_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH_NEW')[0].childNodes[0])!=='undefined')
+    { pa_orgeh_new.value = lf_domdata.getElementsByTagName('EX_F_ORGEH_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve PLANS_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS_NEW')[0].childNodes[0])!=='undefined')
+    { pa_plans_new.value = lf_domdata.getElementsByTagName('EX_F_PLANS_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve SACHP_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP_NEW')[0].childNodes[0])!=='undefined')
+    { pa_sachp_new.value = lf_domdata.getElementsByTagName('EX_F_SACHP_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve STELL_NEW
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_NEW')[0].childNodes[0])!=='undefined')
+    { pa_stell_new.value = lf_domdata.getElementsByTagName('EX_F_STELL_NEW')[0].childNodes[0].nodeValue; }
+
+
 //--- get bukrs_select table, and add values to the
     var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
     for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
@@ -586,6 +623,9 @@ function responseRead(obj) {
         var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
         pa_massg.add(new Option(lf_massg_text, lf_massg));
     }
+
+//--- Operation failed, let's out a generic warning
+    if (lf_failed=='X') mini.createDismissibleMessage('Operation failed because:');
 
 //--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
@@ -608,16 +648,12 @@ function responseRead(obj) {
 }
 
 
-
-
-
-
 //--- ------------------------------------------------------------------------------ ---//
-//--- Loading CollabData                                                             ---//
+//---                                                                                ---//
 //--- ------------------------------------------------------------------------------ ---//
-function loadCollabData() {
 
-}
+
+
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- Saving the data entered into the form                                          ---//
