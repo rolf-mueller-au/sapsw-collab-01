@@ -515,6 +515,9 @@ function responsePchRead(obj) {
     //mini.createDismissibleMessage("responsePchRead(obj) started...");
     var lf_domdata = obj.data;
     var lf_failed  = '';
+//--- retrieve PERNR
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_PERNR')[0].childNodes[0])!=='undefined')
+    { pa_pernr.value = lf_domdata.getElementsByTagName('EX_F_PERNR')[0].childNodes[0].nodeValue; }
 //--- retrieve display name
     if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
     { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
@@ -1096,4 +1099,4 @@ function resetAppData( ) {
 }
 
 //--- Register our on-view-load handler
-gadgets.util.registerOnLoadHandler(init);
+gadgets.util.registerOnLoadHandler(init)
