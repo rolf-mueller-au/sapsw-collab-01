@@ -714,6 +714,9 @@ function responsePchSave(obj) {
     //mini.createDismissibleMessage("responsePchRead(obj) started...");
     var lf_domdata = obj.data;
 
+//--- at least give some message out
+    mini.createDismissibleMessage("Collaboration data has been saved.");
+
 //--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
     for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
