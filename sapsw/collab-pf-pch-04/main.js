@@ -656,6 +656,79 @@ function responsePchRead(obj) {
 
 
 //--- ------------------------------------------------------------------------------ ---//
+//--- pchSave()                                                                      ---//
+//--- ------------------------------------------------------------------------------ ---//
+function pchSave() {
+    //var lf_message = "pchSave() started for pernr " + pa_pernr.value;
+    //mini.createDismissibleMessage(lf_message);
+
+//--- here we assemble the soapEnvelope for the request
+    var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_SAVE>';
+    var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_SAVE>';
+    var lf_soapEnvelope_UUID   = "<IM_F_UUID>" + gf_uuid + "</IM_F_UUID>";
+    var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
+    var lf_soapEnvelope_Date   = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
+    var lf_soapEnvelope_Massg  = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
+    var lf_soapEnvelope_Btrtl  = "<IM_F_BTRTL_NEW>" + pa_btrtl_new.value + "</IM_F_BTRTL_NEW>";
+    var lf_soapEnvelope_Bukrs  = "<IM_F_BUKRS_NEW>" + pa_bukrs_new.value + "</IM_F_BUKRS_NEW>";
+    var lf_soapEnvelope_Kostl  = "<IM_F_KOSTL_NEW>" + pa_kostl_new.value + "</IM_F_KOSTL_NEW>";
+    var lf_soapEnvelope_Orgeh  = "<IM_F_ORGEH_NEW>" + pa_orgeh_new.value + "</IM_F_ORGEH_NEW>";
+    var lf_soapEnvelope_Plans  = "<IM_F_PLANS_NEW>" + pa_plans_new.value + "</IM_F_PLANS_NEW>";
+    var lf_soapEnvelope_Sachp  = "<IM_F_SACHP_NEW>" + pa_sachp_new.value + "</IM_F_SACHP_NEW>";
+    var lf_soapEnvelope_Stell  = "<IM_F_STELL_NEW>" + pa_stell_new.value + "</IM_F_STELL_NEW>";
+    var lf_soapEnvelope_Werks  = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
+
+//--- assemble soapEnvelope
+    var lf_soapEnvelope = gf_soapEnvelope_beg
+        + lf_urn_beg
+        + lf_soapEnvelope_Btrtl
+        + lf_soapEnvelope_Bukrs
+        + lf_soapEnvelope_Date
+        + lf_soapEnvelope_Kostl
+        + lf_soapEnvelope_Massg
+        + lf_soapEnvelope_Orgeh
+        + lf_soapEnvelope_Sachp
+        + lf_soapEnvelope_Stell
+        + lf_soapEnvelope_UserId
+        + lf_soapEnvelope_UUID
+        + lf_urn_end
+        + gf_soapEnvelope_end;
+
+//--- and put the request together
+    var lf_params = {};
+    lf_params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    lf_params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
+    lf_params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    lf_params[gadgets.io.RequestParameters.HEADERS] = {
+        "SOAPAction": "",
+        "Content-Type": "text/xml; charset=utf-8"
+    };
+    lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
+    gadgets.io.makeRequest(gf_url, responsePchSave, lf_params);
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- responsePchSave()                                                              ---//
+//--- ------------------------------------------------------------------------------ ---//
+function responsePchSave(obj) {
+    //mini.createDismissibleMessage("responsePchRead(obj) started...");
+    var lf_domdata = obj.data;
+
+//--- get message table, and out them as messages
+    var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
+    for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
+        var lf_elItem = lf_elMessages.childNodes[x];
+        var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
+        var lf_msgNumber = lf_elItem.getElementsByTagName('NUMBER')[0].childNodes[0].nodeValue;
+        var lf_msgMessage = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
+        var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
+        mini.createDismissibleMessage(lf_msg);
+    }
+
+}
+
+
+//--- ------------------------------------------------------------------------------ ---//
 //---                                                                                ---//
 //--- ------------------------------------------------------------------------------ ---//
 
