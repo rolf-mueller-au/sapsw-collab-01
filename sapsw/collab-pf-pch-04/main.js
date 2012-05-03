@@ -97,6 +97,7 @@ function loadUuid() {
                 var lf_no_p_in_response = 0;
                 for (p in response) {
                     lf_no_p_in_response = lf_no_p_in_response + 1;
+//--- we don't have a UUID yet, hence ask to register
                     if (!response[p]) {
                         var lf_message = 'This activity has not been registered with the backend yet.'
                             + ' Would you like to register now?';
@@ -111,11 +112,13 @@ function loadUuid() {
 //--- response is fine let's read UUID
                     if (typeof(response[p].pch_uuid)!=='undefined') {
                         gf_uuid = response[p].pch_uuid;
+                        pch_uuid.value = gf_uuid;
+                        div_uuid.text = gf_uuid;
 //--- ok, we have the UUID, now let's read the data from the backend through pchRead()
                         pchRead();
 
                     } else {
-//--- we don't have a UUID yet, hence alert
+//--- we don't have a UUID yet, hence ask to register
                         if (gf_ownerId!=gf_userId ) {
                             var lf_message = 'The owner has not linked a process to this activity yet. ' +
                                 'Please contact the owner (' + gf_ownerName + ').';
@@ -295,10 +298,14 @@ function responseRegCheckPernr(obj) {
                 var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
                 mini.createDismissibleMessage(lf_msg);
             }
+            my_status.value = '3'; // 3 = In collaboration
             return;
         }
     }
 
+//--- retrieve status
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
+    { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve display name
     if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
     { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
@@ -350,10 +357,6 @@ function responseRegCheckPernr(obj) {
 //--- retrieve WERKS_TXT
     if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
     { pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
-
-//--- for now, we can set the status to '2 = Pernr registered', but this should
-//    be set by the backend and passed on to the gadget through the API
-    my_status.value = '2';
 
 }
 
@@ -536,6 +539,9 @@ function responsePchRead(obj) {
 //--- retrieve display name
     if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
     { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
+//--- retrieve status
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
+    { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined')
     { lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue; }
@@ -657,9 +663,6 @@ function responsePchRead(obj) {
         var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
         mini.createDismissibleMessage(lf_msg);
     }
-
-//--- at the end, we set the my_status field accordingly
-    my_status.value = "1";
 
 //--- and we also disable the pernr field and hide the pushbuttons, which
 //    pushbuttons, but only, if nothing failed
