@@ -113,7 +113,7 @@ function loadUuid() {
                     if (typeof(response[p].pch_uuid)!=='undefined') {
                         gf_uuid = response[p].pch_uuid;
                         pch_uuid.value = gf_uuid;
-                        div_uuid.value = gf_uuid;
+                        div_UUID.value = gf_uuid;
 //--- ok, we have the UUID, now let's read the data from the backend through pchRead()
                         pchRead();
 
