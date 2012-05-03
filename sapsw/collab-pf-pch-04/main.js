@@ -272,7 +272,7 @@ function responseRegCheckPernr(obj) {
     var lf_domdata = obj.data;
     var lf_failed  = '';
 
-//--- retrieve UUID from backend
+//--- retrieve EX_F_FAILED from backend
     if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined') {
         lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue;
         if (lf_failed=='X') {
@@ -341,6 +341,10 @@ function responseRegCheckPernr(obj) {
 //--- retrieve WERKS_TXT
     if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
     { pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
+
+//--- for now, we can set the status to '2 = Pernr registered', but this should
+//    be set by the backend and passed on to the gadget through the API
+    my_status.value = '2';
 
 }
 
@@ -465,13 +469,15 @@ function responseRegOpen(obj) {
         mini.createDismissibleMessage(lf_msg);
     }
 
-//--- at the end, we set the my_status field accordingly
-    my_status.value = "1";
+//--- As with the other places, we set the status manually to "3 = In collaboration".
+//    But practically, this status needs to be stored in the backend and retrieved through this API
+    my_status.value = "3";
 
 //--- and we also disable the pernr field and hide pushbutton
     pa_pernr.disabled = "disabled";
-    button_loadPernr.disabled = "disabled";
-
+//  button_loadPernr.disabled = "disabled";
+    button_checkPernr.style.visibility = 'hidden';
+    button_regOpen.style.visibility = 'hidden';
 }
 
 
@@ -646,10 +652,13 @@ function responsePchRead(obj) {
 //--- at the end, we set the my_status field accordingly
     my_status.value = "1";
 
-//--- and we also disable the pernr field and hide pushbutton, but only, if nothing failed
+//--- and we also disable the pernr field and hide the pushbuttons, which
+//    pushbuttons, but only, if nothing failed
     if (lf_failed!='X') {
-        pa_pernr.disabled = "disabled";
-        button_loadPernr.disabled = "disabled";
+        pa_pernr.disabled = 'disabled';
+//      button_loadPernr.disabled = 'disabled';
+        button_checkPern.style.visibility = 'hidden';
+        button_regOpen.style.visibility = 'disabled';
     }
 
 }
@@ -661,6 +670,10 @@ function responsePchRead(obj) {
 function pchSave() {
     //var lf_message = "pchSave() started for pernr " + pa_pernr.value;
     //mini.createDismissibleMessage(lf_message);
+
+//--- we will set the status to "3 = In collaboration", but we will need to
+//    pass this value into the backend, so that it can be stored there
+    my_status.value = '3';
 
 //--- here we assemble the soapEnvelope for the request
     var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_SAVE>';
@@ -974,6 +987,12 @@ function responseLoadPernrDetails2(obj) {
 function checkAppData() {
     //mini.createDismissibleMessage("checkAppData() started...");
 
+//--- we will set the status to "4 = Checked", but we will need to
+//    pass this value into the backend, so that it can be stored there.
+//    IMPORTANT: if this check failes, then the status remains in
+//    "3 = In collaboration". The API has to provide us with the result.
+    my_status.value = '4';
+
 //--- here we assemble the soapEnvelope for the request
     var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_CHECK>';
     var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_CHECK>';
@@ -1045,6 +1064,13 @@ function responseCheckAppData(obj) {
 //--- for submitAppData, we call the backend web-service...                           ---//
 //--- ------------------------------------------------------------------------------ ---//
 function submitAppData() {
+
+//--- we will set the status to "5 = Submitted", but we will need to
+//    pass this value into the backend, so that it can be stored there.
+//    IMPORTANT: if this Submit failes, then the status goes back to
+//    "3 = In collaboration". The API has to provide us with the result.
+    my_status.value = '5';
+
 
 //--- here we assemble the soapEnvelope for the request
     var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_SEND>';
