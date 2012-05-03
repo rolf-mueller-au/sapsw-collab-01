@@ -741,6 +741,10 @@ function responsePchSave(obj) {
         mini.createDismissibleMessage(lf_msg);
     }
 
+//--- retrieve STATUS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
+    { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
+
 }
 
 
@@ -982,23 +986,16 @@ function responseLoadPernrDetails2(obj) {
 }
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- for checkAppData, we call the backend web-service...                           ---//
+//--- for pchCheck(), we call the backend web-service...                           ---//
 //--- ------------------------------------------------------------------------------ ---//
-function checkAppData() {
-    //mini.createDismissibleMessage("checkAppData() started...");
-
-//--- we will set the status to "4 = Checked", but we will need to
-//    pass this value into the backend, so that it can be stored there.
-//    IMPORTANT: if this check failes, then the status remains in
-//    "3 = In collaboration". The API has to provide us with the result.
-    my_status.value = '4';
+function pchCheck() {
 
 //--- here we assemble the soapEnvelope for the request
     var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_CHECK>';
     var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_CHECK>';
 
 //--- get all the values from the input fields and package them into tags
-    var lf_soapEnvelope_Pernr  = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_UUID = "<IM_F_UUID>" + gf_uuid + "</IM_F_UUID>";
     var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
     var lf_soapEnvelope_Date   = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
     var lf_soapEnvelope_Massg  = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
@@ -1021,11 +1018,11 @@ function checkAppData() {
         + lf_soapEnvelope_Kostl
         + lf_soapEnvelope_Massg
         + lf_soapEnvelope_Orgeh
-        + lf_soapEnvelope_Pernr
         + lf_soapEnvelope_Plans
         + lf_soapEnvelope_Sachp
         + lf_soapEnvelope_Stell
         + lf_soapEnvelope_UserId
+        + lf_soapEnvelope_UUID
         + lf_soapEnvelope_Werks
         + lf_urn_end
         + gf_soapEnvelope_end;
@@ -1039,15 +1036,16 @@ function checkAppData() {
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(lf_url, responseCheckAppData, lf_params);
+    gadgets.io.makeRequest(lf_url, responsePchCheck, lf_params);
 }
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- response for CheckAppData                                                      ---//
 //--- ------------------------------------------------------------------------------ ---//
-function responseCheckAppData(obj) {
-    //mini.createDismissibleMessage("responseCheckAppData() started...");
+function responsePchCheck(obj) {
+
     var lf_domdata = obj.data;
+
 //--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
     for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
@@ -1058,26 +1056,22 @@ function responseCheckAppData(obj) {
         var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
         mini.createDismissibleMessage(lf_msg);
     }
+//--- retrieve STATUS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
+    { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- for submitAppData, we call the backend web-service...                           ---//
+//--- for pchSend(), we call the backend web-service...                              ---//
 //--- ------------------------------------------------------------------------------ ---//
-function submitAppData() {
-
-//--- we will set the status to "5 = Submitted", but we will need to
-//    pass this value into the backend, so that it can be stored there.
-//    IMPORTANT: if this Submit failes, then the status goes back to
-//    "3 = In collaboration". The API has to provide us with the result.
-    my_status.value = '5';
-
+function pchSend() {
 
 //--- here we assemble the soapEnvelope for the request
     var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_SEND>';
     var lf_urn_end = '</urn:ZMUR_HCM_PNF_PCH_SEND>';
 
 //--- get all the values from the input fields and package them into tags
-    var lf_soapEnvelope_Pernr  = "<IM_F_PERNR>" + pa_pernr.value + "</IM_F_PERNR>";
+    var lf_soapEnvelope_UUID = "<IM_F_UUID>" + gf_uuid + "</IM_F_UUID>";
     var lf_soapEnvelope_UserId = "<IM_F_USERID>"  + gf_userId  + "</IM_F_USERID>";
     var lf_soapEnvelope_Date   = "<IM_F_DATE>"  + pa_date.value  + "</IM_F_DATE>";
     var lf_soapEnvelope_Massg  = "<IM_F_MASSG>" + pa_massg.value  + "</IM_F_MASSG>";
@@ -1102,11 +1096,11 @@ function submitAppData() {
         + lf_soapEnvelope_Kostl
         + lf_soapEnvelope_Massg
         + lf_soapEnvelope_Orgeh
-        + lf_soapEnvelope_Pernr
         + lf_soapEnvelope_Plans
         + lf_soapEnvelope_Sachp
         + lf_soapEnvelope_Stell
         + lf_soapEnvelope_UserId
+        + lf_soapEnvelope_UUID
         + lf_soapEnvelope_Werks
         + lf_urn_end
         + gf_soapEnvelope_end;
@@ -1120,15 +1114,16 @@ function submitAppData() {
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(lf_url, responseSubmitAppData, lf_params);
+    gadgets.io.makeRequest(lf_url, responsePchSend, lf_params);
 }
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- response for SubmitAppData                                                     ---//
 //--- ------------------------------------------------------------------------------ ---//
-function responseSubmitAppData(obj) {
-    mini.createDismissibleMessage("responseSubmitAppData() started...");
+function responsePchSend(obj) {
+
     var lf_domdata = obj.data;
+
 //--- get message table, and out them as messages
     var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
     for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
@@ -1139,6 +1134,10 @@ function responseSubmitAppData(obj) {
         var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
         mini.createDismissibleMessage(lf_msg);
     }
+
+//--- retrieve STATUS
+    if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
+    { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 }
 
 
