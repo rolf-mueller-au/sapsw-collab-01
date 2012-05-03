@@ -97,7 +97,16 @@ function loadUuid() {
                 var lf_no_p_in_response = 0;
                 for (p in response) {
                     lf_no_p_in_response = lf_no_p_in_response + 1;
-                    if (!response[p]) { alert('loadAppData() continue...?!?!'); continue; }
+                    if (!response[p]) {
+                        var lf_message = 'This activity has not been registered with the backend yet.'
+                            + ' Would you like to register now?';
+                        var lf_answer = confirm(lf_message);
+                        if (lf_answer) {
+                            pchRegUUID();
+                        } else {
+//--- we might have to add a button for pchRegUUID into the screen
+                        }
+                    }
 
 //--- response is fine let's read UUID
                     if (typeof(response[p].pch_uuid)!=='undefined') {
