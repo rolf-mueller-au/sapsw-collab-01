@@ -595,6 +595,26 @@ function responsePchRead(obj) {
 
 //--- now retrieve collaboration data, we have this in this request too...
 
+//--- get bukrs_select table, and add values to the list of available values
+    var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
+    for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
+        var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x1];
+        var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
+        var lf_butxt = lf_elBukrsItem.getElementsByTagName('BUTXT')[0].childNodes[0].nodeValue;
+        var lf_bukrs_text = lf_bukrs + ' - ' + lf_butxt;
+        pa_bukrs_new.add(new Option(lf_bukrs_text, lf_bukrs));
+    }
+
+//--- get massg_select table, and add values to the list of available values
+    var lf_elActionSelects = lf_domdata.getElementsByTagName('EX_T_MASSG_SELECT')[0];
+    for( var x2 = 0; x2 < lf_elActionSelects.childNodes.length; x2++ ) {
+        var lf_elActionItem = lf_elActionSelects.childNodes[x2];
+        var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
+        var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
+        var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
+        pa_massg.add(new Option(lf_massg_text, lf_massg));
+    }
+
 //--- retrieve DATE
     if (typeof(lf_domdata.getElementsByTagName('EX_F_DATE')[0].childNodes[0])!=='undefined')
     { pa_date.value = lf_domdata.getElementsByTagName('EX_F_DATE')[0].childNodes[0].nodeValue; }
@@ -625,27 +645,6 @@ function responsePchRead(obj) {
 //--- retrieve STELL_NEW
     if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_NEW')[0].childNodes[0])!=='undefined')
     { pa_stell_new.value = lf_domdata.getElementsByTagName('EX_F_STELL_NEW')[0].childNodes[0].nodeValue; }
-
-
-//--- get bukrs_select table, and add values to the
-    var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
-    for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
-        var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x1];
-        var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
-        var lf_butxt = lf_elBukrsItem.getElementsByTagName('BUTXT')[0].childNodes[0].nodeValue;
-        var lf_bukrs_text = lf_bukrs + ' - ' + lf_butxt;
-        pa_bukrs_new.add(new Option(lf_bukrs_text, lf_bukrs));
-    }
-
-//--- get massg_select table, and add values to the
-    var lf_elActionSelects = lf_domdata.getElementsByTagName('EX_T_MASSG_SELECT')[0];
-    for( var x2 = 0; x2 < lf_elActionSelects.childNodes.length; x2++ ) {
-        var lf_elActionItem = lf_elActionSelects.childNodes[x2];
-        var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
-        var lf_mgtxt = lf_elActionItem.getElementsByTagName('MGTXT')[0].childNodes[0].nodeValue;
-        var lf_massg_text = lf_massg + ' - ' + lf_mgtxt;
-        pa_massg.add(new Option(lf_massg_text, lf_massg));
-    }
 
 //--- Operation failed, let's out a generic warning
     if (lf_failed=='X') {
