@@ -670,7 +670,27 @@ function responsePchRead(obj) {
         pa_pernr.disabled = 'disabled';
 //      button_loadPernr.disabled = 'disabled';
         button_checkPern.style.visibility = 'hidden';
-        button_regOpen.style.visibility = 'disabled';
+        button_regOpen.style.visibility = 'hidden';
+    }
+
+//--- if the status of the activity is 5 = Submitted, then
+//    we can also hide the check, save and submit buttons.
+//    We should also deactivate the collaboration fields
+    if (my_status.value=='5') {
+        button_saveAppData.style.visibility = 'hidden';
+        button_checkAppData.style.visibility = 'hidden';
+        button_submitAppData.style.visibility = 'hidden';
+        button_resetAppData.style.visibility = 'hidden';
+        pa_pernr.disabled = 'disabled';
+        pa_date.disabled = 'disabled';
+        pa_massg.disabled = 'disabled';
+        pa_werks_new.disabled = 'disabled';
+        pa_btrtl_new.disabled = 'disabled';
+        pa_orgeh_new.disabled = 'disabled';
+        pa_plans_new.disabled = 'disabled';
+        pa_sachp_new.disabled = 'disabled';
+        pa_stell_new.disabled = 'disabled';
+        pa_kostl_new.disabled = 'disabled';
     }
 
 }
