@@ -684,6 +684,7 @@ function responsePchRead(obj) {
         pa_pernr.disabled = 'disabled';
         pa_date.disabled = 'disabled';
         pa_massg.disabled = 'disabled';
+        pa_bukrs_new.disabled = 'disabled';
         pa_werks_new.disabled = 'disabled';
         pa_btrtl_new.disabled = 'disabled';
         pa_orgeh_new.disabled = 'disabled';
