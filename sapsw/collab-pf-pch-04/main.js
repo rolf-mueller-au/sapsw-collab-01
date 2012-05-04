@@ -1048,7 +1048,7 @@ function pchCheck() {
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(lf_url, responsePchCheck, lf_params);
+    gadgets.io.makeRequest(gf_url, responsePchCheck, lf_params);
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -1126,7 +1126,7 @@ function pchSend() {
         "Content-Type":"text/xml; charset=utf-8"
     };
     lf_params[gadgets.io.RequestParameters.POST_DATA] = lf_soapEnvelope;
-    gadgets.io.makeRequest(lf_url, responsePchSend, lf_params);
+    gadgets.io.makeRequest(gf_url, responsePchSend, lf_params);
 }
 
 //--- ------------------------------------------------------------------------------ ---//
