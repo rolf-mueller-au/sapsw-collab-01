@@ -1209,5 +1209,16 @@ function resetAppData( ) {
 
 }
 
+//--- ------------------------------------------------------------------------------ ---//
+//--- Alert Status Information                                                       ---//
+//--- ------------------------------------------------------------------------------ ---//
+function alert_status_info() {
+    var lf_message =
+        'UUID      = ' + gf_uuid + '\n' +
+        'Owner ID  = ' + gf_ownerId + '\n' +
+        'Viewer ID = ' + gf_userId;
+    alert(lf_message);
+}
+
 //--- Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init)
