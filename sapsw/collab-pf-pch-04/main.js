@@ -69,10 +69,12 @@ function loadOwner() {
                     pa_pernr.disabled = 'disabled';
                     button_checkPernr.style.visibility = 'hidden';
                     button_regOpen.style.visibility = 'hidden';
+                    button_resetAppData.style.visibility = 'hidden';
                 } else {
                     pa_pernr.disabled = '';
                     button_checkPernr.style.visibility = 'visible';
                     button_regOpen.style.visibility = 'visible';
+                    button_resetAppData.style.visibility = 'visible';
                 }
 
                 loadUuid();
