@@ -669,7 +669,7 @@ function responsePchRead(obj) {
     if (lf_failed!='X') {
         pa_pernr.disabled = 'disabled';
 //      button_loadPernr.disabled = 'disabled';
-        button_checkPern.style.visibility = 'hidden';
+        button_checkPernr.style.visibility = 'hidden';
         button_regOpen.style.visibility = 'hidden';
     }
 
