@@ -112,7 +112,7 @@ function loadUuid() {
 //--- response is fine let's read UUID
                     if (typeof(response[p].pch_uuid)!=='undefined') {
                         gf_uuid = response[p].pch_uuid;
-                        div_UUID.innerHTML = 'UUID: ' + gf_uuid;
+                        // div_UUID.innerHTML = 'UUID: ' + gf_uuid; "keep this code, good to know :-)
 //--- ok, we have the UUID, now let's read the data from the backend through pchRead()
                         pchRead();
 
@@ -1214,9 +1214,10 @@ function resetAppData( ) {
 //--- ------------------------------------------------------------------------------ ---//
 function alert_status_info() {
     var lf_message =
-        'UUID      = ' + gf_uuid + '\n' +
-        'Owner ID  = ' + gf_ownerId + '\n' +
-        'Viewer ID = ' + gf_userId;
+        'UUID       = ' + gf_uuid + '\n' +
+        'Owner ID   = ' + gf_ownerId + '\n' +
+        'Owner Name = ' + gf_ownerName + '\n' +
+        'Viewer ID  = ' + gf_userId;
     alert(lf_message);
 }
 
