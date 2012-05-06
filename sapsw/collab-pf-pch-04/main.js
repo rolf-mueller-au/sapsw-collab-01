@@ -90,7 +90,7 @@ function loadOwner() {
 function loadUuid() {
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
-//      userId: "@owner"
+      userId: "@viewer"
 //      groupId: "@friends"
     }).execute(function(response) {
             if (response.error) {
@@ -249,7 +249,7 @@ function responseRegUUID(obj) {
 function updateUUIDinAppData() {
 
     osapi.appdata.update({
-//        userId:  "@viewer",
+        userId:  "@viewer",
 //        groupId: "@friends",
         data: { pch_uuid: gf_uuid }
     }).execute(
