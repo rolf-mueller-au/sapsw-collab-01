@@ -12,7 +12,7 @@ var gf_ownerId = '';
 var gf_ownerName = '';
 
 //--- UUID for this tool
-var gf_uuid;
+var gf_uuid = '';
 
 
 //--- global variables related to the communicaiton with the backgend
