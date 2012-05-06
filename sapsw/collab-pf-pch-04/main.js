@@ -90,7 +90,7 @@ function loadOwner() {
 function loadUuid() {
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
-        userId: "@owner"
+//      userId: "@owner"
 //      groupId: "@friends"
     }).execute(function(response) {
             if (response.error) {
