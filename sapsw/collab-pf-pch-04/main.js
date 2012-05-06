@@ -90,8 +90,8 @@ function loadOwner() {
 function loadUuid() {
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
-      userId: "@viewer"
-//      groupId: "@friends"
+      userId: "@viewer",
+      groupId: "@friends"
     }).execute(function(response) {
             if (response.error) {
                 mini.createDismissibleMessage(response.error.message);
@@ -250,19 +250,21 @@ function updateUUIDinAppData() {
 
     osapi.appdata.update({
         userId:  "@viewer",
-//        groupId: "@friends",
+        groupId: "@friends",
         data: { pch_uuid: gf_uuid }
     }).execute(
-        function(userData) {
-            if (userData.error) {
-                mini.createDismissibleMessage(userData.error.message);
+        function(responseUpdateUUID) {
+            if (responseUpdateUUID.error) {
+                mini.createDismissibleMessage(responseUpdateUUID.error.message);
             } else {
 //--- UUID registered, now we can show the buttons
                 button_saveAppData.style.visibility = 'visible';
                 button_checkAppData.style.visibility = 'visible';
                 button_submitAppData.style.visibility = 'visible';
 //--- out success message
-                mini.createDismissibleMessage("UUID successfully registered and saved.");
+                var lf_message = 'UUID successfully registered and saved. ' +
+                                 'UUID = ' + gf_uuid;
+                mini.createDismissibleMessage(lf_message);
             }
         }
     );
