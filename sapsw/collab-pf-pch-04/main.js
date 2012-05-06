@@ -174,27 +174,6 @@ function loadUuid() {
             }
         }
     );
-    if (gf_uuid=='') {
-//--- no UUID there yet, hence register with the backend
-        if (gf_ownerId!=gf_userId ) {
-            var lf_message = 'The owner has not linked a process to this activity yet. ' +
-                'Please contact the owner (' + gf_ownerName + ').';
-            alert (lf_message);
-            div_collab.style.visibility = 'hidden';
-        } else {
-            var lf_message = 'This activity has not been registered with the backend yet.'
-                + ' Would you like to register now?';
-            var lf_answer = confirm(lf_message);
-            if (lf_answer) {
-                pchRegUUID();
-            } else {
-//--- we might have to add a button for pchRegUUID into the screen
-            }
-            lf_message = 'Please enter a personalnumber and start the activity by ' +
-                'clicking on the "Register" button.';
-            alert (lf_message);
-        }
-    }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -1268,4 +1247,4 @@ function alert_status_info() {
 }
 
 //--- Register our on-view-load handler
-gadgets.util.registerOnLoadHandler(init)
+gadgets.util.registerOnLoadHandler(init);
