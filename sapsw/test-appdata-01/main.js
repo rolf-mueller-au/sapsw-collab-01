@@ -54,11 +54,9 @@ function loadOwner() {
                 gf_ownerName = result.displayName;
 //--- if viewer not equal owner,then hide buttons
                 if (gf_ownerId!=gf_userId) {
-                    input_uuid.disabled = 'disabled';
-                    button_uuid.style.visibility = 'hidden';
+                    div_input_id.style.visibility = 'hidden';
                 } else {
-                    input_uuid.disabled = '';
-                    button_uuid.style.visibility = 'visible';
+                    div_input_id.style.visibility = 'visible';
                 }
                 loadUuid();
             }
