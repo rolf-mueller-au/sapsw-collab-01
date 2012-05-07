@@ -55,20 +55,20 @@ function loadOwner() {
 //--- if viewer not equal owner,then hide buttons
                 if (gf_ownerId!=gf_userId) {
                     div_input_id.style.visibility = 'hidden';
+                    loadFriendsUuid();
                 } else {
                     div_input_id.style.visibility = 'visible';
+                    loadSelfUuid();
                 }
-                loadUuid();
             }
         }
     );
 }
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- Try to load the UUID. If we don't have any, then there is nothing              ---//
-//--- to collaboration about                                                         ---//
+//--- loadSelfUuid(                                                                 ---//
 //--- ------------------------------------------------------------------------------ ---//
-function loadUuid() {
+function loadSelfUuid() {
     var lf_message = '';
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
@@ -83,15 +83,8 @@ function loadUuid() {
                     lf_no_p_in_response = lf_no_p_in_response + 1;
 //--- we don't have a UUID yet, hence ask to register
                     if (!response[p]) {
-                        if (gf_ownerId!=gf_userId ) {
-                            lf_message = 'The owner has not entered a UUID yet. ' +
-                                'Please contact the owner (' + gf_ownerName + ').';
-                            alert (lf_message);
-                            div_display_id.innerHTML = 'UUID not available';
-                        } else {
-                            lf_message = 'The UUID has not been entered yet. ';
-                            alert (lf_message);
-                        }
+                        lf_message = 'The UUID has not been entered yet. ';
+                        alert (lf_message);
                     }
 //--- response is fine let's read UUID
                     if (typeof(response[p].foo)!=='undefined') {
@@ -99,28 +92,61 @@ function loadUuid() {
                         div_display_id.innerHTML = 'UUID: ' + gf_uuid;
                     } else {
 //--- we don't have a UUID yet, hence ask to register
-                        if (gf_ownerId!=gf_userId ) {
-                            lf_message = 'The owner has not entered a UUID yet. ' +
-                                'Please contact the owner (' + gf_ownerName + ').';
-                            alert (lf_message);
-                            div_display_id.innerHTML = 'UUID not available';
-                        } else {
-                            lf_message = 'The UUID has not been entered yet. ';
-                            alert (lf_message);
-                        }
+                        lf_message = 'The UUID has not been entered yet. ';
+                        alert (lf_message);
                     }
 
                 }
                 if (lf_no_p_in_response==0) {
-                    if (gf_ownerId!=gf_userId ) {
+                    lf_message = 'The UUID has not been entered yet. ';
+                    alert (lf_message);
+                }
+            }
+        }
+    );
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- loadFriendsUuid(                                                               ---//
+//--- ------------------------------------------------------------------------------ ---//
+function loadFriendsUuid() {
+    var lf_message = '';
+    //mini.createDismissibleMessage("loadAppData() started");
+    osapi.appdata.get({
+        userId: "@viewer",
+        groupId: "@friends"
+    }).execute(function(response) {
+            if (response.error) {
+                mini.createDismissibleMessage(response.error.message);
+            } else {
+                var lf_no_p_in_response = 0;
+                for (p in response) {
+                    lf_no_p_in_response = lf_no_p_in_response + 1;
+//--- we don't have a UUID yet, hence ask to register
+                    if (!response[p]) {
                         lf_message = 'The owner has not entered a UUID yet. ' +
-                            'Please contact the owner (' + gf_ownerName + ').';
+                                     'Please contact the owner (' + gf_ownerName + ').';
                         alert (lf_message);
                         div_display_id.innerHTML = 'UUID not available';
-                    } else {
-                        lf_message = 'The UUID has not been entered yet. ';
-                        alert (lf_message);
                     }
+//--- response is fine let's read UUID
+                    if (typeof(response[p].foo)!=='undefined') {
+                        gf_uuid = response[p].foo;
+                        div_display_id.innerHTML = 'UUID: ' + gf_uuid;
+                    } else {
+//--- we don't have a UUID yet, hence ask to register
+                        lf_message = 'The owner has not entered a UUID yet. ' +
+                                     'Please contact the owner (' + gf_ownerName + ').';
+                        alert (lf_message);
+                        div_display_id.innerHTML = 'UUID not available';
+                    }
+
+                }
+                if (lf_no_p_in_response==0) {
+                    lf_message = 'The owner has not entered a UUID yet. ' +
+                                 'Please contact the owner (' + gf_ownerName + ').';
+                    alert (lf_message);
+                    div_display_id.innerHTML = 'UUID not available';
                 }
             }
         }
