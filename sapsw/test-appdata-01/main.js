@@ -69,6 +69,7 @@ function loadOwner() {
 //--- to collaboration about                                                         ---//
 //--- ------------------------------------------------------------------------------ ---//
 function loadUuid() {
+    var lf_message = '';
     //mini.createDismissibleMessage("loadAppData() started");
     osapi.appdata.get({
       userId: "@viewer",
@@ -83,12 +84,12 @@ function loadUuid() {
 //--- we don't have a UUID yet, hence ask to register
                     if (!response[p]) {
                         if (gf_ownerId!=gf_userId ) {
-                            var lf_message = 'The owner has not entered a UUID yet. ' +
+                            lf_message = 'The owner has not entered a UUID yet. ' +
                                 'Please contact the owner (' + gf_ownerName + ').';
                             alert (lf_message);
                             div_display_id.innerHTML = 'UUID not available';
                         } else {
-                            var lf_message = 'The UUID has not been entered yet. ';
+                            lf_message = 'The UUID has not been entered yet. ';
                             alert (lf_message);
                         }
                     }
@@ -99,12 +100,12 @@ function loadUuid() {
                     } else {
 //--- we don't have a UUID yet, hence ask to register
                         if (gf_ownerId!=gf_userId ) {
-                            var lf_message = 'The owner has not entered a UUID yet. ' +
+                            lf_message = 'The owner has not entered a UUID yet. ' +
                                 'Please contact the owner (' + gf_ownerName + ').';
                             alert (lf_message);
                             div_display_id.innerHTML = 'UUID not available';
                         } else {
-                            var lf_message = 'The UUID has not been entered yet. ';
+                            lf_message = 'The UUID has not been entered yet. ';
                             alert (lf_message);
                         }
                     }
@@ -112,12 +113,12 @@ function loadUuid() {
                 }
                 if (lf_no_p_in_response==0) {
                     if (gf_ownerId!=gf_userId ) {
-                        var lf_message = 'The owner has not entered a UUID yet. ' +
+                        lf_message = 'The owner has not entered a UUID yet. ' +
                             'Please contact the owner (' + gf_ownerName + ').';
                         alert (lf_message);
                         div_display_id.innerHTML = 'UUID not available';
                     } else {
-                        var lf_message = 'The UUID has not been entered yet. ';
+                        lf_message = 'The UUID has not been entered yet. ';
                         alert (lf_message);
                     }
                 }
@@ -138,9 +139,9 @@ function updateUUIDinAppData() {
         groupId: "@friends",
         data: { pch_uuid: gf_uuid }
     }).execute(
-        function(responseUpdateUUID) {
-            if (responseUpdateUUID.error) {
-                mini.createDismissibleMessage(responseUpdateUUID.error.message);
+        function(userData) {
+            if (userData.error) {
+                mini.createDismissibleMessage(userData.error.message);
             } else {
 //--- out success message
                 var lf_message = 'UUID successfully registered and saved. ' +
