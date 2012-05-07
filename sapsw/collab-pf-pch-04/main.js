@@ -88,7 +88,7 @@ function loadOwner() {
 //--- to collaboration about                                                         ---//
 //--- ------------------------------------------------------------------------------ ---//
 function loadUuid() {
-    //mini.createDismissibleMessage("loadAppData() started");
+    var lf_message = '';
     osapi.appdata.get({
       userId: "@viewer",
       groupId: "@friends"
@@ -101,8 +101,8 @@ function loadUuid() {
                     lf_no_p_in_response = lf_no_p_in_response + 1;
 //--- we don't have a UUID yet, hence ask to register
                     if (!response[p]) {
-                        var lf_message = 'This activity has not been registered with the backend yet.'
-                            + ' Would you like to register now?';
+                        var lf_message = 'This activity has not been registered with the backend yet.' +
+                                         ' Would you like to register now?';
                         var lf_answer = confirm(lf_message);
                         if (lf_answer) {
                             pchRegUUID();
@@ -120,24 +120,17 @@ function loadUuid() {
 
                     } else {
 //--- we don't have a UUID yet, hence ask to register
-                        if (gf_ownerId!=gf_userId ) {
-                            var lf_message = 'The owner has not linked a process to this activity yet. ' +
-                                'Please contact the owner (' + gf_ownerName + ').';
-                            alert (lf_message);
-                            div_collab.style.visibility = 'hidden';
-                        } else {
-                            var lf_message = 'This activity has not been registered with the backend yet.'
-                                + ' Would you like to register now?';
-                            var lf_answer = confirm(lf_message);
-                            if (lf_answer) {
-                                pchRegUUID();
-                            } else {
+                        lf_message = 'This activity has not been registered with the backend yet.' +
+                                     ' Would you like to register now?';
+                         var lf_answer = confirm(lf_message);
+                         if (lf_answer) {
+                             pchRegUUID();
+                         } else {
 //--- we might have to add a button for pchRegUUID into the screen
-                            }
-                            lf_message = 'Please enter a personalnumber and start the activity by ' +
-                                'clicking on the "Register" button.';
-                            alert (lf_message);
-                        }
+                         }
+                         lf_message = 'Please enter a personalnumber and start the activity by ' +
+                                      'clicking on the "Register" button.';
+                         alert (lf_message);
 //--- regardless of the user, hide main buttons
                         button_saveAppData.style.visibility = 'hidden';
                         button_checkAppData.style.visibility = 'hidden';
@@ -146,24 +139,17 @@ function loadUuid() {
 
                 }
                 if (lf_no_p_in_response==0) {
-                    if (gf_ownerId!=gf_userId ) {
-                        var lf_message = 'The owner has not linked a process to this activity yet. ' +
-                            'Please contact the owner (' + gf_ownerName + ').';
-                        alert (lf_message);
-                        div_collab.style.visibility = 'hidden';
+                    lf_message = 'This activity has not been registered with the backend yet.' +
+                                 ' Would you like to register now?';
+                    var lf_answer = confirm(lf_message);
+                    if (lf_answer) {
+                        pchRegUUID();
                     } else {
-                        var lf_message = 'This activity has not been registered with the backend yet.'
-                                         + ' Would you like to register now?';
-                        var lf_answer = confirm(lf_message);
-                        if (lf_answer) {
-                            pchRegUUID();
-                        } else {
 //--- we might have to add a button for pchRegUUID into the screen
-                        }
-                        lf_message = 'Please enter a personalnumber and start the activity by ' +
-                            'clicking on the "Register" button.';
-                        alert (lf_message);
                     }
+                    lf_message = 'Please enter a personalnumber and start the activity by ' +
+                                 'clicking on the "Register" button.';
+                    alert (lf_message);
 //--- regardless of the user, hide main buttons
                     button_saveAppData.style.visibility = 'hidden';
                     button_checkAppData.style.visibility = 'hidden';
@@ -171,6 +157,57 @@ function loadUuid() {
                 }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
 //              if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
+            }
+        }
+    );
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Try to load the UUID. If we don't have any, then there is nothing              ---//
+//--- to collaboration about                                                         ---//
+//--- ------------------------------------------------------------------------------ ---//
+function loadFriendsUuid() {
+    var lf_message = '';
+    osapi.appdata.get({
+        userId: "@viewer",
+        groupId: "@friends"
+    }).execute(function(response) {
+            if (response.error) {
+                mini.createDismissibleMessage(response.error.message);
+            } else {
+                var lf_no_p_in_response = 0;
+                for (p in response) {
+                    lf_no_p_in_response = lf_no_p_in_response + 1;
+//--- we don't have a UUID yet, hence alert the user to contact the owner
+                    if (!response[p]) {
+                        lf_message = 'The owner has not linked a process to this activity yet. ' +
+                                     'Please contact the owner (' + gf_ownerName + ').';
+                        alert (lf_message);
+                        div_collab.style.visibility = 'hidden';
+                    }
+
+//--- response is fine let's read UUID
+                    if (typeof(response[p].pch_uuid)!=='undefined') {
+                        gf_uuid = response[p].pch_uuid;
+                        // div_UUID.innerHTML = 'UUID: ' + gf_uuid; "keep this code, good to know :-)
+//--- ok, we have the UUID, now let's read the data from the backend through pchRead()
+                        pchRead();
+
+                    } else {
+//--- we don't have a UUID yet, hence alert the user to contact the owner
+                        lf_message = 'The owner has not linked a process to this activity yet. ' +
+                                     'Please contact the owner (' + gf_ownerName + ').';
+                        alert (lf_message);
+                        div_collab.style.visibility = 'hidden';
+                    }
+                }
+                if (lf_no_p_in_response==0) {
+//--- we don't have a UUID yet, hence alert the user to contact the owner
+                    lf_message = 'The owner has not linked a process to this activity yet. ' +
+                                 'Please contact the owner (' + gf_ownerName + ').';
+                    alert (lf_message);
+                    div_collab.style.visibility = 'hidden';
+                }
             }
         }
     );
@@ -229,7 +266,7 @@ function updateUUIDinAppData() {
 
     osapi.appdata.update({
         userId:  "@viewer",
-        groupId: "@friends",
+        groupId: "@self",
         data: { pch_uuid: gf_uuid }
     }).execute(
         function(responseUpdateUUID) {
