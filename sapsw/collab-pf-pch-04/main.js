@@ -70,14 +70,14 @@ function loadOwner() {
                     button_checkPernr.style.visibility = 'hidden';
                     button_regOpen.style.visibility = 'hidden';
                     button_resetAppData.style.visibility = 'hidden';
+                    loadFriendsUuid();
                 } else {
                     pa_pernr.disabled = '';
                     button_checkPernr.style.visibility = 'visible';
                     button_regOpen.style.visibility = 'visible';
                     button_resetAppData.style.visibility = 'visible';
+                    loadSelfUuid();
                 }
-
-                loadUuid();
             }
         }
     );
@@ -87,11 +87,11 @@ function loadOwner() {
 //--- Try to load the UUID. If we don't have any, then there is nothing              ---//
 //--- to collaboration about                                                         ---//
 //--- ------------------------------------------------------------------------------ ---//
-function loadUuid() {
+function loadSelfUuid() {
     var lf_message = '';
     osapi.appdata.get({
       userId: "@viewer",
-      groupId: "@friends"
+      groupId: "@self"
     }).execute(function(response) {
             if (response.error) {
                 mini.createDismissibleMessage(response.error.message);
