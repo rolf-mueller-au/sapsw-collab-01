@@ -94,8 +94,8 @@ function loadUuid() {
                         }
                     }
 //--- response is fine let's read UUID
-                    if (typeof(response[p].pch_uuid)!=='undefined') {
-                        gf_uuid = response[p].pch_uuid;
+                    if (typeof(response[p].foo)!=='undefined') {
+                        gf_uuid = response[p].foo;
                         div_display_id.innerHTML = 'UUID: ' + gf_uuid;
                     } else {
 //--- we don't have a UUID yet, hence ask to register
