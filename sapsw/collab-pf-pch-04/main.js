@@ -109,6 +109,10 @@ function loadUuid() {
                         } else {
 //--- we might have to add a button for pchRegUUID into the screen
                         }
+                        button_saveAppData.style.visibility = 'hidden';
+                        button_checkAppData.style.visibility = 'hidden';
+                        button_submitAppData.style.visibility = 'hidden';
+                        button_resetAppData.style.visibility = 'hidden';
                     }
 
 //--- response is fine let's read UUID
@@ -128,13 +132,11 @@ function loadUuid() {
                          } else {
 //--- we might have to add a button for pchRegUUID into the screen
                          }
-                         lf_message = 'Please enter a personalnumber and start the activity by ' +
-                                      'clicking on the "Register" button.';
-                         alert (lf_message);
 //--- regardless of the user, hide main buttons
                         button_saveAppData.style.visibility = 'hidden';
                         button_checkAppData.style.visibility = 'hidden';
                         button_submitAppData.style.visibility = 'hidden';
+                        button_resetAppData.style.visibility = 'hidden';
                     }
 
                 }
@@ -147,13 +149,11 @@ function loadUuid() {
                     } else {
 //--- we might have to add a button for pchRegUUID into the screen
                     }
-                    lf_message = 'Please enter a personalnumber and start the activity by ' +
-                                 'clicking on the "Register" button.';
-                    alert (lf_message);
 //--- regardless of the user, hide main buttons
                     button_saveAppData.style.visibility = 'hidden';
                     button_checkAppData.style.visibility = 'hidden';
                     button_submitAppData.style.visibility = 'hidden';
+                    button_resetAppData.style.visibility = 'hidden';
                 }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
 //              if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
@@ -274,9 +274,9 @@ function updateUUIDinAppData() {
                 mini.createDismissibleMessage(responseUpdateUUID.error.message);
             } else {
 //--- UUID registered, now we can show the buttons
-                button_saveAppData.style.visibility = 'visible';
-                button_checkAppData.style.visibility = 'visible';
-                button_submitAppData.style.visibility = 'visible';
+              button_saveAppData.style.visibility = 'visible';
+              button_checkAppData.style.visibility = 'visible';
+              button_submitAppData.style.visibility = 'visible';
 //--- out success message
                 var lf_message = 'UUID successfully registered and saved. ' +
                                  'UUID = ' + gf_uuid;
@@ -343,9 +343,6 @@ function responseRegCheckPernr(obj) {
         }
     }
 
-//--- retrieve status
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
-    { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve display name
     if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
     { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
