@@ -774,10 +774,12 @@ function pchSave() {
         + lf_soapEnvelope_Kostl
         + lf_soapEnvelope_Massg
         + lf_soapEnvelope_Orgeh
+        + lf_soapEnvelope_Plans
         + lf_soapEnvelope_Sachp
         + lf_soapEnvelope_Stell
         + lf_soapEnvelope_UserId
         + lf_soapEnvelope_UUID
+        + lf_soapEnvelope_Werks
         + lf_urn_end
         + gf_soapEnvelope_end;
 
