@@ -134,22 +134,14 @@ function updateUUIDinAppData() {
 
     gf_uuid = input_uuid.value;
 
-    osapi.appdata.update({
-        userId:  "@viewer",
-        groupId: "@friends",
-        data: { pch_uuid: gf_uuid }
-    }).execute(
-        function(userData) {
-            if (userData.error) {
-                mini.createDismissibleMessage(userData.error.message);
-            } else {
-//--- out success message
-                var lf_message = 'UUID successfully registered and saved. ' +
-                                 'UUID = ' + gf_uuid;
-                mini.createDismissibleMessage(lf_message);
-            }
+    osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {foo: gf_uuid}}).execute(function (userData) {
+        if (userData.error){
+            alert(userData.error.message)
         }
-    );
+        else{
+            alert('The data has been updated: ' + input);
+        }
+    });
 
 }
 
