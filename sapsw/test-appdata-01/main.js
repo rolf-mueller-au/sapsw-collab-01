@@ -128,13 +128,11 @@ function loadUuid() {
 }
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- updateUUIDinAppData()                                                          ---//
+//--- appdata_update()                                                          ---//
 //--- ------------------------------------------------------------------------------ ---//
-function updateUUIDinAppData() {
-
-    gf_uuid = input_uuid.value;
-
-    osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {foo: gf_uuid}}).execute(function (userData) {
+var appdata_update = function (){
+    var input = document.getElementById('input_uuid').value;
+    osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {foo: input}}).execute(function (userData) {
         if (userData.error){
             alert(userData.error.message)
         }
@@ -142,8 +140,7 @@ function updateUUIDinAppData() {
             alert('The data has been updated: ' + input);
         }
     });
-
-}
+};
 
 //--- Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);
