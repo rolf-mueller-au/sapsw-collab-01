@@ -126,13 +126,12 @@ function loadUuid() {
         }
     );
 }
-
 //--- ------------------------------------------------------------------------------ ---//
-//--- appdata_update()                                                          ---//
+//--- appdata_update()                                                               ---//
 //--- ------------------------------------------------------------------------------ ---//
 var appdata_update = function (){
     var input = document.getElementById('input_uuid').value;
-    osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {foo: input}}).execute(function (userData) {
+    osapi.appdata.update({userId: '@viewer', groupId: '@friends', data: {foo: input}}).execute(function (userData) {
         if (userData.error){
             alert(userData.error.message)
         }
