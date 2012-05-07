@@ -527,6 +527,11 @@ function responseRegOpen(obj) {
 //  button_loadPernr.disabled = "disabled";
     button_checkPernr.style.visibility = 'hidden';
     button_regOpen.style.visibility = 'hidden';
+
+//--- at least out some message at the end
+    var lf_message = 'PERNR (' + pa_pernr.value + ', ' + pa_name.value + ') successfully registered with the backend.';
+    mini.createDismissibleMessage(lf_message);
+
 }
 
 
@@ -1281,4 +1286,4 @@ function alert_status_info() {
 }
 
 //--- Register our on-view-load handler
-gadgets.util.registerOnLoadHandler(init);
+gadgets.util.registerOnLoadHandler(init)
