@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Collaboration - Process and Forms - Position Change - Version 4.0"
+  <ModulePrefs title="Collaboration - Process and Forms - Position Change - Version 5"
                description="This is a POC on how to collaborate on PnF in SAP Streamwork"
                author="Rolf Mueller"
                author_affiliation="Accenture"
                author_email="rolf.mueller@accenture.com"
-			   height="500">
+			   height="700">
 
     <!-- Commonly used features -->
     <Require feature="dynamic-height" /> 
