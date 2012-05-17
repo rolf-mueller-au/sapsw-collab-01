@@ -1221,9 +1221,10 @@ function responsePchSend(obj) {
 //--- Reset Application Data. This will reset everything...                          ---//
 //--- ------------------------------------------------------------------------------ ---//
 function resetAppData( ) {
-    var answer = confirm("This will reset all appData! Would you like to proceed?");
-    if (answer) {
+    var lf_answer = confirm("This will reset all appData! Would you like to proceed?");
+    if (lf_answer) {
 //--- clear all values
+        document.getElementById('pa_pernr').value = '';
         pa_pernr.value = "";
         pa_name.value = "";
         pa_date.value = "";
