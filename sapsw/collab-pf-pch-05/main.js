@@ -574,7 +574,7 @@ function pchRead() {
 function responsePchRead(obj) {
     //mini.createDismissibleMessage("responsePchRead(obj) started...");
     var lf_domdata = obj.data;
-    var lf_failed  = '';
+    //var lf_failed  = '';
 //--- retrieve PERNR
     if (typeof(lf_domdata.getElementsByTagName('EX_F_PERNR')[0].childNodes[0])!=='undefined')
     { document.getElementById('pa_pernr').value = lf_domdata.getElementsByTagName('EX_F_PERNR')[0].childNodes[0].nodeValue; }
@@ -586,7 +586,7 @@ function responsePchRead(obj) {
     { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined')
-    { lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue; }
+    { var lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
     { document.getElementById('pa_bukrs_old').value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
