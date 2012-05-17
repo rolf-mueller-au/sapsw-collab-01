@@ -1,0 +1,232 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="main.css" type="text/css" />
+  <script type="text/javascript" charset="utf-8" src="main.js"></script>
+  <script type="text/javascript" charset="utf-8" src="scw.js"></script>
+</head>
+
+<body>
+
+<div id='div_collab'>
+
+<table border="0" style="width: 100%">
+  <tbody>
+    <tr>
+      <td class="tdHeader">Employee Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Employee No.</td>
+              <td><input type="text" size="20" id="pa_pernr">
+                  <button type="button" id="button_checkPernr" onclick="regCheckPernr()">Check</button>
+                  <button type="button" id="button_regOpen" onclick="regOpen()">Register</button></td>
+<!--              <button type="button" id="button_updateUUID" onclick="updateUUIDinAppData()">Update UUID</button></td> -->
+              <td>Employee Name</td>
+              <td><input type="text" size="40" disabled="disabled" id="pa_name"></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdHeader">Action Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Effective Date</td>
+              <td>
+                <input type="text" size="12"  id="pa_date">
+                <img src='scw.gif' title='Click Here' alt='Click Here' onclick="scwShow(scwID('pa_date'),event);" />
+              </td>
+              <td>Action Reason</td>
+              <td>
+                <select id="pa_massg">
+                </select>
+                <input id="pa_massg_ct" type="hidden">
+              </td>
+              <td class="tdHeader3" align="right">
+                  Status:
+                  <select id="my_status" disabled="disabled">
+                      <option value=""> = Initial</option>
+                      <option value='1'>1 = Registered with backend</option>
+                      <option value="2">2 = Pernr registered</option>
+                      <option value="3">3 = In draft</option>
+                      <option value="4">4 = Checked</option>
+                      <option value="5">5 = Submitted</option>
+                      <option value="6">6 = Approved</option>
+                  </select>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdHeader">Organizational Information</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px">
+        <table border="0" style="width: 100%">
+          <tbody>
+            <tr>
+              <td class="tdHeader2">Current Situation</td>
+              <td class="tdHeader2">Proposed Situation</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px">
+                <table border="0" style="width: 100%">
+                  <tbody>
+                    <tr>
+                      <td>Company Code</td>
+                      <td>
+                        <input type="text" size="8" disabled="disabled" id="pa_bukrs_old">
+                        <input type="text" size="30" disabled="disabled" id="pa_bukrs_txt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Personnel Area</td>
+                      <td>
+					    <input type="text" size="8" disabled="disabled" id="pa_werks_old">
+						<input type="text" size="30" disabled="disabled" id="pa_werks_txt_old">
+					  </td>
+                    </tr>
+                    <tr>
+                      <td>Personnel SubArea</td>
+                      <td>
+					    <input type="text" size="8" disabled="disabled" id="pa_btrtl_old">
+						<input type="text" size="30" disabled="disabled" id="pa_btrtl_txt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>OrgUnit ID</td>
+                      <td>
+					    <input type="text" size="8" disabled="disabled" id="pa_orgeh_old">
+						<input type="text" size="30" disabled="disabled" id="pa_orgeh_txt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Position</td>
+                      <td>
+					    <input type="text" size="8" disabled="disabled" id="pa_plans_old">
+						<input type="text" size="30" disabled="disabled" id="pa_plans_txt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Personnel Admin.</td>
+                      <td>
+                        <input type="text" size="8" disabled="disabled" id="pa_sachp_old">
+                        <input type="text" size="30" disabled="disabled" id="pa_sachp_txt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Job</td>
+                      <td>
+                        <input type="text" size="8" disabled="disabled" id="pa_stell_old">
+                        <input type="text" size="30" disabled="disabled" id="pa_stell_txt_old">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Cost Center</td>
+                      <td>
+                        <input type="text" size="8" disabled="disabled" id="pa_kostl_old">
+                        <input type="text" size="30" disabled="disabled" id="pa_kostl_txt_old">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="padding: 5px">
+                <table border="0" style="width: 100%">
+                  <tbody>
+                    <tr>
+					  <td>Company Code</td>
+					  <td>
+                        <select id="pa_bukrs_new">
+                        </select>
+                        <input id="pa_bukrs_new_ct" type="hidden">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>Personnel Area</td>
+					  <td>
+					    <input type="text" size="8" maxlength="4" id="pa_werks_new">
+					    <input type="text" size="30" disabled="disabled" id="pa_werkstxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>Personnel SubArea</td>
+					  <td>
+					    <input type="text" size="8" maxlength="4" id="pa_btrtl_new">
+					    <input type="text" size="30" disabled="disabled" id="pa_btrtltxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>OrgUnit ID</td>
+					  <td>
+					    <input type="text" size="8" maxlength="8" id="pa_orgeh_new">
+					    <input type="text" size="30" disabled="disabled" id="pa_orgehtxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+					  <td>Position</td>
+					  <td>
+					    <input type="text" size="8" maxlength="8" id="pa_plans_new">
+					    <input type="text" size="30" disabled="disabled" id="pa_planstxt_new">
+					  </td>
+                    </tr>
+                    <tr>
+                      <td>Personnel Admin.</td>
+                      <td>
+                        <input type="text" size="8" maxlength="3" id="pa_sachp_new">
+                        <input type="text" size="30" disabled="disabled" id="pa_sachptxt_new">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Job</td>
+                      <td>
+                        <input type="text" size="8" maxlength="8" id="pa_stell_new">
+                        <input type="text" size="30" disabled="disabled" id="pa_stelltxt_new">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Cost Center</td>
+                      <td>
+                        <input type="text" size="8" maxlength="8" id="pa_kostl_new">
+                        <input type="text" size="30" disabled="disabled" id="pa_kostltxt_new">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table border="0" class="tableHeader2">
+  <tbody>
+    <tr>
+      <td class="tdHeader3">
+        <button type="button" id="button_saveAppData" onclick="pchSave()">Save</button>
+        <button type="button" id="button_checkAppData" onclick="pchCheck()">Check</button>
+        <button type="button" id="button_submitAppData" onclick="pchSend()">Submit</button>
+        <button type="button" id="button_resetAppData" onclick="resetAppData()">Reset</button>
+      </td>
+      <td class="tdHeader4" align="right"><a onclick='alert_status_info()'>Status Info</a></td>
+      <td class="tdHeader4" align="right">collab-pf-pch-04 V4.1 (18-03-2012)</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+</body>
