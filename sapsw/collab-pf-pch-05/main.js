@@ -586,10 +586,11 @@ function responsePchRead(obj) {
     { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
     var lf_nd_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
-    if (lf_nd_failed!==null || typeof(lf_nd_failed)!=='undefined') {
-      lf_failed = lf_nd_failed.nodeValue;
+    var lf_ty_failed = typeof(lf_nd_failed);
+    if (lf_nd_failed==null || lf_ty_failed=='undefined') {
+        lf_failed = '';
     } else {
-      lf_failed = '';
+        lf_failed = lf_nd_failed.nodeValue;
     }
 //--- retrieve BUKRS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
