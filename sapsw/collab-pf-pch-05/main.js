@@ -343,57 +343,24 @@ function responseRegCheckPernr(obj) {
         }
     }
 
-//--- retrieve display name
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
-    { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
-//--- retrieve BUKRS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
-    { pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
-//--- retrieve BUKRS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0])!=='undefined')
-    { pa_bukrs_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0])!=='undefined')
-    { pa_btrtl_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0])!=='undefined')
-    { pa_btrtl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve KOSTL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0])!=='undefined')
-    { pa_kostl_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0])!=='undefined')
-    { pa_kostl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve ORGEH
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0])!=='undefined')
-    { pa_orgeh_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0].nodeValue; }
-//--- retrieve ORGEH_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0])!=='undefined')
-    { pa_orgeh_txt_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve PLANS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0])!=='undefined')
-    { pa_plans_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0].nodeValue; }
-//--- retrieve PLANS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0])!=='undefined')
-    { pa_plans_txt_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve SACHP
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0])!=='undefined')
-    { pa_sachp_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0].nodeValue; }
-//--- retrieve SACHP_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0])!=='undefined')
-    { pa_sachp_txt_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve STELL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0])!=='undefined')
-    { pa_stell_old.value = lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0].nodeValue; }
-//--- retrieve STELL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0])!=='undefined')
-    { pa_stell_txt_old.value = lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve WERKS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0])!=='undefined')
-    { pa_werks_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0].nodeValue; }
-//--- retrieve WERKS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
-    { pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
+//--- retrieve current (old) information ------------------------------------------- ---//
+    fillScreenField(obj,'EX_F_DISPLAY_NAME','pa_name');
+    fillScreenField(obj,'EX_F_BUKRS','pa_bukrs_old');
+    fillScreenField(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenField(obj,'EX_F_BTRTL','pa_btrtl_old');
+    fillScreenField(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
+    fillScreenField(obj,'EX_F_KOSTL','pa_kostl_old');
+    fillScreenField(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
+    fillScreenField(obj,'EX_F_ORGEH','pa_orgeh_old');
+    fillScreenField(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
+    fillScreenField(obj,'EX_F_PLANS','pa_plans_old');
+    fillScreenField(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
+    fillScreenField(obj,'EX_F_SACHP','pa_sachp_old');
+    fillScreenField(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
+    fillScreenField(obj,'EX_F_STELL','pa_stell_old');
+    fillScreenField(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
+    fillScreenField(obj,'EX_F_WERKS','pa_werks_old');
+    fillScreenField(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
 
 }
 
@@ -434,58 +401,25 @@ function regOpen() {
 //--- ------------------------------------------------------------------------------ ---//
 function responseRegOpen(obj) {
     //mini.createDismissibleMessage("responseLoadPernrDetails() started...");
-    var lf_domdata = obj.data;
-//--- retrieve display name
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
-    { pa_name.value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
-//--- retrieve BUKRS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
-    { pa_bukrs_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
-//--- retrieve BUKRS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0])!=='undefined')
-    { pa_bukrs_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0])!=='undefined')
-    { pa_btrtl_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0])!=='undefined')
-    { pa_btrtl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve KOSTL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0])!=='undefined')
-    { pa_kostl_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0])!=='undefined')
-    { pa_kostl_txt_old.value = lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve ORGEH
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0])!=='undefined')
-    { pa_orgeh_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0].nodeValue; }
-//--- retrieve ORGEH_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0])!=='undefined')
-    { pa_orgeh_txt_old.value = lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve PLANS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0])!=='undefined')
-    { pa_plans_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0].nodeValue; }
-//--- retrieve PLANS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0])!=='undefined')
-    { pa_plans_txt_old.value = lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve SACHP
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0])!=='undefined')
-    { pa_sachp_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0].nodeValue; }
-//--- retrieve SACHP_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0])!=='undefined')
-    { pa_sachp_txt_old.value = lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve STELL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0])!=='undefined')
-    { pa_stell_old.value = lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0].nodeValue; }
-//--- retrieve STELL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0])!=='undefined')
-    { pa_stell_txt_old.value = lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve WERKS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0])!=='undefined')
-    { pa_werks_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0].nodeValue; }
-//--- retrieve WERKS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
-    { pa_werks_txt_old.value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
+
+//--- retrieve current (old) information ------------------------------------------- ---//
+    fillScreenField(obj,'EX_F_DISPLAY_NAME','pa_name');
+    fillScreenField(obj,'EX_F_BUKRS','pa_bukrs_old');
+    fillScreenField(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenField(obj,'EX_F_BTRTL','pa_btrtl_old');
+    fillScreenField(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
+    fillScreenField(obj,'EX_F_KOSTL','pa_kostl_old');
+    fillScreenField(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
+    fillScreenField(obj,'EX_F_ORGEH','pa_orgeh_old');
+    fillScreenField(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
+    fillScreenField(obj,'EX_F_PLANS','pa_plans_old');
+    fillScreenField(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
+    fillScreenField(obj,'EX_F_SACHP','pa_sachp_old');
+    fillScreenField(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
+    fillScreenField(obj,'EX_F_STELL','pa_stell_old');
+    fillScreenField(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
+    fillScreenField(obj,'EX_F_WERKS','pa_werks_old');
+    fillScreenField(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
 
 //--- get bukrs_select table, and add values to the
     var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
@@ -575,14 +509,13 @@ function responsePchRead(obj) {
     //mini.createDismissibleMessage("responsePchRead(obj) started...");
     var lf_domdata = obj.data;
     var lf_failed  = '';
-//--- retrieve PERNR -------------------------------------------------------------- ---//
+
+//--- retrieve header related information ------------------------------------------ ---//
     fillScreenField(obj,'EX_F_PERNR','pa_pernr');
-//--- retrieve display name ------------------------------------------------------- ---//
     fillScreenField(obj,'EX_F_DISPLAY_NAME','pa_name');
-//--- retrieve status
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
-    { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
-//--- retrieve EX_F_FAILED
+    fillScreenField(obj,'EX_F_STATUS','my_status');
+
+//--- retrieve EX_F_FAILED --------------------------------------------------------- ---//
     var lf_nd_failed = obj.data.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
     var lf_ty_failed = typeof(lf_nd_failed);
     if (lf_nd_failed==null || lf_ty_failed=='undefined') {
@@ -590,56 +523,28 @@ function responsePchRead(obj) {
     } else {
         lf_failed = lf_nd_failed.nodeValue;
     }
-//--- retrieve BUKRS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_bukrs_old').value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
-//--- retrieve BUKRS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_bukrs_txt_old').value = lf_domdata.getElementsByTagName('EX_F_BUKRS_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_btrtl_old').value = lf_domdata.getElementsByTagName('EX_F_BTRTL')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_btrtl_txt_old').value = lf_domdata.getElementsByTagName('EX_F_BTRTL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve KOSTL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_kostl_old').value = lf_domdata.getElementsByTagName('EX_F_KOSTL')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_kostl_txt_old').value = lf_domdata.getElementsByTagName('EX_F_KOSTL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve ORGEH
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_orgeh_old').value = lf_domdata.getElementsByTagName('EX_F_ORGEH')[0].childNodes[0].nodeValue; }
-//--- retrieve ORGEH_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_orgeh_txt_old').value = lf_domdata.getElementsByTagName('EX_F_ORGEH_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve PLANS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_plans_old').value = lf_domdata.getElementsByTagName('EX_F_PLANS')[0].childNodes[0].nodeValue; }
-//--- retrieve PLANS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_plans_txt_old').value = lf_domdata.getElementsByTagName('EX_F_PLANS_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve SACHP
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_sachp_old').value = lf_domdata.getElementsByTagName('EX_F_SACHP')[0].childNodes[0].nodeValue; }
-//--- retrieve SACHP_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_sachp_txt_old').value = lf_domdata.getElementsByTagName('EX_F_SACHP_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve STELL
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_stell_old').value = lf_domdata.getElementsByTagName('EX_F_STELL')[0].childNodes[0].nodeValue; }
-//--- retrieve STELL_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_stell_txt_old').value = lf_domdata.getElementsByTagName('EX_F_STELL_TXT')[0].childNodes[0].nodeValue; }
-//--- retrieve WERKS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_werks_old').value = lf_domdata.getElementsByTagName('EX_F_WERKS')[0].childNodes[0].nodeValue; }
-//--- retrieve WERKS_TXT
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_werks_txt_old').value = lf_domdata.getElementsByTagName('EX_F_WERKS_TXT')[0].childNodes[0].nodeValue; }
+
+//--- retrieve current (old) information ------------------------------------------- ---//
+    fillScreenField(obj,'EX_F_BUKRS','pa_bukrs_old');
+    fillScreenField(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenField(obj,'EX_F_BTRTL','pa_btrtl_old');
+    fillScreenField(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
+    fillScreenField(obj,'EX_F_KOSTL','pa_kostl_old');
+    fillScreenField(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
+    fillScreenField(obj,'EX_F_ORGEH','pa_orgeh_old');
+    fillScreenField(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
+    fillScreenField(obj,'EX_F_PLANS','pa_plans_old');
+    fillScreenField(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
+    fillScreenField(obj,'EX_F_SACHP','pa_sachp_old');
+    fillScreenField(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
+    fillScreenField(obj,'EX_F_STELL','pa_stell_old');
+    fillScreenField(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
+    fillScreenField(obj,'EX_F_WERKS','pa_werks_old');
+    fillScreenField(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
 
 //--- now retrieve collaboration data, we have this in this request too...
+//    we have to start with the drop down values though, otherwise,
+//    the drop-downs are empty...
 
 //--- get bukrs_select table, and add values to the list of available values
     var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
@@ -661,36 +566,17 @@ function responsePchRead(obj) {
         document.getElementById('pa_massg').add(new Option(lf_massg_text, lf_massg));
     }
 
-//--- retrieve DATE
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_DATE')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_date').value = lf_domdata.getElementsByTagName('EX_F_DATE')[0].childNodes[0].nodeValue; }
-//--- retrieve MASSG
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_MASSG')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_massg').value = lf_domdata.getElementsByTagName('EX_F_MASSG')[0].childNodes[0].nodeValue; }
-//--- retrieve BUKRS_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_bukrs_new').value = lf_domdata.getElementsByTagName('EX_F_BUKRS_NEW')[0].childNodes[0].nodeValue; }
-//--- retrieve WERKS_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_WERKS_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_werks_new').value = lf_domdata.getElementsByTagName('EX_F_WERKS_NEW')[0].childNodes[0].nodeValue; }
-//--- retrieve BTRTL_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_BTRTL_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_btrtl_new').value = lf_domdata.getElementsByTagName('EX_F_BTRTL_NEW')[0].childNodes[0].nodeValue; }
-//--- retrieve KOSTL_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_KOSTL_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_kostl_new').value = lf_domdata.getElementsByTagName('EX_F_KOSTL_NEW')[0].childNodes[0].nodeValue; }
-//--- retrieve ORGEH_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_ORGEH_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_orgeh_new').value = lf_domdata.getElementsByTagName('EX_F_ORGEH_NEW')[0].childNodes[0].nodeValue; }
-//--- retrieve PLANS_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PLANS_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_plans_new').value = lf_domdata.getElementsByTagName('EX_F_PLANS_NEW')[0].childNodes[0].nodeValue; }
-//--- retrieve SACHP_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_SACHP_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_sachp_new').value = lf_domdata.getElementsByTagName('EX_F_SACHP_NEW')[0].childNodes[0].nodeValue; }
-//--- retrieve STELL_NEW
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_STELL_NEW')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_stell_new').value = lf_domdata.getElementsByTagName('EX_F_STELL_NEW')[0].childNodes[0].nodeValue; }
+//--- retrieve collaboration (new) information ------------------------------------- ---//
+    fillScreenField(obj,'EX_F_DATE','pa_date');
+    fillScreenField(obj,'EX_F_MASSG','pa_massg');
+    fillScreenField(obj,'EX_F_BUKRS_NEW','pa_bukrs_new');
+    fillScreenField(obj,'EX_F_WERKS_NEW','pa_werks_new');
+    fillScreenField(obj,'EX_F_BTRTL_NEW','pa_btrtl_new');
+    fillScreenField(obj,'EX_F_KOSTL_NEW','pa_kostl_new');
+    fillScreenField(obj,'EX_F_ORGEH_NEW','pa_orgeh_new');
+    fillScreenField(obj,'EX_F_PLANS_NEW','pa_plans_new');
+    fillScreenField(obj,'EX_F_SACHP_NEW','pa_sachp_new');
+    fillScreenField(obj,'EX_F_STELL_NEW','pa_stell_new');
 
 //--- Operation failed, let's out a generic warning
     if (lf_failed=='X') {
