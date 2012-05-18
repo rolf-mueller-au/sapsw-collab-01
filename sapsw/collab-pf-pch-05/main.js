@@ -585,8 +585,12 @@ function responsePchRead(obj) {
     if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
     { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
-    //if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined')
-    //{ var lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue; }
+    if ((typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined') &&
+        (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0]).nodeValue!=='undefined')) {
+      lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue;
+    } else {
+      lf_failed = '';
+    }
 //--- retrieve BUKRS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0])!=='undefined')
     { document.getElementById('pa_bukrs_old').value = lf_domdata.getElementsByTagName('EX_F_BUKRS')[0].childNodes[0].nodeValue; }
