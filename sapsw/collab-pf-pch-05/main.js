@@ -585,8 +585,9 @@ function responsePchRead(obj) {
     if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
     { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!==null) {
-      lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue;
+    var lf_nd_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
+    if (typeof(lf_nd_failed)!==null) {
+      lf_failed = lf_nd_failed.nodeValue;
     } else {
       lf_failed = '';
     }
