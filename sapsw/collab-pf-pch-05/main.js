@@ -586,7 +586,7 @@ function responsePchRead(obj) {
     { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 //--- retrieve BUKRS
     var lf_nd_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
-    if (typeof(lf_nd_failed)!==null) {
+    if (lf_nd_failed!==null || typeof(lf_nd_failed)!=='undefined') {
       lf_failed = lf_nd_failed.nodeValue;
     } else {
       lf_failed = '';
