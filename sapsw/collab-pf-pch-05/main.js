@@ -578,13 +578,7 @@ function responsePchRead(obj) {
 //--- retrieve PERNR -------------------------------------------------------------- ---//
     fillScreenField(obj,'EX_F_PERNR','pa_pernr');
 //--- retrieve display name ------------------------------------------------------- ---//
-    var lf_nd_pa_name = obj.data.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0];
-    var lf_ty_pa_name = typeof(lf_nd_pa_name);
-    if (lf_nd_pa_name==null || lf_ty_pa_name=='undefined') {
-        document.getElementById('pa_name').value = '';
-    } else {
-        document.getElementById('pa_name').value = lf_nd_failed.nodeValue;
-    }
+    fillScreenField(obj,'EX_F_DISPLAY_NAME','pa_name');
 //--- retrieve status
     if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
     { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
