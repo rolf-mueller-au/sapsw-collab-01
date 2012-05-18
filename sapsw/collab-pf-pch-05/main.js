@@ -575,17 +575,21 @@ function responsePchRead(obj) {
     //mini.createDismissibleMessage("responsePchRead(obj) started...");
     var lf_domdata = obj.data;
     var lf_failed  = '';
-//--- retrieve PERNR
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_PERNR')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_pernr').value = lf_domdata.getElementsByTagName('EX_F_PERNR')[0].childNodes[0].nodeValue; }
-//--- retrieve display name
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0])!=='undefined')
-    { document.getElementById('pa_name').value = lf_domdata.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0].nodeValue; }
+//--- retrieve PERNR -------------------------------------------------------------- ---//
+    fillScreenField(obj,'EX_F_PERNR','pa_pernr');
+//--- retrieve display name ------------------------------------------------------- ---//
+    var lf_nd_pa_name = obj.data.getElementsByTagName('EX_F_DISPLAY_NAME')[0].childNodes[0];
+    var lf_ty_pa_name = typeof(lf_nd_pa_name);
+    if (lf_nd_pa_name==null || lf_ty_pa_name=='undefined') {
+        document.getElementById('pa_name').value = '';
+    } else {
+        document.getElementById('pa_name').value = lf_nd_failed.nodeValue;
+    }
 //--- retrieve status
     if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
     { document.getElementById('my_status').value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
-//--- retrieve BUKRS
-    var lf_nd_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
+//--- retrieve EX_F_FAILED
+    var lf_nd_failed = obj.data.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
     var lf_ty_failed = typeof(lf_nd_failed);
     if (lf_nd_failed==null || lf_ty_failed=='undefined') {
         lf_failed = '';
@@ -742,6 +746,18 @@ function responsePchRead(obj) {
 
 }
 
+//--- ------------------------------------------------------------------------------ ---//
+//--- fillScreenField from SOAP-Response                                             ---//
+//--- ------------------------------------------------------------------------------ ---//
+function fillScreenField(obj,xmlFieldName,screenFieldName) {
+    var lf_node = obj.data.getElementsByTagName(xmlFieldName)[0].childNodes[0];
+    var lf_typeof = typeof(lf_nd_pa_name);
+    if (lf_node==null || lf_typeof=='undefined') {
+        document.getElementById(screenFieldName).value = '';
+    } else {
+        document.getElementById(screenFieldName).value = lf_node.nodeValue;
+    }
+}
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- pchSave()                                                                      ---//
