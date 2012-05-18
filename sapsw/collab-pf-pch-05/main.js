@@ -751,7 +751,7 @@ function responsePchRead(obj) {
 //--- ------------------------------------------------------------------------------ ---//
 function fillScreenField(obj,xmlFieldName,screenFieldName) {
     var lf_node = obj.data.getElementsByTagName(xmlFieldName)[0].childNodes[0];
-    var lf_typeof = typeof(lf_nd_pa_name);
+    var lf_typeof = typeof(lf_node);
     if (lf_node==null || lf_typeof=='undefined') {
         document.getElementById(screenFieldName).value = '';
     } else {
