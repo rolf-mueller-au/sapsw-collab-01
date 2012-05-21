@@ -2,12 +2,48 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" charset="utf-8" src="main.js"></script>
     <script type="text/javascript" charset="utf-8" src="scw.js"></script>
+    <script type="text/javascript" charset="utf-8" src="divpopup.js"></script>
     <link rel="stylesheet" href="main.css" type="text/css" />
 </head>
 
 <body>
 
 <div id='div_popup' class='divPopup1'></div>
+
+<!-- BEGIN FLOATING LAYER CODE //-->
+<div id="theLayer" style="position:absolute;width:250px;left:100;top:100;visibility:visible">
+    <table border="0" width="250" bgcolor="#424242" cellspacing="0" cellpadding="5">
+        <tr>
+            <td width="100%">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" height="36">
+                    <tr>
+                        <td id="titleBar" style="cursor:move" width="100%">
+                            <ilayer width="100%" onSelectStart="return false">
+                                <layer width="100%" onMouseover="isHot=true;if (isN4) ddN4(theLayer)" onMouseout="isHot=false">
+                                    <font face="Arial" color="#FFFFFF">Layer Title</font>
+                                </layer>
+                            </ilayer>
+                        </td>
+                        <td style="cursor:hand" valign="top">
+                            <a href="#" onClick="hideMe();return false"><font color=#ffffff size=2 face=arial  style="text-decoration:none">X</font></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" bgcolor="#FFFFFF" style="padding:4px" colspan="2">
+                            <!-- PLACE YOUR CONTENT HERE //-->
+                            This is where your content goes.<br>
+                            It can be any html code or text.<br>
+                            Remember to feed the reindeer.<br>
+                            Avoid chewable giblet curtains.
+                            <!-- END OF CONTENT AREA //-->
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- END FLOATING LAYER CODE //-->
 
 <div id='div_collab'>
 
@@ -187,7 +223,8 @@
             <button type="button" id="button_resetAppData" onclick="resetAppData()">Reset</button>
         </td>
         <td class="tdHeader4" align="right">
-            <a onclick="Popup.show('div_popup');return false;">popup test</a>
+            <a href="javascript:showMe();">show</a>
+            <a href="javascript:hideMe();">hide</a>
             <a onclick='alert_status_info()'>Status Info</a>
         </td>
         <td class="tdHeader4" align="right">collab-pf-pch-05 V5.1 (21-03-2012)</td>
