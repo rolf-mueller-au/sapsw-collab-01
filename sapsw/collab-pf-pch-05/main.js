@@ -250,12 +250,14 @@ function responseRegUUID(obj) {
     var lf_domdata = obj.data;
 
 //--- retrieve UUID from backend
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0])!=='undefined') {
-        gf_uuid = lf_domdata.getElementsByTagName('EX_F_UUID')[0].childNodes[0].nodeValue;
+    var lf_node = obj.data.getElementsByTagName('EX_F_UUID')[0].childNodes[0];
+    var lf_typeof = typeof(lf_node);
+    if (lf_node==null || lf_typeof=='undefined') {
+        alert('UUID could not be retrieved, registration of this tools failed.');
+    } else {
+        gf_uuid = lf_node.nodeValue;
 //--- so we have retrieved the UUID from the backend, now we have to save it in APPDATA
         updateUUIDinAppData();
-    } else {
-        alert('UUID could not be retrieved, registration of this tools failed.');
     }
 }
 
@@ -325,22 +327,27 @@ function responseRegCheckPernr(obj) {
     var lf_failed  = '';
 
 //--- retrieve EX_F_FAILED from backend
-    if (typeof(lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0])!=='undefined') {
-        lf_failed = lf_domdata.getElementsByTagName('EX_F_FAILED')[0].childNodes[0].nodeValue;
-        if (lf_failed=='X') {
+    var lf_node = obj.data.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
+    var lf_typeof = typeof(lf_node);
+    if (lf_node==null || lf_typeof=='undefined') {
+        lf_failed = '';
+    } else {
+        lf_failed = lf_node.nodeValue;
+    }
+
+    if (lf_failed=='X') {
 //--- get message table, and out them as messages
-            var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
-            for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
-                var lf_elItem = lf_elMessages.childNodes[x];
-                var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
-                var lf_msgNumber = lf_elItem.getElementsByTagName('NUMBER')[0].childNodes[0].nodeValue;
-                var lf_msgMessage = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
-                var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
-                mini.createDismissibleMessage(lf_msg);
-            }
-            my_status.value = '3'; // 3 = In collaboration
-            return;
+        var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
+        for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
+            var lf_elItem = lf_elMessages.childNodes[x];
+            var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
+            var lf_msgNumber = lf_elItem.getElementsByTagName('NUMBER')[0].childNodes[0].nodeValue;
+            var lf_msgMessage = lf_elItem.getElementsByTagName('MESSAGE')[0].childNodes[0].nodeValue;
+            var lf_msg = lf_msgType + ' ' + lf_msgNumber + ' "' + lf_msgMessage + '"';
+            mini.createDismissibleMessage(lf_msg);
         }
+        my_status.value = '3'; // 3 = In collaboration
+        return;
     }
 
 //--- retrieve current (old) information ------------------------------------------- ---//
