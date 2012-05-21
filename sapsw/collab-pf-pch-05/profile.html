@@ -7,6 +7,8 @@
 
 <body>
 
+<div id='div_popup' class='divPopup1'></div>
+
 <div id='div_collab'>
 
 <table border="0" style="width: 100%">
@@ -75,7 +77,7 @@
         <table border="0" style="width: 100%">
             <tbody>
             <tr>
-                <td class='tdHeader2'>Labels</td>
+                <td></td>
                 <td class='tdHeader2'>Current Situation</td>
                 <td class='tdHeader2'>Proposed Situation</td>
             </tr>
@@ -184,7 +186,10 @@
             <button type="button" id="button_submitAppData" onclick="pchSend()">Submit</button>
             <button type="button" id="button_resetAppData" onclick="resetAppData()">Reset</button>
         </td>
-        <td class="tdHeader4" align="right"><a onclick='alert_status_info()'>Status Info</a></td>
+        <td class="tdHeader4" align="right">
+            <a onclick="Popup.show('div_popup');return false;">popup test</a>
+            <a onclick='alert_status_info()'>Status Info</a>
+        </td>
         <td class="tdHeader4" align="right">collab-pf-pch-05 V5.1 (21-03-2012)</td>
     </tr>
     </tbody>
