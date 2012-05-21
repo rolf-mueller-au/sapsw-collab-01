@@ -20,7 +20,7 @@
                         <td id="titleBar" style="cursor:move" width="100%">
                             <ilayer width="100%" onSelectStart="return false">
                                 <layer width="100%" onMouseover="isHot=true;if (isN4) ddN4(theLayer)" onMouseout="isHot=false">
-                                    <font face="Arial" color="#FFFFFF">Layer Title</font>
+                                    <font face="Arial" color="#FFFFFF">Current Situation</font>
                                 </layer>
                             </ilayer>
                         </td>
@@ -31,10 +31,66 @@
                     <tr>
                         <td width="100%" bgcolor="#FFFFFF" style="padding:4px" colspan="2">
                             <!-- PLACE YOUR CONTENT HERE //-->
-                            This is where your content goes.<br>
-                            It can be any html code or text.<br>
-                            Remember to feed the reindeer.<br>
-                            Avoid chewable giblet curtains.
+                            <table border="0" style="width: 100%">
+                                <tbody>
+                                <tr>
+                                    <td>Company Code</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_bukrs_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_bukrs_txt_old">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Personnel Area</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_werks_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_werks_txt_old">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Personnel SubArea</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_btrtl_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_btrtl_txt_old">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>OrgUnit ID</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_orgeh_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_orgeh_txt_old">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_plans_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_plans_txt_old">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Personnel Admin.</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_sachp_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_sachp_txt_old">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Job</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_stell_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_stell_txt_old">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cost Center</td>
+                                    <td>
+                                        <input type="text" size="8" disabled="disabled" id="pa_kostl_old">
+                                        <input type="text" size="30" disabled="disabled" id="pa_kostl_txt_old">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                             <!-- END OF CONTENT AREA //-->
                         </td>
                     </tr>
