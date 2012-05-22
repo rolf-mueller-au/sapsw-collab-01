@@ -675,12 +675,25 @@ function fillScreenFieldDiv(obj,xmlFieldName,xmlTextFieldName,screenFieldName) {
         } else {
             lf_text = lf_node_text.nodeValue;
         }
-        document.getElementById(screenFieldName).innerHTML = lf_value + ' ' + lf_text;
-    } else {
-        if (lf_node==null || lf_typeof=='undefined') {
-            document.getElementById(screenFieldName).innerHTML = '';
+        var lf_screenElement = document.getElementById(screenFieldName);
+        if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+            // we are not doing anything here :-)
         } else {
-            document.getElementById(screenFieldName).innerHTML = lf_node.nodeValue;
+            lf_screenElement.innerHTML = lf_value + ' ' + lf_text;
+        }
+2    } else {
+        if (lf_node==null || lf_typeof=='undefined') {
+            if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+                // we are not doing anything here :-)
+            } else {
+                lf_screenElement.innerHTML = '';
+            }
+        } else {
+            if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+                // we are not doing anything here :-)
+            } else {
+                lf_screenElement.innerHTML = lf_node.nodeValue;
+            }
         }
     }
 }
