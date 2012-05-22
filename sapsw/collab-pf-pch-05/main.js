@@ -534,6 +534,7 @@ function responsePchRead(obj) {
 //--- retrieve current (old) information ------------------------------------------- ---//
     fillScreenField(obj,'EX_F_BUKRS','pa_bukrs_old');
     fillScreenField(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenFieldDiv(obj,'EX_F_BUKRS','EX_F_BUKRS_TXT','div_pa_bukrs_old');
     fillScreenField(obj,'EX_F_BTRTL','pa_btrtl_old');
     fillScreenField(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
     fillScreenField(obj,'EX_F_KOSTL','pa_kostl_old');
@@ -647,6 +648,37 @@ function fillScreenField(obj,xmlFieldName,screenFieldName) {
 }
 
 //--- ------------------------------------------------------------------------------ ---//
+//--- fillScreenFieldDiv from SOAP-Response                                          ---//
+//--- ------------------------------------------------------------------------------ ---//
+function fillScreenFieldDiv(obj,xmlFieldName,xmlTextFieldName,screenFieldName) {
+    var lf_node = obj.data.getElementsByTagName(xmlFieldName)[0].childNodes[0];
+    var lf_typeof = typeof(lf_node);
+    if (xmlTextFieldName!='') {
+        var lf_node_text = obj.data.getElementsByTagName(xmlTextFieldName)[0].childNodes[0];
+        var lf_typeof_text = typeof(lf_node);
+        var lf_value = '';
+        var lf_text = '';
+        if (lf_node==null || lf_typeof=='undefined') {
+            lf_value  = '';
+        } else {
+            lf_value = lf_node.nodeValue;
+        }
+        if (lf_node_text==null || lf_typeof_text=='undefined') {
+            lf_text  = '';
+        } else {
+            lf_text = lf_node_text.nodeValue;
+        }
+        document.getElementById(screenFieldName).innerHTML = lf_value + ' ' + lf_text;
+    } else {
+        if (lf_node==null || lf_typeof=='undefined') {
+            document.getElementById(screenFieldName).innerHTML = '';
+        } else {
+            document.getElementById(screenFieldName).innerHTML = lf_node.nodeValue;
+        }
+    }
+}
+
+//--- ------------------------------------------------------------------------------ ---//
 //--- pchSave()                                                                      ---//
 //--- ------------------------------------------------------------------------------ ---//
 function pchSave() {
@@ -708,7 +740,7 @@ function pchSave() {
 //--- responsePchSave()                                                              ---//
 //--- ------------------------------------------------------------------------------ ---//
 function responsePchSave(obj) {
-    //mini.createDismissibleMessage("responsePchRead(obj) started...");
+    //mini.createDismissibleMessage("responsePchSave(obj) started...");
     var lf_domdata = obj.data;
 
 //--- at least give some message out
