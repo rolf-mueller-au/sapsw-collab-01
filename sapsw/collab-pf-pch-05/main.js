@@ -351,23 +351,23 @@ function responseRegCheckPernr(obj) {
     }
 
 //--- retrieve current (old) information ------------------------------------------- ---//
-    fillScreenField(obj,'EX_F_DISPLAY_NAME','pa_name');
-    fillScreenField(obj,'EX_F_BUKRS','pa_bukrs_old');
-    fillScreenField(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
-    fillScreenField(obj,'EX_F_BTRTL','pa_btrtl_old');
-    fillScreenField(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
-    fillScreenField(obj,'EX_F_KOSTL','pa_kostl_old');
-    fillScreenField(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
-    fillScreenField(obj,'EX_F_ORGEH','pa_orgeh_old');
-    fillScreenField(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
-    fillScreenField(obj,'EX_F_PLANS','pa_plans_old');
-    fillScreenField(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
-    fillScreenField(obj,'EX_F_SACHP','pa_sachp_old');
-    fillScreenField(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
-    fillScreenField(obj,'EX_F_STELL','pa_stell_old');
-    fillScreenField(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
-    fillScreenField(obj,'EX_F_WERKS','pa_werks_old');
-    fillScreenField(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
+    fillScreenFieldInput(obj,'EX_F_DISPLAY_NAME','pa_name');
+    fillScreenFieldInput(obj,'EX_F_BUKRS','pa_bukrs_old');
+    fillScreenFieldInput(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenFieldInput(obj,'EX_F_BTRTL','pa_btrtl_old');
+    fillScreenFieldInput(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
+    fillScreenFieldInput(obj,'EX_F_KOSTL','pa_kostl_old');
+    fillScreenFieldInput(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
+    fillScreenFieldInput(obj,'EX_F_ORGEH','pa_orgeh_old');
+    fillScreenFieldInput(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
+    fillScreenFieldInput(obj,'EX_F_PLANS','pa_plans_old');
+    fillScreenFieldInput(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
+    fillScreenFieldInput(obj,'EX_F_SACHP','pa_sachp_old');
+    fillScreenFieldInput(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
+    fillScreenFieldInput(obj,'EX_F_STELL','pa_stell_old');
+    fillScreenFieldInput(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
+    fillScreenFieldInput(obj,'EX_F_WERKS','pa_werks_old');
+    fillScreenFieldInput(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
 
 }
 
@@ -410,23 +410,23 @@ function responseRegOpen(obj) {
     //mini.createDismissibleMessage("responseLoadPernrDetails() started...");
 
 //--- retrieve current (old) information ------------------------------------------- ---//
-    fillScreenField(obj,'EX_F_DISPLAY_NAME','pa_name');
-    fillScreenField(obj,'EX_F_BUKRS','pa_bukrs_old');
-    fillScreenField(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
-    fillScreenField(obj,'EX_F_BTRTL','pa_btrtl_old');
-    fillScreenField(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
-    fillScreenField(obj,'EX_F_KOSTL','pa_kostl_old');
-    fillScreenField(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
-    fillScreenField(obj,'EX_F_ORGEH','pa_orgeh_old');
-    fillScreenField(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
-    fillScreenField(obj,'EX_F_PLANS','pa_plans_old');
-    fillScreenField(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
-    fillScreenField(obj,'EX_F_SACHP','pa_sachp_old');
-    fillScreenField(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
-    fillScreenField(obj,'EX_F_STELL','pa_stell_old');
-    fillScreenField(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
-    fillScreenField(obj,'EX_F_WERKS','pa_werks_old');
-    fillScreenField(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
+    fillScreenFieldInput(obj,'EX_F_DISPLAY_NAME','pa_name');
+    fillScreenFieldInput(obj,'EX_F_BUKRS','pa_bukrs_old');
+    fillScreenFieldInput(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenFieldInput(obj,'EX_F_BTRTL','pa_btrtl_old');
+    fillScreenFieldInput(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
+    fillScreenFieldInput(obj,'EX_F_KOSTL','pa_kostl_old');
+    fillScreenFieldInput(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
+    fillScreenFieldInput(obj,'EX_F_ORGEH','pa_orgeh_old');
+    fillScreenFieldInput(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
+    fillScreenFieldInput(obj,'EX_F_PLANS','pa_plans_old');
+    fillScreenFieldInput(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
+    fillScreenFieldInput(obj,'EX_F_SACHP','pa_sachp_old');
+    fillScreenFieldInput(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
+    fillScreenFieldInput(obj,'EX_F_STELL','pa_stell_old');
+    fillScreenFieldInput(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
+    fillScreenFieldInput(obj,'EX_F_WERKS','pa_werks_old');
+    fillScreenFieldInput(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
 
 //--- get bukrs_select table, and add values to the
     var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
@@ -518,9 +518,9 @@ function responsePchRead(obj) {
     var lf_failed  = '';
 
 //--- retrieve header related information ------------------------------------------ ---//
-    fillScreenField(obj,'EX_F_PERNR','pa_pernr');
-    fillScreenField(obj,'EX_F_DISPLAY_NAME','pa_name');
-    fillScreenField(obj,'EX_F_STATUS','my_status');
+    fillScreenFieldInput(obj,'EX_F_PERNR','pa_pernr');
+    fillScreenFieldInput(obj,'EX_F_DISPLAY_NAME','pa_name');
+    fillScreenFieldInput(obj,'EX_F_STATUS','my_status');
 
 //--- retrieve EX_F_FAILED --------------------------------------------------------- ---//
     var lf_nd_failed = obj.data.getElementsByTagName('EX_F_FAILED')[0].childNodes[0];
@@ -532,30 +532,30 @@ function responsePchRead(obj) {
     }
 
 //--- retrieve current (old) information ------------------------------------------- ---//
-    fillScreenField(obj,'EX_F_BUKRS','pa_bukrs_old');
-    fillScreenField(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_BUKRS','EX_F_BUKRS_TXT','div_pa_bukrs_old');
-    fillScreenField(obj,'EX_F_BTRTL','pa_btrtl_old');
-    fillScreenField(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_BTRTL','EX_F_BTRTL_TXT','div_pa_btrtl_old');
-    fillScreenField(obj,'EX_F_KOSTL','pa_kostl_old');
-    fillScreenField(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_KOSTL','EX_F_KOSTL_TXT','div_pa_kostl_old');
-    fillScreenField(obj,'EX_F_ORGEH','pa_orgeh_old');
-    fillScreenField(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_ORGEH','EX_F_ORGEH_TXT','div_pa_orgeh_old');
-    fillScreenField(obj,'EX_F_PLANS','pa_plans_old');
-    fillScreenField(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_PLANS','EX_F_PLANS_TXT','div_pa_plans_old');
-    fillScreenField(obj,'EX_F_SACHP','pa_sachp_old');
-    fillScreenField(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_SACHP','EX_F_SACHP_TXT','div_pa_sachp_old');
-    fillScreenField(obj,'EX_F_STELL','pa_stell_old');
-    fillScreenField(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_STELL','EX_F_STELL_TXT','div_pa_stell_old');
-    fillScreenField(obj,'EX_F_WERKS','pa_werks_old');
-    fillScreenField(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
-    fillScreenFieldDiv(obj,'EX_F_WERKS','EX_F_WERKS_TXT','div_pa_werks_old');
+    fillScreenFieldInput(obj,'EX_F_BUKRS','pa_bukrs_old');
+    fillScreenFieldInput(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_BUKRS','EX_F_BUKRS_TXT','div_pa_bukrs_old');
+    fillScreenFieldInput(obj,'EX_F_BTRTL','pa_btrtl_old');
+    fillScreenFieldInput(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_BTRTL','EX_F_BTRTL_TXT','div_pa_btrtl_old');
+    fillScreenFieldInput(obj,'EX_F_KOSTL','pa_kostl_old');
+    fillScreenFieldInput(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_KOSTL','EX_F_KOSTL_TXT','div_pa_kostl_old');
+    fillScreenFieldInput(obj,'EX_F_ORGEH','pa_orgeh_old');
+    fillScreenFieldInput(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_ORGEH','EX_F_ORGEH_TXT','div_pa_orgeh_old');
+    fillScreenFieldInput(obj,'EX_F_PLANS','pa_plans_old');
+    fillScreenFieldInput(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_PLANS','EX_F_PLANS_TXT','div_pa_plans_old');
+    fillScreenFieldInput(obj,'EX_F_SACHP','pa_sachp_old');
+    fillScreenFieldInput(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_SACHP','EX_F_SACHP_TXT','div_pa_sachp_old');
+    fillScreenFieldInput(obj,'EX_F_STELL','pa_stell_old');
+    fillScreenFieldInput(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_STELL','EX_F_STELL_TXT','div_pa_stell_old');
+    fillScreenFieldInput(obj,'EX_F_WERKS','pa_werks_old');
+    fillScreenFieldInput(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_WERKS','EX_F_WERKS_TXT','div_pa_werks_old');
 
 //--- now retrieve collaboration data, we have this in this request too...
 //    we have to start with the drop down values though, otherwise,
@@ -582,16 +582,16 @@ function responsePchRead(obj) {
     }
 
 //--- retrieve collaboration (new) information ------------------------------------- ---//
-    fillScreenField(obj,'EX_F_DATE','pa_date');
-    fillScreenField(obj,'EX_F_MASSG','pa_massg');
-    fillScreenField(obj,'EX_F_BUKRS_NEW','pa_bukrs_new');
-    fillScreenField(obj,'EX_F_WERKS_NEW','pa_werks_new');
-    fillScreenField(obj,'EX_F_BTRTL_NEW','pa_btrtl_new');
-    fillScreenField(obj,'EX_F_KOSTL_NEW','pa_kostl_new');
-    fillScreenField(obj,'EX_F_ORGEH_NEW','pa_orgeh_new');
-    fillScreenField(obj,'EX_F_PLANS_NEW','pa_plans_new');
-    fillScreenField(obj,'EX_F_SACHP_NEW','pa_sachp_new');
-    fillScreenField(obj,'EX_F_STELL_NEW','pa_stell_new');
+    fillScreenFieldInput(obj,'EX_F_DATE','pa_date');
+    fillScreenFieldInput(obj,'EX_F_MASSG','pa_massg');
+    fillScreenFieldInput(obj,'EX_F_BUKRS_NEW','pa_bukrs_new');
+    fillScreenFieldInput(obj,'EX_F_WERKS_NEW','pa_werks_new');
+    fillScreenFieldInput(obj,'EX_F_BTRTL_NEW','pa_btrtl_new');
+    fillScreenFieldInput(obj,'EX_F_KOSTL_NEW','pa_kostl_new');
+    fillScreenFieldInput(obj,'EX_F_ORGEH_NEW','pa_orgeh_new');
+    fillScreenFieldInput(obj,'EX_F_PLANS_NEW','pa_plans_new');
+    fillScreenFieldInput(obj,'EX_F_SACHP_NEW','pa_sachp_new');
+    fillScreenFieldInput(obj,'EX_F_STELL_NEW','pa_stell_new');
 
 //--- Operation failed, let's out a generic warning
     if (lf_failed=='X') {
@@ -644,22 +644,34 @@ function responsePchRead(obj) {
 //--- ------------------------------------------------------------------------------ ---//
 //--- fillScreenField from SOAP-Response                                             ---//
 //--- ------------------------------------------------------------------------------ ---//
-function fillScreenField(obj,xmlFieldName,screenFieldName) {
+function fillScreenFieldInput(obj,xmlFieldName,screenFieldName) {
     var lf_node = obj.data.getElementsByTagName(xmlFieldName)[0].childNodes[0];
     var lf_typeof = typeof(lf_node);
+    var lf_screenElement;
     if (lf_node==null || lf_typeof=='undefined') {
-        document.getElementById(screenFieldName).value = '';
+        lf_screenElement = document.getElementById(screenFieldName);
+        if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+            // we are not doing anything here :-)
+        } else {
+            lf_screenElement.value = '';
+        }
     } else {
-        document.getElementById(screenFieldName).value = lf_node.nodeValue;
+        lf_screenElement = document.getElementById(screenFieldName);
+        if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+            // we are not doing anything here :-)
+        } else {
+            lf_screenElement.value = lf_node.nodeValue;
+        }
     }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- fillScreenFieldDiv from SOAP-Response                                          ---//
 //--- ------------------------------------------------------------------------------ ---//
-function fillScreenFieldDiv(obj,xmlFieldName,xmlTextFieldName,screenFieldName) {
+function fillScreenFieldWithTextDiv(obj,xmlFieldName,xmlTextFieldName,screenFieldName) {
     var lf_node = obj.data.getElementsByTagName(xmlFieldName)[0].childNodes[0];
     var lf_typeof = typeof(lf_node);
+    var lf_screenElement;
     if (xmlTextFieldName!='') {
         var lf_node_text = obj.data.getElementsByTagName(xmlTextFieldName)[0].childNodes[0];
         var lf_typeof_text = typeof(lf_node);
@@ -675,7 +687,7 @@ function fillScreenFieldDiv(obj,xmlFieldName,xmlTextFieldName,screenFieldName) {
         } else {
             lf_text = lf_node_text.nodeValue;
         }
-        var lf_screenElement = document.getElementById(screenFieldName);
+        lf_screenElement = document.getElementById(screenFieldName);
         if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
             // we are not doing anything here :-)
         } else {
@@ -683,12 +695,14 @@ function fillScreenFieldDiv(obj,xmlFieldName,xmlTextFieldName,screenFieldName) {
         }
 2    } else {
         if (lf_node==null || lf_typeof=='undefined') {
+            lf_screenElement = document.getElementById(screenFieldName);
             if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
                 // we are not doing anything here :-)
             } else {
                 lf_screenElement.innerHTML = '';
             }
         } else {
+            lf_screenElement = document.getElementById(screenFieldName);
             if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
                 // we are not doing anything here :-)
             } else {
@@ -838,7 +852,7 @@ function pchCheck() {
 }
 
 //--- ------------------------------------------------------------------------------ ---//
-//--- response for CheckAppData                                                      ---//
+//--- response for PchCheck                                                          ---//
 //--- ------------------------------------------------------------------------------ ---//
 function responsePchCheck(obj) {
 
@@ -1009,6 +1023,44 @@ function alert_status_info() {
         'Viewer ID  = ' + gf_userId;
     alert(lf_message);
 }
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Alert Status Information                                                       ---//
+//--- ------------------------------------------------------------------------------ ---//
+function show_status_information() {
+    var lf_screenElement;
+//--- gf_uuid
+    lf_screenElement = document.getElementById('div_gf_uuid');
+    if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+        // we are not doing anything here :-)
+    } else {
+        lf_screenElement.innerHTML = gf_uuid;
+    }
+//--- gf_ownerId
+    lf_screenElement = document.getElementById('div_gf_ownerId');
+    if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+        // we are not doing anything here :-)
+    } else {
+        lf_screenElement.innerHTML = gf_ownerId;
+    }
+//--- gf_ownerName
+    lf_screenElement = document.getElementById('div_gf_ownerName');
+    if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+        // we are not doing anything here :-)
+    } else {
+        lf_screenElement.innerHTML = gf_ownerName;
+    }
+//--- gf_userId
+    lf_screenElement = document.getElementById('div_gf_userId');
+    if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+        // we are not doing anything here :-)
+    } else {
+        lf_screenElement.innerHTML = gf_userId;
+    }
+//--- Now that we filled the DIVs, call the function to display the popup
+    showMe();
+}
+
 
 //--- Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init)
