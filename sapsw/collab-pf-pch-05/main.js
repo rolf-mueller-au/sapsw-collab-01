@@ -14,6 +14,9 @@ var gf_ownerName = '';
 //--- UUID for this tool
 var gf_uuid = '';
 
+//--- Notification Number and Process Reference Number, once it has been submitted
+var gf_notifNo = '';
+var gf_processRefNo = '';
 
 //--- global variables related to the communicaiton with the backgend
 var gf_url = 'http://213.23.110.71:8000/sap/bc/srt/rfc/sap/zmur_hcm_collab/801/zmur_hcm_collab/zmur_hcm_collab';
@@ -529,6 +532,24 @@ function responsePchRead(obj) {
         lf_failed = '';
     } else {
         lf_failed = lf_nd_failed.nodeValue;
+    }
+
+//--- retrieve EX_F_NOTIF_NO ------------------------------------------------------- ---//
+    var lf_nd_notif_no = obj.data.getElementsByTagName('EX_F_NOTIF_NO')[0].childNodes[0];
+    var lf_ty_notif_no = typeof(lf_nd_notif_no);
+    if (lf_nd_notif_no==null || lf_ty_notif_no=='undefined') {
+        gf_notifNo = '';
+    } else {
+        gf_notifNo = lf_nd_notif_no.nodeValue;
+    }
+
+//--- retrieve EX_F_PROCESS_REF_NO ------------------------------------------------------- ---//
+    var lf_nd_process_ref_no = obj.data.getElementsByTagName('EX_F_PROCESS_REF_NO')[0].childNodes[0];
+    var lf_ty_process_ref_no = typeof(lf_nd_process_ref_no);
+    if (lf_nd_process_ref_no==null || lf_ty_process_ref_no=='undefined') {
+        gf_processRefNo = '';
+    } else {
+        gf_processRefNo = lf_nd_process_ref_no.nodeValue;
     }
 
 //--- retrieve current (old) information ------------------------------------------- ---//
@@ -1056,6 +1077,20 @@ function show_status_information() {
         // we are not doing anything here :-)
     } else {
         lf_screenElement.innerHTML = gf_userId;
+    }
+//--- gf_notifNo
+    lf_screenElement = document.getElementById('div_gf_notifNo');
+    if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+        // we are not doing anything here :-)
+    } else {
+        lf_screenElement.innerHTML = gf_notifNo;
+    }
+//--- gf_processRefNo
+    lf_screenElement = document.getElementById('div_gf_processRefNo');
+    if (lf_screenElement==null || typeof(lf_screenElement)=='undefined' ) {
+        // we are not doing anything here :-)
+    } else {
+        lf_screenElement.innerHTML = gf_processRefNo;
     }
 //--- Now that we filled the DIVs, call the function to display the popup
     showMe();
