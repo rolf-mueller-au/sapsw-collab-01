@@ -24,18 +24,14 @@ var gf_soapEnvelope_beg = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\
 var gf_soapEnvelope_end = "</soapenv:Body></soapenv:Envelope>";
 
 
-//--- On-view-load initialization
+//--- ------------------------------------------------------------------------------ ---//
+//--- Initiate everything!!!                                                         ---//
+//--- ------------------------------------------------------------------------------ ---//
 function init() {
     var lf_message;
     mini = new gadgets.MiniMessage();
-
-//    lf_message = 'loadAppData()';
-//    alert(lf_message);
-//    loadAppData();
     loadUser();
-
 }
-
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- Load the currently logged in user                                              ---//
@@ -70,15 +66,11 @@ function loadOwner() {
 //--- if viewer not equal owner,then hide buttons
                 if (gf_ownerId!=gf_userId) {
                     pa_pernr.disabled = 'disabled';
-                    button_checkPernr.style.visibility = 'hidden';
-                    button_regOpen.style.visibility = 'hidden';
-                    button_resetAppData.style.visibility = 'hidden';
+                    hideActionButtons();
                     loadFriendsUuid();
                 } else {
                     pa_pernr.disabled = '';
-                    button_checkPernr.style.visibility = 'visible';
-                    button_regOpen.style.visibility = 'visible';
-                    button_resetAppData.style.visibility = 'visible';
+                    showActionButtons();
                     loadSelfUuid();
                 }
             }
@@ -112,10 +104,7 @@ function loadSelfUuid() {
                         } else {
 //--- we might have to add a button for pchRegUUID into the screen
                         }
-                        button_saveAppData.style.visibility = 'hidden';
-                        button_checkAppData.style.visibility = 'hidden';
-                        button_submitAppData.style.visibility = 'hidden';
-                        button_resetAppData.style.visibility = 'hidden';
+                        hideActionButtons();
                     }
 
 //--- response is fine let's read UUID
@@ -136,10 +125,7 @@ function loadSelfUuid() {
 //--- we might have to add a button for pchRegUUID into the screen
                          }
 //--- regardless of the user, hide main buttons
-                        button_saveAppData.style.visibility = 'hidden';
-                        button_checkAppData.style.visibility = 'hidden';
-                        button_submitAppData.style.visibility = 'hidden';
-                        button_resetAppData.style.visibility = 'hidden';
+                        hideActionButtons();
                     }
 
                 }
@@ -153,10 +139,7 @@ function loadSelfUuid() {
 //--- we might have to add a button for pchRegUUID into the screen
                     }
 //--- regardless of the user, hide main buttons
-                    button_saveAppData.style.visibility = 'hidden';
-                    button_checkAppData.style.visibility = 'hidden';
-                    button_submitAppData.style.visibility = 'hidden';
-                    button_resetAppData.style.visibility = 'hidden';
+                    hideActionButtons();
                 }
 //--- if pa_bukrs_old is empty, the perform loadPernrDetails()
 //              if (pa_bukrs_old.value==''&&pa_pernr.value!=='') { loadPernrDetails2() }
@@ -279,9 +262,7 @@ function updateUUIDinAppData() {
                 mini.createDismissibleMessage(responseUpdateUUID.error.message);
             } else {
 //--- UUID registered, now we can show the buttons
-              button_saveAppData.style.visibility = 'visible';
-              button_checkAppData.style.visibility = 'visible';
-              button_submitAppData.style.visibility = 'visible';
+                showActionButtons();
 //--- out success message
                 var lf_message = 'UUID successfully registered and saved. ' +
                                  'UUID = ' + gf_uuid;
@@ -973,6 +954,49 @@ function responsePchSend(obj) {
     { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
 }
 
+//--- ------------------------------------------------------------------------------ ---//
+//--- Show Action Buttons                                                            ---//
+//--- ------------------------------------------------------------------------------ ---//
+function showActionButtons() {
+//--- button_saveAppData
+    var lf_button_saveAppData = document.getElementById(button_saveAppData);
+    if (lf_button_saveAppData==null || typeof(lf_button_saveAppData)=='undefined' ) {
+    } else { lf_button_saveAppData.style.visibility = 'visible'; }
+//--- button_checkAppData
+    var lf_button_checkAppData = document.getElementById(button_checkAppData);
+    if (lf_button_checkAppData==null || typeof(lf_button_checkAppData)=='undefined' ) {
+    } else { lf_button_checkAppData.style.visibility = 'visible'; }
+//--- button_submitAppData
+    var lf_button_submitAppData = document.getElementById(button_submitAppData);
+    if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
+    } else { lf_button_submitAppData.style.visibility = 'visible'; }
+//--- button_resetAppData
+    var lf_button_resetAppData = document.getElementById(button_resetAppData);
+    if (lf_button_resetAppData==null || typeof(lf_button_resetAppData)=='undefined' ) {
+    } else { lf_button_resetAppData.style.visibility = 'visible'; }
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Hide Action Buttons                                                            ---//
+//--- ------------------------------------------------------------------------------ ---//
+function hideActionButtons() {
+//--- button_saveAppData
+    var lf_button_saveAppData = document.getElementById(button_saveAppData);
+    if (lf_button_saveAppData==null || typeof(lf_button_saveAppData)=='undefined' ) {
+    } else { lf_button_saveAppData.style.visibility = 'hidden'; }
+//--- button_checkAppData
+    var lf_button_checkAppData = document.getElementById(button_checkAppData);
+    if (lf_button_checkAppData==null || typeof(lf_button_checkAppData)=='undefined' ) {
+    } else { lf_button_checkAppData.style.visibility = 'hidden'; }
+//--- button_submitAppData
+    var lf_button_submitAppData = document.getElementById(button_submitAppData);
+    if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
+    } else { lf_button_submitAppData.style.visibility = 'hidden'; }
+//--- button_resetAppData
+    var lf_button_resetAppData = document.getElementById(button_resetAppData);
+    if (lf_button_resetAppData==null || typeof(lf_button_resetAppData)=='undefined' ) {
+    } else { lf_button_resetAppData.style.visibility = 'hidden'; }
+}
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- Reset Application Data. This will reset everything...                          ---//
