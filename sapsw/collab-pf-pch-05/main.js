@@ -1011,10 +1011,6 @@ function showActionButtons() {
     var lf_button_submitAppData = document.getElementById('button_submitAppData');
     if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
     } else { lf_button_submitAppData.style.visibility = 'visible'; }
-//--- button_resetAppData
-    var lf_button_resetAppData = document.getElementById('button_resetAppData');
-    if (lf_button_resetAppData==null || typeof(lf_button_resetAppData)=='undefined' ) {
-    } else { lf_button_resetAppData.style.visibility = 'visible'; }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -1033,10 +1029,6 @@ function hideActionButtons() {
     var lf_button_submitAppData = document.getElementById('button_submitAppData');
     if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
     } else { lf_button_submitAppData.style.visibility = 'hidden'; }
-//--- button_resetAppData
-    var lf_button_resetAppData = document.getElementById('button_resetAppData');
-    if (lf_button_resetAppData==null || typeof(lf_button_resetAppData)=='undefined' ) {
-    } else { lf_button_resetAppData.style.visibility = 'hidden'; }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
