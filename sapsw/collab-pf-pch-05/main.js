@@ -175,7 +175,6 @@ function loadFriendsUuid() {
 //--- response is fine let's read UUID
                     if (typeof(response[p].pch_uuid)!=='undefined') {
                         gf_uuid = response[p].pch_uuid;
-                        // div_UUID.innerHTML = 'UUID: ' + gf_uuid; "keep this code, good to know :-)
 //--- ok, we have the UUID, now let's read the data from the backend through pchRead()
                         pchRead();
 
@@ -262,6 +261,7 @@ function updateUUIDinAppData() {
                 mini.createDismissibleMessage(responseUpdateUUID.error.message);
             } else {
 //--- UUID registered, now we can show the buttons
+                showRegistrationButtons();
                 showActionButtons();
 //--- out success message
                 var lf_message = 'UUID successfully registered and saved. ' +
@@ -449,9 +449,7 @@ function responseRegOpen(obj) {
 
 //--- and we also disable the pernr field and hide pushbutton
     pa_pernr.disabled = "disabled";
-//  button_loadPernr.disabled = "disabled";
-    button_checkPernr.style.visibility = 'hidden';
-    button_regOpen.style.visibility = 'hidden';
+    hideRegistrationButtons();
 
 //--- at least out some message at the end
     var lf_message = 'PERNR (' + pa_pernr.value + ', ' + pa_name.value + ') successfully registered with the backend.';
@@ -595,6 +593,12 @@ function responsePchRead(obj) {
     fillScreenFieldInput(obj,'EX_F_SACHP_NEW','pa_sachp_new');
     fillScreenFieldInput(obj,'EX_F_STELL_NEW','pa_stell_new');
 
+//--- If PA_PERNR is empty, then we still have to register
+    var lf_pa_pernr = document.getElementById('pa_pernr');
+    if (lf_pa_pernr==null || typeof(lf_pa_pernr)=='undefined' ) {
+    } else { if (lf_pa_pernr.value=='') showRegistrationButtons(); }
+
+
 //--- Operation failed, let's out a generic warning
     if (lf_failed=='X') {
         mini.createDismissibleMessage('Operation failed because:');
@@ -615,19 +619,14 @@ function responsePchRead(obj) {
 //    pushbuttons, but only, if nothing failed
     if (lf_failed!='X') {
         document.getElementById('pa_pernr').disabled = 'disabled';
-//      button_loadPernr.disabled = 'disabled';
-        document.getElementById('button_checkPernr').style.visibility = 'hidden';
-        document.getElementById('button_regOpen').style.visibility = 'hidden';
+        hideRegistrationButtons();
     }
 
 //--- if the status of the activity is 5 = Submitted, then
 //    we can also hide the check, save and submit buttons.
 //    We should also deactivate the collaboration fields
     if (my_status.value=='5') {
-        document.getElementById('button_saveAppData').style.visibility = 'hidden';
-        document.getElementById('button_checkAppData').style.visibility = 'hidden';
-        document.getElementById('button_submitAppData').style.visibility = 'hidden';
-        document.getElementById('button_resetAppData').style.visibility = 'hidden';
+        hideActionButtons();
         document.getElementById('pa_pernr').disabled = 'disabled';
         document.getElementById('pa_date').disabled = 'disabled';
         document.getElementById('pa_massg').disabled = 'disabled';
@@ -952,6 +951,34 @@ function responsePchSend(obj) {
 //--- retrieve STATUS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
     { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Show Registration Buttons                                                      ---//
+//--- ------------------------------------------------------------------------------ ---//
+function showRegistrationButtons() {
+//--- button_checkPernr
+    var lf_button_checkPernr = document.getElementById(button_checkPernr);
+    if (lf_button_checkPernr==null || typeof(lf_button_checkPernr)=='undefined' ) {
+    } else { lf_button_checkPernr.style.visibility = 'visible'; }
+//--- button_regOpen
+    var lf_button_regOpen = document.getElementById(button_regOpen);
+    if (lf_button_regOpen==null || typeof(lf_button_regOpen)=='undefined' ) {
+    } else { lf_button_regOpen.style.visibility = 'visible'; }
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Hide Registration Buttons                                                      ---//
+//--- ------------------------------------------------------------------------------ ---//
+function hideRegistrationButtons() {
+//--- button_checkPernr
+    var lf_button_checkPernr = document.getElementById(button_checkPernr);
+    if (lf_button_checkPernr==null || typeof(lf_button_checkPernr)=='undefined' ) {
+    } else { lf_button_checkPernr.style.visibility = 'hidden'; }
+//--- button_regOpen
+    var lf_button_regOpen = document.getElementById(button_regOpen);
+    if (lf_button_regOpen==null || typeof(lf_button_regOpen)=='undefined' ) {
+    } else { lf_button_regOpen.style.visibility = 'hidden'; }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
