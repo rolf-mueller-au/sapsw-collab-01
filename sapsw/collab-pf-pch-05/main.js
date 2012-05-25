@@ -596,7 +596,7 @@ function responsePchRead(obj) {
 //--- If PA_PERNR is empty, then we still have to register
     var lf_pa_pernr = document.getElementById('pa_pernr');
     if (lf_pa_pernr==null || typeof(lf_pa_pernr)=='undefined' ) {
-    } else { if (lf_pa_pernr.value=='') showRegistrationButtons(); }
+    } else { if (lf_pa_pernr.value=='' || lf_pa_pernr.value=='00000000') showRegistrationButtons(); }
 
 
 //--- Operation failed, let's out a generic warning
