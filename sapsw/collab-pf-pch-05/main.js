@@ -405,20 +405,28 @@ function responseRegOpen(obj) {
     fillScreenFieldInput(obj,'EX_F_DISPLAY_NAME','pa_name');
     fillScreenFieldInput(obj,'EX_F_BUKRS','pa_bukrs_old');
     fillScreenFieldInput(obj,'EX_F_BUKRS_TXT','pa_bukrs_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_BUKRS','EX_F_BUKRS_TXT','div_pa_bukrs_old');
     fillScreenFieldInput(obj,'EX_F_BTRTL','pa_btrtl_old');
     fillScreenFieldInput(obj,'EX_F_BTRTL_TXT','pa_btrtl_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_BTRTL','EX_F_BTRTL_TXT','div_pa_btrtl_old');
     fillScreenFieldInput(obj,'EX_F_KOSTL','pa_kostl_old');
     fillScreenFieldInput(obj,'EX_F_KOSTL_TXT','pa_kostl_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_KOSTL','EX_F_KOSTL_TXT','div_pa_kostl_old');
     fillScreenFieldInput(obj,'EX_F_ORGEH','pa_orgeh_old');
     fillScreenFieldInput(obj,'EX_F_ORGEH_TXT','pa_orgeh_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_ORGEH','EX_F_ORGEH_TXT','div_pa_orgeh_old');
     fillScreenFieldInput(obj,'EX_F_PLANS','pa_plans_old');
     fillScreenFieldInput(obj,'EX_F_PLANS_TXT','pa_plans_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_PLANS','EX_F_PLANS_TXT','div_pa_plans_old');
     fillScreenFieldInput(obj,'EX_F_SACHP','pa_sachp_old');
     fillScreenFieldInput(obj,'EX_F_SACHP_TXT','pa_sachp_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_SACHP','EX_F_SACHP_TXT','div_pa_sachp_old');
     fillScreenFieldInput(obj,'EX_F_STELL','pa_stell_old');
     fillScreenFieldInput(obj,'EX_F_STELL_TXT','pa_stell_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_STELL','EX_F_STELL_TXT','div_pa_stell_old');
     fillScreenFieldInput(obj,'EX_F_WERKS','pa_werks_old');
     fillScreenFieldInput(obj,'EX_F_WERKS_TXT','pa_werks_txt_old');
+    fillScreenFieldWithTextDiv(obj,'EX_F_WERKS','EX_F_WERKS_TXT','div_pa_werks_old');
 
 //--- get bukrs_select table, and add values to the
     var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
