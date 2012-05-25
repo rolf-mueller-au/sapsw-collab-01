@@ -627,19 +627,13 @@ function responsePchRead(obj) {
 //    We should also deactivate the collaboration fields
     if (my_status.value=='5') {
         hideActionButtons();
-        document.getElementById('pa_pernr').disabled = 'disabled';
-        document.getElementById('pa_date').disabled = 'disabled';
-        document.getElementById('pa_massg').disabled = 'disabled';
-        document.getElementById('pa_bukrs_new').disabled = 'disabled';
-        document.getElementById('pa_werks_new').disabled = 'disabled';
-        document.getElementById('pa_btrtl_new').disabled = 'disabled';
-        document.getElementById('pa_orgeh_new').disabled = 'disabled';
-        document.getElementById('pa_plans_new').disabled = 'disabled';
-        document.getElementById('pa_sachp_new').disabled = 'disabled';
-        document.getElementById('pa_stell_new').disabled = 'disabled';
-        document.getElementById('pa_kostl_new').disabled = 'disabled';
+        disableInputFields();
     }
 
+//--- At the very end, we check, if the activity has been closed.
+//    If this is the case, then we should hide all buttons and
+//    disable all input fields
+    checkActivityClosed();
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -958,11 +952,11 @@ function responsePchSend(obj) {
 //--- ------------------------------------------------------------------------------ ---//
 function showRegistrationButtons() {
 //--- button_checkPernr
-    var lf_button_checkPernr = document.getElementById(button_checkPernr);
+    var lf_button_checkPernr = document.getElementById('button_checkPernr');
     if (lf_button_checkPernr==null || typeof(lf_button_checkPernr)=='undefined' ) {
     } else { lf_button_checkPernr.style.visibility = 'visible'; }
 //--- button_regOpen
-    var lf_button_regOpen = document.getElementById(button_regOpen);
+    var lf_button_regOpen = document.getElementById('button_regOpen');
     if (lf_button_regOpen==null || typeof(lf_button_regOpen)=='undefined' ) {
     } else { lf_button_regOpen.style.visibility = 'visible'; }
 }
@@ -972,11 +966,11 @@ function showRegistrationButtons() {
 //--- ------------------------------------------------------------------------------ ---//
 function hideRegistrationButtons() {
 //--- button_checkPernr
-    var lf_button_checkPernr = document.getElementById(button_checkPernr);
+    var lf_button_checkPernr = document.getElementById('button_checkPernr');
     if (lf_button_checkPernr==null || typeof(lf_button_checkPernr)=='undefined' ) {
     } else { lf_button_checkPernr.style.visibility = 'hidden'; }
 //--- button_regOpen
-    var lf_button_regOpen = document.getElementById(button_regOpen);
+    var lf_button_regOpen = document.getElementById('button_regOpen');
     if (lf_button_regOpen==null || typeof(lf_button_regOpen)=='undefined' ) {
     } else { lf_button_regOpen.style.visibility = 'hidden'; }
 }
@@ -986,19 +980,19 @@ function hideRegistrationButtons() {
 //--- ------------------------------------------------------------------------------ ---//
 function showActionButtons() {
 //--- button_saveAppData
-    var lf_button_saveAppData = document.getElementById(button_saveAppData);
+    var lf_button_saveAppData = document.getElementById('button_saveAppData');
     if (lf_button_saveAppData==null || typeof(lf_button_saveAppData)=='undefined' ) {
     } else { lf_button_saveAppData.style.visibility = 'visible'; }
 //--- button_checkAppData
-    var lf_button_checkAppData = document.getElementById(button_checkAppData);
+    var lf_button_checkAppData = document.getElementById('button_checkAppData');
     if (lf_button_checkAppData==null || typeof(lf_button_checkAppData)=='undefined' ) {
     } else { lf_button_checkAppData.style.visibility = 'visible'; }
 //--- button_submitAppData
-    var lf_button_submitAppData = document.getElementById(button_submitAppData);
+    var lf_button_submitAppData = document.getElementById('button_submitAppData');
     if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
     } else { lf_button_submitAppData.style.visibility = 'visible'; }
 //--- button_resetAppData
-    var lf_button_resetAppData = document.getElementById(button_resetAppData);
+    var lf_button_resetAppData = document.getElementById('button_resetAppData');
     if (lf_button_resetAppData==null || typeof(lf_button_resetAppData)=='undefined' ) {
     } else { lf_button_resetAppData.style.visibility = 'visible'; }
 }
@@ -1008,21 +1002,84 @@ function showActionButtons() {
 //--- ------------------------------------------------------------------------------ ---//
 function hideActionButtons() {
 //--- button_saveAppData
-    var lf_button_saveAppData = document.getElementById(button_saveAppData);
+    var lf_button_saveAppData = document.getElementById('button_saveAppData');
     if (lf_button_saveAppData==null || typeof(lf_button_saveAppData)=='undefined' ) {
     } else { lf_button_saveAppData.style.visibility = 'hidden'; }
 //--- button_checkAppData
-    var lf_button_checkAppData = document.getElementById(button_checkAppData);
+    var lf_button_checkAppData = document.getElementById('button_checkAppData');
     if (lf_button_checkAppData==null || typeof(lf_button_checkAppData)=='undefined' ) {
     } else { lf_button_checkAppData.style.visibility = 'hidden'; }
 //--- button_submitAppData
-    var lf_button_submitAppData = document.getElementById(button_submitAppData);
+    var lf_button_submitAppData = document.getElementById('button_submitAppData');
     if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
     } else { lf_button_submitAppData.style.visibility = 'hidden'; }
 //--- button_resetAppData
-    var lf_button_resetAppData = document.getElementById(button_resetAppData);
+    var lf_button_resetAppData = document.getElementById('button_resetAppData');
     if (lf_button_resetAppData==null || typeof(lf_button_resetAppData)=='undefined' ) {
     } else { lf_button_resetAppData.style.visibility = 'hidden'; }
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Disable Input Fields                                                           ---//
+//--- ------------------------------------------------------------------------------ ---//
+function disableInputFields() {
+//--- pa_pernr
+    var lf_pa_pernr = document.getElementById('pa_pernr');
+    if (lf_pa_pernr==null || typeof(lf_pa_pernr)=='undefined' ) {
+    } else { lf_pa_pernr.disabled = 'disabled'; }
+//--- pa_date
+    var lf_pa_date = document.getElementById('pa_date');
+    if (lf_pa_date==null || typeof(lf_pa_date)=='undefined' ) {
+    } else { lf_pa_date.disabled = 'disabled'; }
+//--- pa_massg
+    var lf_pa_massg = document.getElementById('pa_massg');
+    if (lf_pa_massg==null || typeof(lf_pa_massg)=='undefined' ) {
+    } else { lf_pa_massg.disabled = 'disabled'; }
+//--- pa_bukrs_new
+    var lf_pa_bukrs_new = document.getElementById('pa_bukrs_new');
+    if (lf_pa_bukrs_new==null || typeof(lf_pa_bukrs_new)=='undefined' ) {
+    } else { lf_pa_bukrs_new.disabled = 'disabled'; }
+//--- pa_werks_new
+    var lf_pa_werks_new = document.getElementById('pa_werks_new');
+    if (lf_pa_werks_new==null || typeof(lf_pa_werks_new)=='undefined' ) {
+    } else { lf_pa_werks_new.disabled = 'disabled'; }
+//--- pa_btrtl_new
+    var lf_pa_btrtl_new = document.getElementById('pa_btrtl_new');
+    if (lf_pa_btrtl_new==null || typeof(lf_pa_btrtl_new)=='undefined' ) {
+    } else { lf_pa_btrtl_new.disabled = 'disabled'; }
+//--- pa_orgeh_new
+    var lf_pa_orgeh_new = document.getElementById('pa_orgeh_new');
+    if (lf_pa_orgeh_new==null || typeof(lf_pa_orgeh_new)=='undefined' ) {
+    } else { lf_pa_orgeh_new.disabled = 'disabled'; }
+//--- pa_plans_new
+    var lf_pa_plans_new = document.getElementById('pa_plans_new');
+    if (lf_pa_plans_new==null || typeof(lf_pa_plans_new)=='undefined' ) {
+    } else { lf_pa_plans_new.disabled = 'disabled'; }
+//--- pa_sachp_new
+    var lf_pa_sachp_new = document.getElementById('pa_sachp_new');
+    if (lf_pa_sachp_new==null || typeof(lf_pa_sachp_new)=='undefined' ) {
+    } else { lf_pa_sachp_new.disabled = 'disabled'; }
+//--- pa_stell_new
+    var lf_pa_stell_new = document.getElementById('pa_stell_new');
+    if (lf_pa_stell_new==null || typeof(lf_pa_stell_new)=='undefined' ) {
+    } else { lf_pa_stell_new.disabled = 'disabled'; }
+//--- pa_kostl_new
+    var lf_pa_kostl_new = document.getElementById('pa_kostl_new');
+    if (lf_pa_kostl_new==null || typeof(lf_pa_kostl_new)=='undefined' ) {
+    } else { lf_pa_kostl_new.disabled = 'disabled'; }
+}
+
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Check if the activity has been closed. If yes, then hide all buttons           ---//
+//--- and disable all input fields.                                                  ---//
+//--- ------------------------------------------------------------------------------ ---//
+function checkActivityClosed() {
+    if (streamwork.isActivityReadOnly()) {
+        hideActionButtons();
+        hideRegistrationButtons();
+        disableInputFields();
+    }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
