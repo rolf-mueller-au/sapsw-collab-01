@@ -510,8 +510,8 @@ function pchRead() {
 //--- ------------------------------------------------------------------------------ ---//
 function responsePchRead(obj) {
     //mini.createDismissibleMessage("responsePchRead(obj) started...");
-    var lf_domdata = obj.data;
-    var lf_failed  = '';
+    var lf_failed            = '';
+    var lf_hideActionButtons = '';
 
 //--- retrieve header related information ------------------------------------------ ---//
     fillScreenFieldInput(obj,'EX_F_PERNR','pa_pernr');
@@ -576,7 +576,7 @@ function responsePchRead(obj) {
 //    the drop-downs are empty...
 
 //--- get bukrs_select table, and add values to the list of available values
-    var lf_elBukrsNewSelects = lf_domdata.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
+    var lf_elBukrsNewSelects = obj.data.getElementsByTagName('EX_T_BUKRS_SELECT')[0];
     for( var x1 = 0; x1 < lf_elBukrsNewSelects.childNodes.length; x1++ ) {
         var lf_elBukrsItem = lf_elBukrsNewSelects.childNodes[x1];
         var lf_bukrs = lf_elBukrsItem.getElementsByTagName('BUKRS')[0].childNodes[0].nodeValue;
@@ -586,7 +586,7 @@ function responsePchRead(obj) {
     }
 
 //--- get massg_select table, and add values to the list of available values
-    var lf_elActionSelects = lf_domdata.getElementsByTagName('EX_T_MASSG_SELECT')[0];
+    var lf_elActionSelects = obj.data.getElementsByTagName('EX_T_MASSG_SELECT')[0];
     for( var x2 = 0; x2 < lf_elActionSelects.childNodes.length; x2++ ) {
         var lf_elActionItem = lf_elActionSelects.childNodes[x2];
         var lf_massg = lf_elActionItem.getElementsByTagName('MASSG')[0].childNodes[0].nodeValue;
@@ -613,6 +613,7 @@ function responsePchRead(obj) {
         } else { if (lf_pa_pernr.value=='' || lf_pa_pernr.value=='00000000') {
             showRegistrationButtons();
             hideActionButtons();
+            lf_hideActionButtons = 'X';
         }
     }
 
@@ -623,7 +624,7 @@ function responsePchRead(obj) {
     }
 
 //--- get message table, and out them as messages
-    var lf_elMessages = lf_domdata.getElementsByTagName('EX_T_MESSAGE')[0];
+    var lf_elMessages = obj.data.getElementsByTagName('EX_T_MESSAGE')[0];
     for( var x = 0; x < lf_elMessages.childNodes.length; x++ ) {
         var lf_elItem = lf_elMessages.childNodes[x];
         var lf_msgType = lf_elItem.getElementsByTagName('TYPE')[0].childNodes[0].nodeValue;
@@ -646,15 +647,25 @@ function responsePchRead(obj) {
     if (my_status.value=='5') {
         hideActionButtons();
         disableInputFields();
+        lf_hideActionButtons = 'X';
     }
-
-//--- We got that far, now we can show the action-buttons
-    showActionButtons();
 
 //--- At the very end, we check, if the activity has been closed.
 //    If this is the case, then we should hide all buttons and
 //    disable all input fields
-    checkActivityClosed();
+    if (streamwork.isActivityReadOnly()) {
+        hideActionButtons();
+        hideRegistrationButtons();
+        disableInputFields();
+        lf_hideActionButtons = 'X';
+    }
+
+//--- At the end, we check, if hideActionButton is set
+//    If this is not the case, the we can show the Action Buttions
+    if (lf_hideActionButton=='') {
+        showActionButtons();
+    }
+
 }
 
 //--- ------------------------------------------------------------------------------ ---//
