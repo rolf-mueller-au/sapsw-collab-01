@@ -66,11 +66,9 @@ function loadOwner() {
 //--- if viewer not equal owner,then hide buttons
                 if (gf_ownerId!=gf_userId) {
                     pa_pernr.disabled = 'disabled';
-                    hideActionButtons();
                     loadFriendsUuid();
                 } else {
                     pa_pernr.disabled = '';
-                    showActionButtons();
                     loadSelfUuid();
                 }
             }
@@ -649,6 +647,9 @@ function responsePchRead(obj) {
         hideActionButtons();
         disableInputFields();
     }
+
+//--- We got that far, now we can show the action-buttons
+    showActionButtons();
 
 //--- At the very end, we check, if the activity has been closed.
 //    If this is the case, then we should hide all buttons and
