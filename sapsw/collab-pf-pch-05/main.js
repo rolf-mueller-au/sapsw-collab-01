@@ -662,7 +662,7 @@ function responsePchRead(obj) {
 
 //--- At the end, we check, if hideActionButton is set
 //    If this is not the case, the we can show the Action Buttions
-    if (lf_hideActionButton=='') {
+    if (lf_hideActionButtons=='') {
         showActionButtons();
     }
 
