@@ -657,11 +657,19 @@ function responsePchRead(obj) {
         hideActionButtons();
         disableInputFields();
         lf_hideActionButtons = 'X';
+//--- if lf_approve is set to 'X', then we can show the approve button
+        if (lf_approve=='X') {
+            showApproveButton();
+        }
     }
 
-//--- if lf_approve is set to 'X', then we can show the approve button
-    if (lf_approve=='X') {
-        showApproveButton();
+//--- if the status of the activity is 6 = Approved, then
+//    we can also hide the check, save and submit buttons.
+//    We should also deactivate the collaboration fields
+    if (my_status.value=='6') {
+        hideActionButtons();
+        hideApproveButton();
+        disableInputFields();
     }
 
 //--- At the very end, we check, if the activity has been closed.
