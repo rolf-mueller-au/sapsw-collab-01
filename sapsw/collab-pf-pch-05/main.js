@@ -527,6 +527,15 @@ function responsePchRead(obj) {
         lf_failed = lf_nd_failed.nodeValue;
     }
 
+//--- retrieve EX_F_APPROVE -------------------------------------------------------- ---//
+    var lf_nd_approve = obj.data.getElementsByTagName('EX_F_APPROVE')[0].childNodes[0];
+    var lf_ty_approve = typeof(lf_nd_approve);
+    if (lf_nd_approve==null || lf_ty_approve=='undefined') {
+        lf_approve = '';
+    } else {
+        lf_approve = lf_nd_approve.nodeValue;
+    }
+
 //--- retrieve EX_F_NOTIF_NO ------------------------------------------------------- ---//
     var lf_nd_notif_no = obj.data.getElementsByTagName('EX_F_NOTIF_NO')[0].childNodes[0];
     var lf_ty_notif_no = typeof(lf_nd_notif_no);
@@ -650,12 +659,18 @@ function responsePchRead(obj) {
         lf_hideActionButtons = 'X';
     }
 
+//--- if lf_approve is set to 'X', then we can show the approve button
+    if (lf_approve=='X') {
+        showApproveButton();
+    }
+
 //--- At the very end, we check, if the activity has been closed.
 //    If this is the case, then we should hide all buttons and
 //    disable all input fields
     if (streamwork.isActivityReadOnly()) {
         hideActionButtons();
         hideRegistrationButtons();
+        hideApproveButton();
         disableInputFields();
         lf_hideActionButtons = 'X';
     }
@@ -903,7 +918,7 @@ function responsePchCheck(obj) {
 //--- ------------------------------------------------------------------------------ ---//
 //--- for pchSend(), we call the backend web-service...                              ---//
 //--- ------------------------------------------------------------------------------ ---//
-function pchSend() {
+function pchSend(im_f_event) {
 
 //--- here we assemble the soapEnvelope for the request
     var lf_urn_beg = '<urn:ZMUR_HCM_PNF_PCH_SEND>';
@@ -922,7 +937,7 @@ function pchSend() {
     var lf_soapEnvelope_Sachp  = "<IM_F_SACHP_NEW>" + pa_sachp_new.value + "</IM_F_SACHP_NEW>";
     var lf_soapEnvelope_Stell  = "<IM_F_STELL_NEW>" + pa_stell_new.value + "</IM_F_STELL_NEW>";
     var lf_soapEnvelope_Werks  = "<IM_F_WERKS_NEW>" + pa_werks_new.value + "</IM_F_WERKS_NEW>";
-    var lf_soapEnvelope_Event  = "<IM_F_EVENT>SEND</IM_F_EVENT>";
+    var lf_soapEnvelope_Event  = "<IM_F_EVENT>" + im_f_event + "</IM_F_EVENT>";
 
 //--- put the complete soap envelope together
     var lf_soapEnvelope;
@@ -977,6 +992,19 @@ function responsePchSend(obj) {
 //--- retrieve STATUS
     if (typeof(lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0])!=='undefined')
     { my_status.value = lf_domdata.getElementsByTagName('EX_F_STATUS')[0].childNodes[0].nodeValue; }
+
+//--- if status is 5 = submitted, then we can disable fields and remove action buttons
+    if (my_status.value=='5') {
+        hideActionButtons();
+        disableInputFields();
+    }
+
+//--- if status is 6 = approved, then we can disable fields and remove approve button
+    if (my_status.value=='6') {
+        hideApproveButton();
+        disableInputFields();
+    }
+
 }
 
 //--- ------------------------------------------------------------------------------ ---//
@@ -1011,36 +1039,40 @@ function hideRegistrationButtons() {
 //--- Show Action Buttons                                                            ---//
 //--- ------------------------------------------------------------------------------ ---//
 function showActionButtons() {
-//--- button_saveAppData
-    var lf_button_saveAppData = document.getElementById('button_saveAppData');
-    if (lf_button_saveAppData==null || typeof(lf_button_saveAppData)=='undefined' ) {
-    } else { lf_button_saveAppData.style.visibility = 'visible'; }
-//--- button_checkAppData
-    var lf_button_checkAppData = document.getElementById('button_checkAppData');
-    if (lf_button_checkAppData==null || typeof(lf_button_checkAppData)=='undefined' ) {
-    } else { lf_button_checkAppData.style.visibility = 'visible'; }
-//--- button_submitAppData
-    var lf_button_submitAppData = document.getElementById('button_submitAppData');
-    if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
-    } else { lf_button_submitAppData.style.visibility = 'visible'; }
+//--- div_actionButtons
+    var lf_div_actionButtons = document.getElementById('div_actionButtons');
+    if (lf_div_actionButtons==null || typeof(lf_div_actionButtons)=='undefined' ) {
+    } else { lf_div_actionButtons.style.visibility = 'visible'; }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- Hide Action Buttons                                                            ---//
 //--- ------------------------------------------------------------------------------ ---//
 function hideActionButtons() {
-//--- button_saveAppData
-    var lf_button_saveAppData = document.getElementById('button_saveAppData');
-    if (lf_button_saveAppData==null || typeof(lf_button_saveAppData)=='undefined' ) {
-    } else { lf_button_saveAppData.style.visibility = 'hidden'; }
-//--- button_checkAppData
-    var lf_button_checkAppData = document.getElementById('button_checkAppData');
-    if (lf_button_checkAppData==null || typeof(lf_button_checkAppData)=='undefined' ) {
-    } else { lf_button_checkAppData.style.visibility = 'hidden'; }
-//--- button_submitAppData
-    var lf_button_submitAppData = document.getElementById('button_submitAppData');
-    if (lf_button_submitAppData==null || typeof(lf_button_submitAppData)=='undefined' ) {
-    } else { lf_button_submitAppData.style.visibility = 'hidden'; }
+//--- div_actionButtons
+    var lf_div_actionButtons = document.getElementById('div_actionButtons');
+    if (lf_div_actionButtons==null || typeof(lf_div_actionButtons)=='undefined' ) {
+    } else { lf_div_actionButtons.style.visibility = 'hidden'; }
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Show Approve Button                                                            ---//
+//--- ------------------------------------------------------------------------------ ---//
+function showApproveButton() {
+//--- div_approveButton
+    var lf_div_approveButton = document.getElementById('div_approveButton');
+    if (lf_div_approveButton==null || typeof(lf_div_approveButton)=='undefined' ) {
+    } else { lf_div_approveButton.style.visibility = 'visible'; }
+}
+
+//--- ------------------------------------------------------------------------------ ---//
+//--- Hide Approve Button                                                            ---//
+//--- ------------------------------------------------------------------------------ ---//
+function hideApproveButton() {
+//--- div_approveButton
+    var lf_div_approveButton = document.getElementById('div_approveButton');
+    if (lf_div_approveButton==null || typeof(lf_div_approveButton)=='undefined' ) {
+    } else { lf_div_approveButton.style.visibility = 'hidden'; }
 }
 
 //--- ------------------------------------------------------------------------------ ---//
