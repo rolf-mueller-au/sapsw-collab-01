@@ -670,6 +670,7 @@ function responsePchRead(obj) {
         hideActionButtons();
         hideApproveButton();
         disableInputFields();
+        lf_hideActionButtons = 'X';
     }
 
 //--- At the very end, we check, if the activity has been closed.
