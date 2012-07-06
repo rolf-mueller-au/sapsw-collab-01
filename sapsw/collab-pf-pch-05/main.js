@@ -673,7 +673,7 @@ function responsePchRead(obj) {
         lf_hideActionButtons = 'X';
 //--- if lf_approve is set to 'X', then we can show the submit button
         if (lf_approve=='X') {
-            showSubmitButton();
+            showApproveButton();
         }
     }
 
@@ -1087,28 +1087,6 @@ function hideApproveButton() {
     if (lf_div_approveButton==null || typeof(lf_div_approveButton)=='undefined' ) {
     } else { lf_div_approveButton.style.visibility = 'hidden'; }
 }
-
-
-//--- ------------------------------------------------------------------------------ ---//
-//--- Show Submit Button                                                            ---//
-//--- ------------------------------------------------------------------------------ ---//
-function showSubmitButton() {
-//--- div_submitButton
-    var lf_div_submitButton = document.getElementById('div_submitButton');
-    if (lf_div_submitButton==null || typeof(lf_div_submitButton)=='undefined' ) {
-    } else { lf_div_submitButton.style.visibility = 'visible'; }
-}
-
-//--- ------------------------------------------------------------------------------ ---//
-//--- Hide Submit Button                                                            ---//
-//--- ------------------------------------------------------------------------------ ---//
-function hideSubmitButton() {
-//--- div_submitButton
-    var lf_div_submitButton = document.getElementById('div_submitButton');
-    if (lf_div_submitButton==null || typeof(lf_div_submitButton)=='undefined' ) {
-    } else { lf_div_submitButton.style.visibility = 'hidden'; }
-}
-
 
 //--- ------------------------------------------------------------------------------ ---//
 //--- Disable Input Fields                                                           ---//
