@@ -677,6 +677,28 @@ function responsePchRead(obj) {
         }
     }
 
+//--- if the status of the activity is 7 = Submitted to backend, then
+//    we can also hide the check, save and submit buttons.
+//    We should also deactivate the collaboration fields
+    if (my_status.value=='7') {
+        hideActionButtons();
+        hideApproveButton();
+        disableInputFields();
+        lf_hideActionButtons = 'X';
+    }
+
+//--- if the status of the activity is 8 = Approval failed
+//    or 9 = Submit to backend failed, then
+//    we can also hide the check, save and submit buttons.
+//    We should also deactivate the collaboration fields
+    if (my_status.value=='8'||my_status.value=='9') {
+        hideActionButtons();
+        hideApproveButton();
+        disableInputFields();
+        lf_hideActionButtons = 'X';
+    }
+
+
 //--- At the very end, we check, if the activity has been closed.
 //    If this is the case, then we should hide all buttons and
 //    disable all input fields
